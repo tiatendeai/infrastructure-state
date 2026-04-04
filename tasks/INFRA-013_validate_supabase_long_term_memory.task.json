@@ -1,0 +1,29 @@
+{
+  "task_id": "INFRA-013-validate-supabase-long-term-memory",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-013",
+  "linear_project": "Memory Layer",
+  "linear_team_key": "INF",
+  "service_target": "memory-layer",
+  "context_refs": [
+    "docs/memory-layer.md",
+    "docs/memory-policy.md",
+    "contexts/memory-layer.md"
+  ],
+  "infra_refs": [
+    "adapters/memory/long_term/supabase_client.py"
+  ],
+  "expected_output": [
+    "docs/memory-layer.md",
+    "contexts/memory-layer.md",
+    "tasks/INFRA-013_validate_supabase_long_term_memory.task.json"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Formalizar Supabase como memória longa do ecossistema sem conexão real nesta tranche."
+  },
+  "output": {}
+}

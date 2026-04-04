@@ -40,7 +40,7 @@ STATE
 }
 
 ensure_runtime_layout() {
-  mkdir -p registry/runs state/snapshots .agents/runtime logs tasks state kernel
+  mkdir -p registry/runs state/snapshots .agents/runtime logs tasks state kernel contexts
   [ -f registry/runs/.gitkeep ] || : > registry/runs/.gitkeep
   [ -f state/snapshots/.gitkeep ] || : > state/snapshots/.gitkeep
   [ -f .agents/runtime/.gitkeep ] || : > .agents/runtime/.gitkeep
@@ -101,7 +101,7 @@ doctor_command() {
     fi
   done
 
-  for dir in contracts docs templates tasks registry/runs state/snapshots scripts examples adapters logs .agents/runtime; do
+  for dir in contracts docs templates tasks registry/runs state/snapshots scripts examples adapters contexts logs .agents/runtime; do
     if [ -d "$dir" ]; then
       echo "OK: $dir"
     else

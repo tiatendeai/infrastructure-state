@@ -1,0 +1,31 @@
+{
+  "task_id": "INFRA-014-create-memory-layer-interface",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-014",
+  "linear_project": "Memory Layer",
+  "linear_team_key": "INF",
+  "service_target": "memory-layer",
+  "context_refs": [
+    "docs/memory-layer.md",
+    "docs/memory-policy.md",
+    "contexts/memory-layer.md"
+  ],
+  "infra_refs": [
+    "adapters/memory/interface/memory.py",
+    "adapters/memory/short_term/redis_client.py",
+    "adapters/memory/long_term/supabase_client.py"
+  ],
+  "expected_output": [
+    "adapters/memory/interface/memory.py",
+    "adapters/memory/short_term/redis_client.py",
+    "adapters/memory/long_term/supabase_client.py"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Criar interface única de memória e stubs locais para Redis e Supabase."
+  },
+  "output": {}
+}

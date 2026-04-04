@@ -56,6 +56,7 @@ O Ruptur Farm Framework foi desenhado para inteligência modular e efêmera:
 ├── .agents/
 ├── .archive/
 ├── adapters/
+├── contexts/
 ├── contracts/
 ├── docs/
 ├── examples/
@@ -185,6 +186,7 @@ Nesta tranche, a allowlist contém apenas:
 
 - `scripts/collect_server_inventory.py`
 - `scripts/generate_services_registry.py`
+- `scripts/build_context_packet.py`
 
 O objetivo é permitir tasks auditáveis de coleta e validação sem abrir espaço para execução arbitrária.
 
@@ -203,6 +205,7 @@ O diretório `adapters/` existe para integrações opcionais. O núcleo funciona
 - `adapters/llm/`
 - `adapters/storage/`
 - `adapters/ruptur-forge/`
+- `adapters/memory/`
 
 ## O que um diretório criado com este framework ganha
 

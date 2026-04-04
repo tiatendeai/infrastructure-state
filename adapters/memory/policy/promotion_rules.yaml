@@ -1,0 +1,32 @@
+version: 1
+layers:
+  - id: raw_event
+    retention: short
+    linear_visibility: none
+    description: evento bruto local; nunca sobe para o Linear
+  - id: summary
+    retention: medium
+    linear_visibility: clean_summary
+    description: resumo operacional limpo que pode alimentar comentários/status
+  - id: canonical_memory
+    retention: long
+    linear_visibility: referenced_only
+    description: fatos persistentes e reutilizáveis do ecossistema
+  - id: context_packet
+    retention: ephemeral
+    linear_visibility: none
+    description: pacote efêmero montado para a execução atual
+promotion:
+  promote_to_canonical_when:
+    - decision_arquitural
+    - service_mapping
+    - naming_convention
+    - linear_issue_task_binding
+    - capability_validated
+    - integration_requirement_without_secret
+  do_not_promote:
+    - raw_logs
+    - transient_stack_traces
+    - sensitive_payloads
+    - temporary_runtime_state
+    - episodic_failures_without_structural_relevance

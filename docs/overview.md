@@ -7,5 +7,6 @@ O framework separa:
 - **runtime**: `registry/runs/`, `state/snapshots/`, `logs/`
 - **templates**: pontos de partida reutilizáveis
 - **adapters**: integrações opcionais e desacopladas
+- **contexts**: pacotes de contexto e memória operacional
 
 A meta é garantir que qualquer pessoa ou agente consiga iniciar, executar e limpar o ambiente com poucos comandos.

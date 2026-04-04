@@ -1,0 +1,64 @@
+{
+  "task_id": "INFRA-016-create-context-packet-for-tasks",
+  "type": "command",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-016",
+  "linear_project": "Memory Layer",
+  "linear_team_key": "INF",
+  "service_target": "context-packet",
+  "context_refs": [
+    "docs/memory-policy.md",
+    "docs/memory-layer.md",
+    "contexts/memory-layer.md"
+  ],
+  "infra_refs": [
+    "contracts/context-packet.schema.json",
+    "templates/context-packet.json.tpl",
+    "scripts/build_context_packet.py",
+    "tasks/INFRA-014_create_memory_layer_interface.task.json"
+  ],
+  "expected_output": [
+    "contracts/context-packet.schema.json",
+    "templates/context-packet.json.tpl",
+    "registry/runs/*.json"
+  ],
+  "approval_required": true,
+  "execution_policy": "local_context_generation",
+  "input": {
+    "entrypoint": "scripts/build_context_packet.py",
+    "args": [
+      "--task-file",
+      "tasks/INFRA-014_create_memory_layer_interface.task.json",
+      "--linear-identifier",
+      "INF-14",
+      "--linear-title",
+      "Criar interface da memory layer",
+      "--objective",
+      "Definir interface local para memória curta e longa",
+      "--policy-ref",
+      "docs/memory-policy.md",
+      "--schema",
+      "contracts/context-packet.schema.json",
+      "--validate-schema"
+    ],
+    "service_target": "context-packet",
+    "context_refs": [
+      "docs/memory-policy.md",
+      "docs/memory-layer.md",
+      "contexts/memory-layer.md"
+    ],
+    "infra_refs": [
+      "contracts/context-packet.schema.json",
+      "templates/context-packet.json.tpl",
+      "scripts/build_context_packet.py",
+      "tasks/INFRA-014_create_memory_layer_interface.task.json"
+    ],
+    "expected_output": [
+      "contracts/context-packet.schema.json",
+      "templates/context-packet.json.tpl",
+      "registry/runs/*.json"
+    ]
+  },
+  "output": {}
+}

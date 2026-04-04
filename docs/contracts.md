@@ -35,6 +35,7 @@ Nesta tranche, a allowlist contém somente:
 
 - `scripts/collect_server_inventory.py`
 - `scripts/generate_services_registry.py`
+- `scripts/build_context_packet.py`
 
 O `input` recomendado para `command` contém:
 
@@ -63,3 +64,29 @@ O estado global precisa declarar:
 - `execution_policy`
 
 Os contratos formais ficam em `contracts/`.
+
+
+## Context Packet
+O context packet é um artefato efêmero para execução de tasks/agentes.
+
+Contrato formal:
+- `contracts/context-packet.schema.json`
+
+Template base:
+- `templates/context-packet.json.tpl`
+
+Campos obrigatórios:
+- `project`
+- `branch`
+- `linear_issue`
+- `task`
+- `objective`
+- `latest_actions`
+- `canonical_facts`
+- `retrieved_memories`
+- `policy_refs`
+
+Regra:
+- deve ser pequeno
+- deve derivar de fatos canônicos
+- não deve carregar runtime bruto

@@ -97,3 +97,27 @@ mappings:
     local_task: tasks/INFRA-012_define_jarvis_foundation_profile.task.json
     project: Memory Layer
     local_status: done
+  - backlog_key: INFRA-013
+    linear_issue_identifier: INF-13
+    linear_issue_id: 07fc0aca-c85b-4030-9ee6-c0c31ff64020
+    local_task: tasks/INFRA-013_validate_supabase_long_term_memory.task.json
+    project: Memory Layer
+    local_status: done
+  - backlog_key: INFRA-014
+    linear_issue_identifier: INF-14
+    linear_issue_id: c3115c18-fe35-4c54-b14c-ae5e9ba1794e
+    local_task: tasks/INFRA-014_create_memory_layer_interface.task.json
+    project: Memory Layer
+    local_status: done
+  - backlog_key: INFRA-015
+    linear_issue_identifier: INF-15
+    linear_issue_id: 740fe388-5837-405b-91b2-ab0511f9fe25
+    local_task: tasks/INFRA-015_define_memory_promotion_policy.task.json
+    project: Memory Layer
+    local_status: done
+  - backlog_key: INFRA-016
+    linear_issue_identifier: INF-16
+    linear_issue_id: 27eb70e4-e111-49b6-9512-5bf02f140174
+    local_task: tasks/INFRA-016_create_context_packet_for_tasks.task.json
+    project: Memory Layer
+    local_status: done

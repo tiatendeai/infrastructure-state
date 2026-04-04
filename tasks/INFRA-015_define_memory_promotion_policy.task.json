@@ -1,0 +1,27 @@
+{
+  "task_id": "INFRA-015-define-memory-promotion-policy",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-015",
+  "linear_project": "Memory Layer",
+  "linear_team_key": "INF",
+  "service_target": "memory-layer",
+  "context_refs": [
+    "docs/memory-policy.md",
+    "docs/memory-layer.md"
+  ],
+  "infra_refs": [
+    "adapters/memory/policy/promotion_rules.yaml"
+  ],
+  "expected_output": [
+    "docs/memory-policy.md",
+    "adapters/memory/policy/promotion_rules.yaml"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Definir promotion policy de memória separando raw_event, summary, canonical_memory e context_packet."
+  },
+  "output": {}
+}

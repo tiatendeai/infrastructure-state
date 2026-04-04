@@ -25,6 +25,7 @@ ALLOWED_MODES = {"FAST", "STANDARD", "FULL"}
 ALLOWED_COMMAND_ENTRYPOINTS = {
     "scripts/collect_server_inventory.py",
     "scripts/generate_services_registry.py",
+    "scripts/build_context_packet.py",
 }
 TYPE_TO_MODE = {
     "echo": "FAST",

@@ -1,0 +1,34 @@
+{
+  "records": [
+    {
+      "memory_id": "mem-001",
+      "layer": "canonical_memory",
+      "title": "Papel do infrastructure-state",
+      "summary": "O infrastructure-state é a fonte canônica de execução, evidência e estado técnico.",
+      "source": "README.md",
+      "metadata": {
+        "scope": "governance"
+      }
+    },
+    {
+      "memory_id": "mem-002",
+      "layer": "canonical_memory",
+      "title": "Papel do Linear",
+      "summary": "O Linear é a fonte de backlog, governança, cadência e dependências; runtime bruto não sobe para o Linear.",
+      "source": "registry/linear-mapping.yaml",
+      "metadata": {
+        "scope": "governance"
+      }
+    },
+    {
+      "memory_id": "mem-003",
+      "layer": "summary",
+      "title": "Inventory do KVM2",
+      "summary": "O baseline do KVM2 já foi capturado e materializado localmente antes da camada de memória.",
+      "source": "registry/services.yaml",
+      "metadata": {
+        "scope": "inventory"
+      }
+    }
+  ]
+}
