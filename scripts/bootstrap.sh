@@ -16,10 +16,10 @@ STATE
 }
 
 ensure_runtime_layout() {
-  mkdir -p kernel state registry/runs tasks logs state/snapshots .agents/runtime contexts
+  mkdir -p kernel state registry/runs tasks logs state/snapshots state/runtime contexts
   [ -f registry/runs/.gitkeep ] || : > registry/runs/.gitkeep
   [ -f state/snapshots/.gitkeep ] || : > state/snapshots/.gitkeep
-  [ -f .agents/runtime/.gitkeep ] || : > .agents/runtime/.gitkeep
+  [ -f state/runtime/.gitkeep ] || : > state/runtime/.gitkeep
   [ -f logs/execution.log ] || : > logs/execution.log
 }
 

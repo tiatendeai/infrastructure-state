@@ -12,6 +12,8 @@ Campos opcionais de governança suportados:
 
 - `mode`
 - `linear_issue_id`
+- `linear_issue_identifier`
+- `linear_issue_uuid`
 - `linear_project`
 - `linear_team_key`
 - `service_target`
@@ -36,6 +38,7 @@ Nesta tranche, a allowlist contém somente:
 - `scripts/collect_server_inventory.py`
 - `scripts/generate_services_registry.py`
 - `scripts/build_context_packet.py`
+- `scripts/linear_adapter.py`
 
 O `input` recomendado para `command` contém:
 
@@ -57,11 +60,17 @@ O estado global precisa declarar:
 
 - `task_source`
 - `linear_issue_id`
+- `linear_issue_identifier`
+- `linear_issue_uuid`
 - `linear_project`
 - `linear_team_key`
 - `service_target`
 - `approval_required`
 - `execution_policy`
+- `resolved_linear_issue_identifier`
+- `context_packet`
+- `memory_backend`
+- `retrieved_memory_count`
 
 Os contratos formais ficam em `contracts/`.
 
@@ -90,3 +99,8 @@ Regra:
 - deve ser pequeno
 - deve derivar de fatos canônicos
 - não deve carregar runtime bruto
+
+Integração operacional atual:
+- o `run_task.py` monta automaticamente um context packet para tasks vinculadas ao Linear
+- a recuperação de memória usa o backend configurado localmente, com default `mock`
+- o caminho do context packet entra em state, runtime e registry

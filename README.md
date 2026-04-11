@@ -81,6 +81,8 @@ O Ruptur Farm Framework foi desenhado para inteligência modular e efêmera:
 As tasks podem incluir metadados opcionais de governança para integração com o Linear:
 
 - `linear_issue_id`
+- `linear_issue_identifier`
+- `linear_issue_uuid`
 - `linear_project`
 - `linear_team_key`
 - `service_target`
@@ -105,7 +107,7 @@ As tasks podem incluir metadados opcionais de governança para integração com 
 ### FULL
 - validação completa do contrato
 - snapshot de estado
-- trilha runtime em `.agents/runtime/`
+- trilha runtime em `state/runtime/`
 - ideal para mudanças críticas, inventário remoto ou fluxos auditáveis
 
 A escolha do modo pode ser:
@@ -174,7 +176,7 @@ Durante a execução, o runner **não reescreve** a task-fonte. Toda evidência 
 - `kernel/state.json`
 - `registry/runs/*.json`
 - `logs/execution.log`
-- `.agents/runtime/`
+- `state/runtime/`
 
 Isso preserva auditoria, diff limpo e reprodutibilidade.
 
@@ -187,6 +189,7 @@ Nesta tranche, a allowlist contém apenas:
 - `scripts/collect_server_inventory.py`
 - `scripts/generate_services_registry.py`
 - `scripts/build_context_packet.py`
+- `scripts/linear_adapter.py`
 
 O objetivo é permitir tasks auditáveis de coleta e validação sem abrir espaço para execução arbitrária.
 
@@ -215,7 +218,7 @@ Quando este framework é aplicado a um diretório, ele deixa de ser apenas uma p
 - **contratos formais** em `contracts/`
 - **execução por tarefas** via `scripts/ruptur.sh`
 - **trilha operacional** em `registry/runs/` e `logs/execution.log`
-- **runtime efêmero separado** em `.agents/runtime/` e `state/snapshots/`
+- **runtime efêmero separado** em `state/runtime/` e `state/snapshots/`
 
 Na prática, isso significa que o diretório fica preparado para:
 
@@ -248,6 +251,7 @@ Toda execução pode deixar rastro em:
 
 - `logs/execution.log`
 - `registry/runs/`
+- `state/runtime/<task_id>/context-packet.json`
 
 ### 3. Operação declarativa
 O trabalho pode ser descrito em tasks JSON, validadas e executadas por um fluxo padrão.

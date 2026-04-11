@@ -8,6 +8,8 @@ registry/runs/*
 !registry/runs/.gitkeep
 state/snapshots/*
 !state/snapshots/.gitkeep
+state/runtime/*
+!state/runtime/.gitkeep
 .agents/runtime/*
 !.agents/runtime/.gitkeep
 node_modules/
@@ -23,3 +25,5 @@ coverage/
 .archive/legacy/workflows/*.json
 .archive/legacy/workflows/*.sh
 .archive/legacy/scripts/*.sh
+.cursor/mcp.json
+.antigravity/mcp_config.json

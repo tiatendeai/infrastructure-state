@@ -40,20 +40,56 @@ STATE
 }
 
 ensure_runtime_layout() {
-  mkdir -p registry/runs state/snapshots .agents/runtime logs tasks state kernel contexts
+  mkdir -p registry/runs state/snapshots state/runtime logs tasks state kernel contexts
   [ -f registry/runs/.gitkeep ] || : > registry/runs/.gitkeep
   [ -f state/snapshots/.gitkeep ] || : > state/snapshots/.gitkeep
-  [ -f .agents/runtime/.gitkeep ] || : > .agents/runtime/.gitkeep
+  [ -f state/runtime/.gitkeep ] || : > state/runtime/.gitkeep
   [ -f logs/execution.log ] || : > logs/execution.log
 }
 
-load_env() {
-  if [ -f .env ]; then
-    set -a
-    # shellcheck disable=SC1091
-    . ./.env
-    set +a
+load_env_file() {
+  local env_path="$1"
+
+  if [ -f "$env_path" ]; then
+    while IFS= read -r raw_line || [ -n "$raw_line" ]; do
+      local line key value first_char last_char
+      line="${raw_line%$'\r'}"
+      line="${line#"${line%%[![:space:]]*}"}"
+      line="${line%"${line##*[![:space:]]}"}"
+
+      [ -z "$line" ] && continue
+      case "$line" in
+        \#*) continue
+          ;;
+      esac
+      case "$line" in
+        *=*) ;;
+        *) continue
+          ;;
+      esac
+
+      IFS='=' read -r key value <<< "$line"
+      key="${key#"${key%%[![:space:]]*}"}"
+      key="${key%"${key##*[![:space:]]}"}"
+      value="${value#"${value%%[![:space:]]*}"}"
+      value="${value%"${value##*[![:space:]]}"}"
+
+      if [ "${#value}" -ge 2 ]; then
+        first_char="${value:0:1}"
+        last_char="${value: -1}"
+        if { [ "$first_char" = '"' ] || [ "$first_char" = "'" ]; } && [ "$first_char" = "$last_char" ]; then
+          value="${value:1:${#value}-2}"
+        fi
+      fi
+
+      [ -n "$key" ] && export "$key=$value"
+    done < "$env_path"
   fi
+}
+
+load_env() {
+  load_env_file .env
+  load_env_file .env.local
 }
 
 error() {
@@ -101,7 +137,7 @@ doctor_command() {
     fi
   done
 
-  for dir in contracts docs templates tasks registry/runs state/snapshots scripts examples adapters contexts logs .agents/runtime; do
+  for dir in contracts docs templates tasks registry/runs state/snapshots state/runtime scripts examples adapters contexts logs; do
     if [ -d "$dir" ]; then
       echo "OK: $dir"
     else
@@ -110,23 +146,37 @@ doctor_command() {
     fi
   done
 
+  if python3 scripts/validate_contract.py kernel/state.json contracts/state.schema.json >/dev/null 2>&1; then
+    echo "OK: kernel/state.json compatível com contracts/state.schema.json"
+  else
+    error "kernel/state.json incompatível com contracts/state.schema.json"
+    has_error=1
+  fi
+
+  if python3 scripts/run_task.py --validate-only examples/hello.task.json >/dev/null 2>&1; then
+    echo "OK: examples/hello.task.json"
+  else
+    error "example task inválida: examples/hello.task.json"
+    has_error=1
+  fi
+
   return "$has_error"
 }
 
 clean_command() {
-  rm -rf state/snapshots .agents/runtime
-  mkdir -p state/snapshots .agents/runtime
+  rm -rf state/snapshots state/runtime
+  mkdir -p state/snapshots state/runtime
   : > state/snapshots/.gitkeep
-  : > .agents/runtime/.gitkeep
+  : > state/runtime/.gitkeep
   echo "Runtime efêmero limpo com segurança."
 }
 
 reset_command() {
-  rm -rf registry/runs state/snapshots .agents/runtime
-  mkdir -p registry/runs state/snapshots .agents/runtime logs kernel
+  rm -rf registry/runs state/snapshots state/runtime
+  mkdir -p registry/runs state/snapshots state/runtime logs kernel
   : > registry/runs/.gitkeep
   : > state/snapshots/.gitkeep
-  : > .agents/runtime/.gitkeep
+  : > state/runtime/.gitkeep
   : > logs/execution.log
   write_default_state
   echo "Runtime, registry, logs e state foram resetados."

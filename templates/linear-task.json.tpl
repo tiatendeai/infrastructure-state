@@ -4,6 +4,8 @@
   "mode": "{{MODE}}",
   "status": "pending",
   "linear_issue_id": "{{LINEAR_ISSUE_ID}}",
+  "linear_issue_identifier": "{{LINEAR_ISSUE_IDENTIFIER}}",
+  "linear_issue_uuid": "{{LINEAR_ISSUE_UUID}}",
   "linear_project": "{{LINEAR_PROJECT}}",
   "linear_team_key": "{{LINEAR_TEAM_KEY}}",
   "service_target": "{{SERVICE_TARGET}}",

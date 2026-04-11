@@ -113,7 +113,8 @@
             "enum": [
               "raw_event",
               "summary",
-              "canonical_memory"
+              "canonical_memory",
+              "context_packet"
             ]
           },
           "title": {

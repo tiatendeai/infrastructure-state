@@ -21,11 +21,23 @@
             "mode": { "type": "string", "enum": ["FAST", "STANDARD", "FULL"] },
             "task_source": { "type": "string" },
             "linear_issue_id": { "type": "string" },
+            "linear_issue_identifier": { "type": "string" },
+            "linear_issue_uuid": { "type": "string" },
             "linear_project": { "type": "string" },
             "linear_team_key": { "type": "string" },
             "service_target": { "type": "string" },
             "approval_required": { "type": "boolean" },
-            "execution_policy": { "type": "string" }
+            "execution_policy": { "type": "string" },
+            "resolved_linear_issue_identifier": { "type": "string" },
+            "context_packet": { "type": "string" },
+            "memory_backend": {
+              "type": "string",
+              "enum": ["mock", "redis", "supabase"]
+            },
+            "retrieved_memory_count": {
+              "type": "integer",
+              "minimum": 0
+            }
           },
           "additionalProperties": false
         }
@@ -45,11 +57,23 @@
           "registry_record": { "type": "string" },
           "task_source": { "type": "string" },
           "linear_issue_id": { "type": "string" },
+          "linear_issue_identifier": { "type": "string" },
+          "linear_issue_uuid": { "type": "string" },
           "linear_project": { "type": "string" },
           "linear_team_key": { "type": "string" },
           "service_target": { "type": "string" },
           "approval_required": { "type": "boolean" },
-          "execution_policy": { "type": "string" }
+          "execution_policy": { "type": "string" },
+          "resolved_linear_issue_identifier": { "type": "string" },
+          "context_packet": { "type": "string" },
+          "memory_backend": {
+            "type": "string",
+            "enum": ["mock", "redis", "supabase"]
+          },
+          "retrieved_memory_count": {
+            "type": "integer",
+            "minimum": 0
+          }
         },
         "additionalProperties": false
       }

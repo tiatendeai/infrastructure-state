@@ -25,9 +25,9 @@ O que fica para depois:
 
 ## Fronteira atual
 
-Hoje, o fluxo real termina em:
+Hoje, o fluxo real já cobre:
 
-`task local -> execução -> registry/log/state`
+`issue mapeada -> task local -> context packet -> memory retrieval local -> execução -> registry/log/state -> update Linear`
 
 ## Fronteira futura
 
@@ -39,12 +39,12 @@ Quando a automação entrar, o fluxo passará a ser:
 4. Git registra quando aplicável
 5. observabilidade acompanha
 6. state guarda a trilha canônica
-7. Linear recebe status e evidência
+7. Linear recebe status e resumo operacional
 
 ## Regra operacional
 
-Enquanto o fluxo completo não existir:
+Enquanto webhook/n8n ainda não entram:
 
-- documentar claramente o que é manual
-- não fingir automação inexistente
+- usar o adapter nativo do Linear como superfície oficial de update
+- usar `registry/linear-mapping.yaml` como vínculo issue ↔ task
 - usar o state local como verdade operacional

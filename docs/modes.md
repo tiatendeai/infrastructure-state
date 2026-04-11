@@ -38,4 +38,4 @@ Toda evidência de execução deve ser escrita em:
 - `kernel/state.json`
 - `registry/runs/*.json`
 - `logs/execution.log`
-- `.agents/runtime/`
+- `state/runtime/`

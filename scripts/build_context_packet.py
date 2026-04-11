@@ -5,6 +5,7 @@ import argparse
 import json
 import subprocess
 import sys
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -15,14 +16,28 @@ sys.path.insert(0, str(ROOT))
 from adapters.memory.interface.memory import MockMemoryBackend, serialize_records  # noqa: E402
 from adapters.memory.long_term.supabase_client import SupabaseMemoryBackend  # noqa: E402
 from adapters.memory.short_term.redis_client import RedisMemoryBackend  # noqa: E402
-
-
-class SchemaValidationError(ValueError):
-    pass
+from scripts.schema_tools import load_json, validate_instance  # noqa: E402
 
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def load_dotenv(path: Path, overwrite: bool = False) -> None:
+    if not path.exists():
+        return
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        if not key or (key in os.environ and not overwrite):
+            continue
+        value = value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {'"', "'"}:
+            value = value[1:-1]
+        os.environ[key] = value
 
 
 def parse_args() -> argparse.Namespace:
@@ -63,64 +78,8 @@ def resolve_branch(explicit: str | None) -> str:
         return "master"
 
 
-def load_json(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-def check_type(instance: Any, expected: str) -> bool:
-    if expected == "object":
-        return isinstance(instance, dict)
-    if expected == "array":
-        return isinstance(instance, list)
-    if expected == "string":
-        return isinstance(instance, str)
-    if expected == "integer":
-        return isinstance(instance, int) and not isinstance(instance, bool)
-    if expected == "boolean":
-        return isinstance(instance, bool)
-    if expected == "null":
-        return instance is None
-    return True
-
-
-def validate_instance(instance: Any, schema: dict[str, Any], path: str = "$") -> None:
-    expected_type = schema.get("type")
-    if expected_type and not check_type(instance, expected_type):
-        raise SchemaValidationError(f"{path}: tipo inválido, esperado {expected_type}")
-
-    if expected_type == "object":
-        if schema.get("additionalProperties") is False:
-            allowed = set(schema.get("properties", {}).keys())
-            extra = set(instance.keys()) - allowed
-            if extra:
-                raise SchemaValidationError(f"{path}: propriedades não permitidas: {', '.join(sorted(extra))}")
-        for field_name in schema.get("required", []):
-            if field_name not in instance:
-                raise SchemaValidationError(f"{path}: campo obrigatório ausente: {field_name}")
-        for field_name, child_schema in schema.get("properties", {}).items():
-            if field_name in instance:
-                value = instance[field_name]
-                if "enum" in child_schema and value not in child_schema["enum"]:
-                    raise SchemaValidationError(f"{path}.{field_name}: valor fora do enum")
-                if child_schema.get("type") == "string" and "minLength" in child_schema and len(value) < child_schema["minLength"]:
-                    raise SchemaValidationError(f"{path}.{field_name}: tamanho mínimo não atendido")
-                validate_instance(value, child_schema, f"{path}.{field_name}")
-    elif expected_type == "array":
-        item_schema = schema.get("items")
-        if item_schema:
-            for index, item in enumerate(instance):
-                validate_instance(item, item_schema, f"{path}[{index}]")
-    else:
-        if "enum" in schema and instance not in schema["enum"]:
-            raise SchemaValidationError(f"{path}: valor fora do enum")
-        if expected_type == "string" and "minLength" in schema and len(instance) < schema["minLength"]:
-            raise SchemaValidationError(f"{path}: tamanho mínimo não atendido")
-
-
 def load_memories(backend_name: str, fixture: Path, query: str, limit: int) -> list[dict[str, Any]]:
-    if backend_name == "mock":
-        backend = MockMemoryBackend.from_fixture(fixture)
-        records = backend.search(query, limit=limit)
+    def render(records: list[Any]) -> list[dict[str, Any]]:
         return [
             {
                 "memory_id": record.memory_id,
@@ -131,14 +90,23 @@ def load_memories(backend_name: str, fixture: Path, query: str, limit: int) -> l
             }
             for record in records
         ]
-    if backend_name == "redis":
+
+    if backend_name == "mock":
+        backend = MockMemoryBackend.from_fixture(fixture)
+    elif backend_name == "redis":
         backend = RedisMemoryBackend()
-        return serialize_records(backend.search(query, limit=limit))
-    backend = SupabaseMemoryBackend()
-    return serialize_records(backend.search(query, limit=limit))
+    else:
+        backend = SupabaseMemoryBackend()
+
+    records = backend.search(query, limit=limit)
+    if not records and query.strip():
+        records = backend.search("", limit=limit)
+    return render(records)
 
 
 def main() -> int:
+    load_dotenv(ROOT / ".env")
+    load_dotenv(ROOT / ".env.local", overwrite=True)
     args = parse_args()
     task_path = (ROOT / args.task_file).resolve()
     if not task_path.exists():

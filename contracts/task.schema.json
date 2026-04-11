@@ -36,6 +36,12 @@
     "linear_issue_id": {
       "type": "string"
     },
+    "linear_issue_identifier": {
+      "type": "string"
+    },
+    "linear_issue_uuid": {
+      "type": "string"
+    },
     "linear_project": {
       "type": "string"
     },
