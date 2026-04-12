@@ -1,0 +1,66 @@
+metadata:
+  updated_at: '2026-04-12'
+  owner: 'ops (Gabriel / vOps)'
+  orchestrator: 'Jarvis (Maestro)'
+  purpose: 'Controle canônico de contas, failover e uso operacional de licenças/credits de agentes de IA no ecossistema.'
+
+products:
+  antigravity:
+    source_of_truth: 'registro operacional manual + conferência periódica do operador'
+    accounts:
+      - email: 'contact@2dlcompany.com.br'
+        role: 'primary'
+        environment: 'produção/comercial'
+        status: 'credits_exhausted'
+        last_event_at: '2026-04-12'
+        evidence: 'relato direto do operador Diego nesta sessão'
+        notes: 'Conta principal usada no Antigravity até esgotar os créditos no dia.'
+      - email: 'backup.tiatendeai@gmail.com'
+        role: 'backup_failover'
+        environment: 'contingência'
+        status: 'active'
+        activated_at: '2026-04-12'
+        evidence: 'relato direto do operador Diego nesta sessão'
+        notes: 'Conta de backup ativada após esgotamento dos créditos da principal.'
+    policy:
+      preferred_usage: 'Usar a primary para operação normal e faturável; acionar backup apenas em estouro de crédito, indisponibilidade ou teste controlado.'
+      switchback_rule: 'Voltar para a primary assim que houver crédito/normalização e registrar o retorno.'
+      audit_frequency: 'diária em fase crítica; semanal em regime estável'
+
+  codex:
+    source_of_truth: '/Users/diego/.codex/auth.json (claim email do id_token)'
+    accounts:
+      - email: 'tiatendeai@gmail.com'
+        role: 'current_active_session'
+        status: 'active'
+        checked_at: '2026-04-12'
+        evidence: 'claim email extraído localmente do id_token do Codex'
+        notes: 'Sessão atual do Codex autenticada nesta conta neste momento.'
+    policy:
+      preferred_usage: 'Manter uma conta operacional estável por sessão para não pulverizar histórico, auth e troubleshooting.'
+      caution: 'Não assumir que a conta ativa do Codex seja a mesma conta ativa do Antigravity; tratar cada produto com controle separado.'
+
+governance:
+  best_practice:
+    - 'Separar primary, backup e emergência por produto, nunca usar a mesma etiqueta de forma ambígua.'
+    - 'Registrar toda troca com data, motivo, produto e conta destino.'
+    - 'Nunca guardar segredos/tokens neste arquivo; registrar apenas metadados operacionais.'
+    - 'Usar este registro como referência de consulta rápida antes de abrir sessões novas ou trocar identidade.'
+  recommended_model:
+    - 'Antigravity: conta primária de negócio (2DL) + uma conta backup fria.'
+    - 'Codex: uma conta operacional principal dedicada ao ecossistema + troca deliberada somente quando necessário.'
+    - 'Se houver crescimento do uso, criar depois um ledger mensal por produto com custo, crédito e motivo de troca.'
+
+ledger:
+  - occurred_at: '2026-04-12'
+    product: 'antigravity'
+    action: 'failover_activated'
+    from: 'contact@2dlcompany.com.br'
+    to: 'backup.tiatendeai@gmail.com'
+    reason: 'créditos esgotados na conta principal'
+    source: 'operador'
+  - occurred_at: '2026-04-12'
+    product: 'codex'
+    action: 'active_account_checked'
+    account: 'tiatendeai@gmail.com'
+    source: 'local_auth_claim'
