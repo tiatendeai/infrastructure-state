@@ -43,6 +43,40 @@ Em consolidação:
 - host2_whisper_models
 - host1_letsencrypt
 
+
+## Mapa de exposição pública observado em 2026-04-12
+
+### Rotas hoje respondendo na KVM2 (IP 187.77.242.208)
+
+- `api.ruptur.cloud`
+- `webhook.ruptur.cloud`
+- `baileys.ruptur.cloud`
+- `n8n.ruptur.cloud`
+
+### Rotas que a oracle-prod também consegue servir (teste direto por Host header no IP 167.234.228.71)
+
+- `app.ruptur.cloud` → 307
+- `api.ruptur.cloud` → 401
+- `webhook.ruptur.cloud` → 401
+- `ruptur.cloud` → 301
+- `site.ruptur.cloud` → 301
+- `aquecimento.ruptur.cloud` → 301
+- `baileys.ruptur.cloud` → 404 de aplicação, mas responde na borda
+
+### Rota que continua única da KVM2 neste momento
+
+- `n8n.ruptur.cloud`
+
+### Implicação operacional
+
+A KVM2 pode ser abatida mais cedo se aceitarmos uma das opções abaixo para `n8n.ruptur.cloud`:
+
+1. janela curta de indisponibilidade
+2. migração do n8n para outro host antes do corte
+3. publicação temporária do n8n em novo destino antes do rebuild completo
+
+Para o restante do tráfego Ruptur, a oracle-prod já consegue atuar como retaguarda temporária.
+
 ## Gate de destruição
 
 Só avançar para destroy quando:
