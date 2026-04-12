@@ -2,6 +2,64 @@
 
 Atualizado em: 2026-04-12
 
+## Estado real agora — pós-preservação e pós-rebuild da KVM2
+
+### KVM2
+
+A KVM2 **já não está mais na fase de risco pré-export** descrita abaixo. O estado atual validado é:
+
+- legado preservado no cofre da `oracle-test`
+- limpeza destrutiva já executada
+- rebuild mínimo já concluído
+- Ollama local ativo no host
+- Jarvis novo no ar com provider `ollama`
+
+Estado operacional confirmado:
+
+- host com ~`72G` livres
+- `ollama version 0.20.5`
+- modelo local `qwen3:4b`
+- `jarvis-agent` saudável
+- porta publicada `3010 -> 3000`
+- checks `healthz`, `readyz` e `statusz` positivos
+- provider ativo:
+  - `CORE_PROVIDER=ollama`
+  - `ROUTER_PROVIDER=ollama`
+  - `OLLAMA_BASE_URL=http://host.docker.internal:11434/v1`
+  - `OLLAMA_MODEL=qwen3:4b`
+
+### Preservação canônica fora da KVM2
+
+No cofre da `oracle-test` permanecem preservados:
+
+- `kvm2_ruptur_db_data_final`
+- `kvm2_baileys_data_final`
+- `jarvis_data_final`
+- `n8n_n8n_data_consistent`
+- `langfuse_langfuse_clickhouse_data_consistent`
+- `langfuse_langfuse_postgres_data`
+- `langfuse_langfuse_minio_data`
+- `kvm2_traefik_letsencrypt`
+- `kvm2_warmup_runtime_data`
+- restore-kit de configs/envs
+
+Capacidade observada no cofre:
+
+- `raw` ≈ `1.5G`
+- `restore-kit` ≈ `12K`
+
+### Leitura canônica
+
+Conclusão atual:
+
+**a KVM2 foi preservada, abatida com segurança e reerguida com core mínimo local-first.**
+
+O próximo trabalho deixou de ser “preservar antes de destruir” e passou a ser:
+
+1. canonizar este estado em documentação permanente;
+2. decidir quais camadas voltam em seguida;
+3. tratar Oracle/Terraform e serviços adicionais em nova fase controlada.
+
 ## Decisão de ferramental
 
 ### Ansible
