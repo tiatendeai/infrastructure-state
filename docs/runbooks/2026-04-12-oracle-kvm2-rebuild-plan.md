@@ -77,6 +77,19 @@ A KVM2 pode ser abatida mais cedo se aceitarmos uma das opções abaixo para `n8
 
 Para o restante do tráfego Ruptur, a oracle-prod já consegue atuar como retaguarda temporária.
 
+
+### KVM2 congelada em 2026-04-12
+
+- `n8n-n8n-1` parado e exportado de forma consistente (`n8n_n8n_data_consistent`)
+- serviços Swarm `jarvis_jarvis` e `proxy_socket-proxy` escalados para `0`
+- demais containers de aplicação parados para congelar o host
+- snapshots finais gerados para:
+  - `kvm2_ruptur_db_data_final`
+  - `kvm2_baileys_data_final`
+  - `jarvis_data_final`
+
+Resultado: a KVM2 está operacionalmente abatida e pronta para a fase de limpeza/rebuild, sem dependência de manter os serviços atuais ligados.
+
 ## Gate de destruição
 
 Só avançar para destroy quando:
