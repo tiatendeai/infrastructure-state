@@ -1,0 +1,55 @@
+---
+- name: Orquestrar Terraform da Oracle com guardrails
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Validar presença do diretório Terraform
+      ansible.builtin.stat:
+        path: "{{ terraform_project_dir }}"
+      register: terraform_dir_stat
+
+    - name: Falhar se o diretório Terraform não existir
+      ansible.builtin.fail:
+        msg: "Diretório Terraform não encontrado: {{ terraform_project_dir }}"
+      when: not terraform_dir_stat.stat.exists
+
+    - name: Exibir estado conhecido do Terraform
+      ansible.builtin.command:
+        cmd: terraform state list
+        chdir: "{{ terraform_project_dir }}"
+      register: terraform_state_list
+      changed_when: false
+
+    - name: Mostrar estado do Terraform
+      ansible.builtin.debug:
+        var: terraform_state_list.stdout_lines
+
+    - name: Gerar plano Terraform quando explicitamente habilitado
+      ansible.builtin.command:
+        cmd: terraform plan -no-color
+        chdir: "{{ terraform_project_dir }}"
+      register: terraform_plan
+      changed_when: false
+      when: oracle_plan_enabled | bool
+
+    - name: Exigir confirmação explícita para destruição Oracle
+      ansible.builtin.fail:
+        msg: "Destruição Oracle bloqueada. Use oracle_destroy_confirmation=DESTROY-ORACLE."
+      when:
+        - oracle_destroy_enabled | bool
+        - oracle_destroy_confirmation != "DESTROY-ORACLE"
+
+    - name: Destruir infraestrutura Oracle quando explicitamente liberado
+      ansible.builtin.command:
+        cmd: terraform destroy -auto-approve
+        chdir: "{{ terraform_project_dir }}"
+      when:
+        - oracle_destroy_enabled | bool
+        - oracle_destroy_confirmation == "DESTROY-ORACLE"
+
+    - name: Aplicar infraestrutura Oracle quando explicitamente habilitado
+      ansible.builtin.command:
+        cmd: terraform apply -auto-approve
+        chdir: "{{ terraform_project_dir }}"
+      when: oracle_apply_enabled | bool

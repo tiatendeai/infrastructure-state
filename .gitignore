@@ -19,6 +19,10 @@ build/
 coverage/
 .vscode/
 .idea/
+.venv-ansible/
+adapters/provisioning/ansible/.cache/
+adapters/provisioning/ansible/artifacts/**/*.tar.gz
+adapters/provisioning/ansible/artifacts/**/*.tgz
 
 # artefatos legados sensíveis / operacionais brutos
 .archive/legacy/.antigravity/*.json
