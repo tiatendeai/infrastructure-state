@@ -1,4 +1,4 @@
-generated_at: "2026-04-13T15:26:05Z"
+generated_at: "2026-04-13T15:28:19Z"
 root: "/Users/diego/dev"
 operator: "Diego"
 purpose: "Inventário mínimo para observabilidade, controle e recuperação pré-formatação"
@@ -9,7 +9,7 @@ control_plane:
     exists: true
     remote: "https://github.com/tiatendeai/state.git"
     branch: "main"
-    status: "## main...origin/main [ahead 1]"
+    status: "## main...origin/main"
     pending_items: 0
     restore_priority: "critical"
     role: "canonical_governance"
@@ -19,7 +19,7 @@ control_plane:
     exists: true
     remote: "https://github.com/tiatendeai/infrastructure-state.git"
     branch: "master"
-    status: "## master...origin/master [ahead 1]"
+    status: "## master...origin/master"
     pending_items: 0
     restore_priority: "critical"
     role: "operational_control_plane"
@@ -39,7 +39,7 @@ control_plane:
     exists: true
     remote: "https://github.com/tiatendeai/J.A.R.V.I.S."
     branch: "main"
-    status: "## main...origin/main [ahead 1]"
+    status: "## main...origin/main"
     pending_items: 0
     restore_priority: "critical"
     role: "maestro_runtime"
@@ -70,7 +70,7 @@ business_repos:
     exists: true
     remote: "https://github.com/tiatendeai/2dl-automated-tech-farm-and-cash-factory-co.git"
     branch: "main"
-    status: "## main...origin/main [ahead 1]"
+    status: "## main...origin/main"
     pending_items: 0
     restore_priority: "medium"
     role: "delivery_repo"
@@ -90,7 +90,7 @@ business_repos:
     exists: true
     remote: "https://github.com/tiatendeai/ruptur-revenue-engine-os-ai.git"
     branch: "bootstrap/fullstack-revenue-os"
-    status: "## bootstrap/fullstack-revenue-os...origin/bootstrap/fullstack-revenue-os [ahead 1]"
+    status: "## bootstrap/fullstack-revenue-os...origin/bootstrap/fullstack-revenue-os"
     pending_items: 0
     restore_priority: "high"
     role: "revenue_engine"
