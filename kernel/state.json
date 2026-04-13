@@ -101,6 +101,15 @@
       "timestamp": "2026-04-07T19:15:20Z",
       "registry_record": "registry/runs/2026-04-07T19-15-19Z_hello-world.json",
       "task_source": "examples/hello.task.json"
+    },
+    {
+      "task_id": "hello-world",
+      "type": "echo",
+      "mode": "FAST",
+      "status": "done",
+      "timestamp": "2026-04-13T14:56:37Z",
+      "registry_record": "registry/runs/2026-04-13T14-56-32Z_hello-world.json",
+      "task_source": "examples/hello.task.json"
     }
   ],
   "version": 1

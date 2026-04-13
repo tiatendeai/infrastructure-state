@@ -1,0 +1,106 @@
+# Mapeamento Oficial do Ecossistema Ruptur (Registry of Ownership)
+# Este arquivo define de forma determinística os proprietários (donos) de cada
+# repositório (House) e microserviço mapeado no infrastructure-state.
+
+# ---------------------------------------------------------
+# REGISTRO DAS CASAS (REPOSITÓRIOS) DA ARQUITETURA
+# ---------------------------------------------------------
+houses:
+  alpha:
+    path: "/Users/diego/dev/alpha"
+    repository: "alpha"
+    owner_agent: "Jarvis (Maestro)"
+    owner_uid: "jarvis-root-001"
+    technical_function: "Root, Gênese e Definição do DNA das IAs"
+    
+  state:
+    path: "/Users/diego/dev/state"
+    repository: "state"
+    owner_agent: "vcvo (Visão Estratégica)"
+    technical_function: "Governança Canônica, Manuais e Regras de Negócio"
+
+  infrastructure-state:
+    path: "/Users/diego/dev/infrastructure-state"
+    repository: "infrastructure-state"
+    owner_agent: "ops (Gabriel / vOps)"
+    technical_function: "DevOps, VPSs, Orquestração Docker, Deployments e Segurança"
+
+  finance-state:
+    path: "/Users/diego/dev/finance-state"
+    repository: "finance-state"
+    owner_agent: "vcfo (João / vCFO)"
+    technical_function: "Controle de ROI, Saldo de APIs, Billing e Integrações de Pagamento"
+
+  ruptur:
+    path: "/Users/diego/dev/ruptur"
+    repository: "ruptur"
+    owner_agent: "eggs (Rafael / vCEO)"
+    technical_function: "Execução, Desbloqueios e Engenharia de Software Core"
+
+  customer-state:
+    path: "/Users/diego/dev/customer-state"
+    repository: "customer-state"
+    owner_agent: "iazinha (Alice / vCMO)"
+    technical_function: "Customer Experience (CX), Interface, UX e Camadas de Front-end"
+
+  # Repositórios Adicionais Baseados no Desenvolvimento Atual
+  elon-the-bot-click:
+    repository: "elon-the-bot-click"
+    owner_agent: "eggs (Rafael / vCEO)"
+    technical_function: "Bot Autônomo de Apostas (Bac Bo) - Execução em Client-Side / Content Scripts"
+
+  ruptur-revenue-engine-os-ai:
+    repository: "ruptur-revenue-engine-os-ai"
+    owner_agent: "vcfo (João / vCFO)"
+    technical_function: "Motor de Receita e Integrações de Faturamento/Assinaturas"
+
+  caes-for-self-evolution-system:
+    repository: "caes-for-self-evolution-system"
+    owner_agent: "vcvo (Visão Estratégica)"
+    technical_function: "Sistema de Auditoria e Evolução Cognitiva (Trilhas do N8N/LLM)"
+
+
+# ---------------------------------------------------------
+# REGISTRO DE MICROSERVIÇOS (Baseado no services.yaml)
+# host_alias: hostinger-kvm2
+# ---------------------------------------------------------
+services_ownership:
+  kvm2:
+    warmup:
+      owner_agent: "ops (Gabriel / vOps)"
+      category: "runtime_support"
+    
+    ruptur-web:
+      owner_agent: "iazinha (Alice / vCMO)"
+      category: "application_frontend"
+      observation: "Design da experiência do usuário e interface principal."
+
+    whisper:
+      owner_agent: "ops (Gabriel / vOps)"
+      category: "ai_runtime"
+      observation: "Manutenção do modelo de inferência (STT) na infraestrutura local."
+
+    baileys:
+      owner_agent: "ops (Gabriel / vOps)"
+      category: "integration_gateway"
+      observation: "Garantir a estabilidade da sub-rede do WhatsApp."
+
+    ruptur-backend:
+      owner_agent: "eggs (Rafael / vCEO)"
+      category: "application_backend"
+      observation: "Regras de negócio, endpoints e lógica de execução pesada."
+
+    ruptur-db:
+      owner_agent: "ops (Gabriel / vOps)"
+      category: "database"
+      observation: "Persistência, backups e migrations do PostgreSQL."
+
+    traefik:
+      owner_agent: "ops (Gabriel / vOps)"
+      category: "reverse_proxy"
+      observation: "Regras de roteamento de entrada, SSL e Gateways."
+
+    docker-socket-proxy:
+      owner_agent: "ops (Gabriel / vOps)"
+      category: "docker_proxy"
+      observation: "Segurança de acesso aos daemons Docker."
