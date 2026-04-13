@@ -1,0 +1,35 @@
+generated_at: "2026-04-13T15:23:24Z"
+machine_format_context: true
+backup_sets:
+  - id: "operator-core-secrets"
+    required: true
+    storage: "encrypted_off_git"
+    paths:
+      - "$HOME/.ssh"
+      - "$HOME/.codex"
+      - "$HOME/.gitconfig"
+      - "$HOME/.zshrc"
+      - "$HOME/.zprofile"
+      - "$HOME/.npmrc"
+    notes: "Não versionar; exportar somente para bundle criptografado."
+  - id: "local-only-repositories-and-archives"
+    required: true
+    storage: "encrypted_off_git"
+    paths:
+      - "/Users/diego/dev/adk"
+      - "/Users/diego/dev/GitHub/brute-ai-agent-histories"
+    notes: "Ativos sem remote canônico; precisam existir fora da máquina antes da formatação."
+  - id: "non-tiatendeai-working-trees"
+    required: "review"
+    storage: "encrypted_off_git_or_owner_remote"
+    paths:
+      - "/Users/diego/dev/prompts"
+      - "/Users/diego/dev/prompts/SMSProject"
+    notes: "Há mudanças locais fora da conta tiatendeai; decidir push/backup conforme relevância."
+safe_to_discard_after_validation:
+  - "**/.DS_Store"
+  - "*.code-workspace"
+  - "full_dev_tree_infra.txt"
+  - ".turbo/"
+  - "apps/*/.turbo/"
+  - "logs de build efêmeros"

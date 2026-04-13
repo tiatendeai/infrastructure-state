@@ -1,0 +1,110 @@
+version: 1
+generated_for: "machine-format-recovery"
+updated_at: "2026-04-13"
+restore_order:
+  - order: 1
+    repo: "state"
+    remote: "https://github.com/tiatendeai/state.git"
+    branch: "main"
+    local_path: "/Users/diego/dev/state"
+    role: "canonical_governance"
+    restore_priority: "critical"
+    bootstrap:
+      - "git clone https://github.com/tiatendeai/state.git /Users/diego/dev/state"
+    acceptance:
+      - "registry/repositories.yaml presente"
+      - "constitution/jarvis.dna.md presente"
+  - order: 2
+    repo: "infrastructure-state"
+    remote: "https://github.com/tiatendeai/infrastructure-state.git"
+    branch: "master"
+    local_path: "/Users/diego/dev/infrastructure-state"
+    role: "operational_control_plane"
+    restore_priority: "critical"
+    bootstrap:
+      - "git clone https://github.com/tiatendeai/infrastructure-state.git /Users/diego/dev/infrastructure-state"
+    acceptance:
+      - "recovery/dev_inventory.yaml presente"
+      - "recovery/local_backup_manifest.yaml presente"
+  - order: 3
+    repo: "omega"
+    remote: "https://github.com/tiatendeai/omega.git"
+    branch: "main"
+    local_path: "/Users/diego/dev/omega"
+    role: "session_lifecycle"
+    restore_priority: "critical"
+    bootstrap:
+      - "git clone https://github.com/tiatendeai/omega.git /Users/diego/dev/omega"
+    acceptance:
+      - "sessions/ acessível"
+  - order: 4
+    repo: "J.A.R.V.I.S."
+    remote: "https://github.com/tiatendeai/J.A.R.V.I.S."
+    branch: "main"
+    local_path: "/Users/diego/dev/J.A.R.V.I.S."
+    role: "maestro_runtime"
+    restore_priority: "critical"
+    bootstrap:
+      - "git clone https://github.com/tiatendeai/J.A.R.V.I.S. /Users/diego/dev/J.A.R.V.I.S."
+      - "cd /Users/diego/dev/J.A.R.V.I.S."
+      - "nvm use"
+      - "npm ci"
+      - "npm run ci"
+    acceptance:
+      - "RECOVERY.md presente"
+      - "bin/jarvis-ts-node executável"
+      - "npm run ci finaliza sem erro"
+  - order: 5
+    repo: "alpha"
+    remote: "https://github.com/tiatendeai/alpha"
+    branch: "main"
+    local_path: "/Users/diego/dev/alpha"
+    role: "genesis"
+    restore_priority: "high"
+    bootstrap:
+      - "git clone https://github.com/tiatendeai/alpha /Users/diego/dev/alpha"
+  - order: 6
+    repo: "ruptur"
+    remote: "https://github.com/tiatendeai/ruptur.git"
+    branch: "lindona-front-e-warmup-manager"
+    local_path: "/Users/diego/dev/ruptur"
+    role: "execution_core"
+    restore_priority: "high"
+    bootstrap:
+      - "git clone https://github.com/tiatendeai/ruptur.git /Users/diego/dev/ruptur"
+      - "cd /Users/diego/dev/ruptur"
+      - "git checkout lindona-front-e-warmup-manager"
+  - order: 7
+    repo: "lab/ruptur-revenue-engine-os-ai"
+    remote: "https://github.com/tiatendeai/ruptur-revenue-engine-os-ai.git"
+    branch: "bootstrap/fullstack-revenue-os"
+    local_path: "/Users/diego/dev/lab/ruptur-revenue-engine-os-ai"
+    role: "revenue_engine"
+    restore_priority: "high"
+    bootstrap:
+      - "git clone https://github.com/tiatendeai/ruptur-revenue-engine-os-ai.git /Users/diego/dev/lab/ruptur-revenue-engine-os-ai"
+      - "cd /Users/diego/dev/lab/ruptur-revenue-engine-os-ai"
+      - "git checkout bootstrap/fullstack-revenue-os"
+  - order: 8
+    repo: "2dl-automated-tech-farm-and-cash-factory-co"
+    remote: "https://github.com/tiatendeai/2dl-automated-tech-farm-and-cash-factory-co.git"
+    branch: "main"
+    local_path: "/Users/diego/dev/2dl-automated-tech-farm-and-cash-factory-co"
+    role: "delivery_repo"
+    restore_priority: "medium"
+    bootstrap:
+      - "git clone https://github.com/tiatendeai/2dl-automated-tech-farm-and-cash-factory-co.git /Users/diego/dev/2dl-automated-tech-farm-and-cash-factory-co"
+  - order: 9
+    repo: "vps-oracle"
+    remote: "https://github.com/tiatendeai/vps-oracle.git"
+    branch: "master"
+    local_path: "/Users/diego/dev/vps-oracle"
+    role: "oracle_vps_automation"
+    restore_priority: "medium"
+    bootstrap:
+      - "git clone https://github.com/tiatendeai/vps-oracle.git /Users/diego/dev/vps-oracle"
+post_restore_requirements:
+  - "Restaurar bundle criptografado fora do Git antes de testar conectores"
+  - "Repor $HOME/.ssh e validar acesso aos remotes"
+  - "Repor $HOME/.codex para plugins, skills, auth e memórias operacionais"
+  - "Validar login do GitHub CLI e conectores críticos"

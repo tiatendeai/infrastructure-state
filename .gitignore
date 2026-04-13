@@ -31,3 +31,5 @@ adapters/provisioning/ansible/artifacts/**/*.tgz
 .archive/legacy/scripts/*.sh
 .cursor/mcp.json
 .antigravity/mcp_config.json
+*.code-workspace
+recovery/artifacts/

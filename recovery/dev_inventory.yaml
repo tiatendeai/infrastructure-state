@@ -1,0 +1,124 @@
+generated_at: "2026-04-13T15:26:05Z"
+root: "/Users/diego/dev"
+operator: "Diego"
+purpose: "Inventário mínimo para observabilidade, controle e recuperação pré-formatação"
+control_plane:
+  - repo: "state"
+    path: "/Users/diego/dev/state"
+    local_path: "/Users/diego/dev/state"
+    exists: true
+    remote: "https://github.com/tiatendeai/state.git"
+    branch: "main"
+    status: "## main...origin/main [ahead 1]"
+    pending_items: 0
+    restore_priority: "critical"
+    role: "canonical_governance"
+  - repo: "infrastructure-state"
+    path: "/Users/diego/dev/infrastructure-state"
+    local_path: "/Users/diego/dev/infrastructure-state"
+    exists: true
+    remote: "https://github.com/tiatendeai/infrastructure-state.git"
+    branch: "master"
+    status: "## master...origin/master [ahead 1]"
+    pending_items: 0
+    restore_priority: "critical"
+    role: "operational_control_plane"
+  - repo: "omega"
+    path: "/Users/diego/dev/omega"
+    local_path: "/Users/diego/dev/omega"
+    exists: true
+    remote: "https://github.com/tiatendeai/omega.git"
+    branch: "main"
+    status: "## main...origin/chore/omega-session-lifecycle-performance-2026-03-23"
+    pending_items: 0
+    restore_priority: "critical"
+    role: "session_lifecycle"
+  - repo: "J.A.R.V.I.S."
+    path: "/Users/diego/dev/J.A.R.V.I.S."
+    local_path: "/Users/diego/dev/J.A.R.V.I.S."
+    exists: true
+    remote: "https://github.com/tiatendeai/J.A.R.V.I.S."
+    branch: "main"
+    status: "## main...origin/main [ahead 1]"
+    pending_items: 0
+    restore_priority: "critical"
+    role: "maestro_runtime"
+business_repos:
+  - repo: "alpha"
+    path: "/Users/diego/dev/alpha"
+    local_path: "/Users/diego/dev/alpha"
+    exists: true
+    remote: "https://github.com/tiatendeai/alpha"
+    branch: "main"
+    status: "## main...origin/main"
+    pending_items: 0
+    restore_priority: "high"
+    role: "genesis"
+  - repo: "ruptur"
+    path: "/Users/diego/dev/ruptur"
+    local_path: "/Users/diego/dev/ruptur"
+    exists: true
+    remote: "https://github.com/tiatendeai/ruptur.git"
+    branch: "lindona-front-e-warmup-manager"
+    status: "## lindona-front-e-warmup-manager...origin/lindona-front-e-warmup-manager"
+    pending_items: 0
+    restore_priority: "high"
+    role: "execution_core"
+  - repo: "2dl-automated-tech-farm-and-cash-factory-co"
+    path: "/Users/diego/dev/2dl-automated-tech-farm-and-cash-factory-co"
+    local_path: "/Users/diego/dev/2dl-automated-tech-farm-and-cash-factory-co"
+    exists: true
+    remote: "https://github.com/tiatendeai/2dl-automated-tech-farm-and-cash-factory-co.git"
+    branch: "main"
+    status: "## main...origin/main [ahead 1]"
+    pending_items: 0
+    restore_priority: "medium"
+    role: "delivery_repo"
+  - repo: "vps-oracle"
+    path: "/Users/diego/dev/vps-oracle"
+    local_path: "/Users/diego/dev/vps-oracle"
+    exists: true
+    remote: "https://github.com/tiatendeai/vps-oracle.git"
+    branch: "master"
+    status: "## master...origin/master"
+    pending_items: 0
+    restore_priority: "medium"
+    role: "oracle_vps_automation"
+  - repo: "ruptur-revenue-engine-os-ai"
+    path: "/Users/diego/dev/lab/ruptur-revenue-engine-os-ai"
+    local_path: "/Users/diego/dev/lab/ruptur-revenue-engine-os-ai"
+    exists: true
+    remote: "https://github.com/tiatendeai/ruptur-revenue-engine-os-ai.git"
+    branch: "bootstrap/fullstack-revenue-os"
+    status: "## bootstrap/fullstack-revenue-os...origin/bootstrap/fullstack-revenue-os [ahead 1]"
+    pending_items: 0
+    restore_priority: "high"
+    role: "revenue_engine"
+additional_git_repos_to_review:
+  - repo: "prompts"
+    path: "/Users/diego/dev/prompts"
+    local_path: "/Users/diego/dev/prompts"
+    exists: true
+    remote: "https://github.com/sandeco/prompts.git"
+    branch: "main"
+    status: "## main...origin/main [ahead 1]"
+    pending_items: 1
+    backup_strategy: "review_and_backup_if_business_critical"
+  - repo: "SMSProject"
+    path: "/Users/diego/dev/prompts/SMSProject"
+    local_path: "/Users/diego/dev/prompts/SMSProject"
+    exists: true
+    remote: "https://github.com/sandeco/SMSProject.git"
+    branch: "master"
+    status: "## master...origin/master"
+    pending_items: 2
+    backup_strategy: "review_and_backup_if_business_critical"
+local_only_assets:
+  - path: "/Users/diego/dev/adk"
+    type: "repo_without_remote"
+    required_backup: true
+    recommended_storage: "encrypted_off_git"
+  - path: "/Users/diego/dev/GitHub/brute-ai-agent-histories"
+    type: "local_archive_history"
+    required_backup: true
+    recommended_storage: "encrypted_off_git"
