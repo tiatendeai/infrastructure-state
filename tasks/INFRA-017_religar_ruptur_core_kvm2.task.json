@@ -1,0 +1,49 @@
+{
+  "task_id": "INFRA-017-religar-ruptur-core-kvm2",
+  "type": "change",
+  "mode": "FULL",
+  "status": "in_progress",
+  "linear_issue_id": "INFRA-017",
+  "linear_project": "KVM2 Core",
+  "linear_team_key": "INF",
+  "service_target": "ruptur-core-kvm2",
+  "context_refs": [
+    "docs/runbooks/2026-04-13-religacao-ruptur-core-kvm2.md",
+    "../state/knowledge/2026-04-13-jarvis-ruptur-religacao-kvm2.md",
+    "../ruptur/knowledge/2026-04-13-jarvis-ruptur-religacao-kvm2.md"
+  ],
+  "infra_refs": [
+    "../ruptur/deploy/kvm2/docker-compose.yml",
+    "../ruptur/ops/kvm2/preflight.sh",
+    "../ruptur/ops/kvm2/smoke.sh"
+  ],
+  "expected_output": [
+    "evidencia de `ruptur-db` no ar",
+    "evidencia de `ruptur-backend` no ar",
+    "health local aprovado",
+    "fluxo minimo Jarvis -> Ruptur comprovado"
+  ],
+  "approval_required": false,
+  "execution_policy": "remote_materialization_with_local_record",
+  "input": {
+    "message": "Religar o core minimo do Ruptur no KVM2 para que o Jarvis volte a usar o Ruptur sem criar sistemas paralelos.",
+    "today_priorities": [
+      "subir ruptur-db",
+      "subir ruptur-backend",
+      "validar health",
+      "validar webhook/canal minimo",
+      "comprovar integracao com Jarvis"
+    ]
+  },
+  "output": {
+    "progress_notes": [
+      "2026-04-13: kvm2-ruptur-db-1 materializado e saudável no KVM2.",
+      "2026-04-13: kvm2-ruptur-backend-1 materializado no KVM2.",
+      "2026-04-13: health validado dentro do container com GET /health retornando ok.",
+      "2026-04-13: webhook /webhook/uazapi respondeu com ok em smoke mínimo.",
+      "2026-04-13: admin token UAZAPI respondeu e listou instâncias.",
+      "2026-04-13: token direto configurado no backend retornou 401 em /instance/status, indicando drift de credencial/instância.",
+      "2026-04-13: próximo passo é reconciliar a instância/canal e concluir a ligação operacional do Jarvis ao Ruptur."
+    ]
+  }
+}
