@@ -1,0 +1,15 @@
+{
+  "task_id": "INFRA-AUDIT-GCP-001",
+  "type": "command",
+  "status": "pending",
+  "priority": "high",
+  "input": {
+    "entrypoint": "scripts/ansible_runner.py",
+    "args": ["preflight.yml", "--inventory", "production"],
+    "message": "Executando auditoria preventiva (Preflight) no ambiente GCP via Ansible."
+  },
+  "output": {},
+  "service_target": "gcp-primary",
+  "execution_policy": "standard",
+  "approval_required": false
+}

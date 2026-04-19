@@ -1,68 +1,55 @@
----
-# Diretório local do Terraform Oracle
-terraform_project_dir: /Users/diego/dev/GitHub/vps-oracle/infra
+shipyard_project_name: ruptur-lab
+shipyard_environment: lab
+shipyard_expected_debian_major_version: "11"
+shipyard_compose_autostart: false
+shipyard_jarvis_enabled: false
+shipyard_admin_user: diego
+shipyard_timezone: America/Sao_Paulo
+shipyard_tls_acme_email: ruptur.cloud@gmail.com
 
-# Estrutura de staging bruto nas Oracle
-oracle_archive_root: /srv/jarvis-archive
-oracle_archive_dirs:
-  - raw
-  - manifests
-  - checksums
-  - restore-kit
-  - incoming
-  - exports
-  - logs
+shipyard_base_dir: /opt/ruptur
+shipyard_compose_dir: "{{ shipyard_base_dir }}/compose"
+shipyard_config_dir: "{{ shipyard_base_dir }}/config"
+shipyard_data_dir: "{{ shipyard_base_dir }}/data"
+shipyard_logs_dir: "{{ shipyard_base_dir }}/logs"
+shipyard_runtime_dir: "{{ shipyard_base_dir }}/runtime"
+shipyard_backup_dir: "{{ shipyard_base_dir }}/backups"
 
-# Diretório local para artefatos gerados pelo Ansible
-ansible_artifacts_root: /Users/diego/dev/infrastructure-state/adapters/provisioning/ansible/artifacts
+shipyard_external_networks:
+  - ruptur-edge
+  - ruptur-data
 
-# Exportações críticas da KVM2 identificadas até agora
-kvm2_export_paths:
-  - /var/lib/docker/volumes/kvm2_ruptur_db_data/_data
-  - /var/lib/docker/volumes/kvm2_baileys_data/_data
-  - /var/lib/docker/volumes/kvm2_traefik_letsencrypt/_data
-  - /var/lib/docker/volumes/kvm2_warmup_runtime_data/_data
-  - /var/lib/docker/volumes/kvm2_whisper_models/_data
-  - /var/lib/docker/volumes/n8n_n8n_data/_data
-  - /var/lib/docker/volumes/langfuse_langfuse_postgres_data/_data
-  - /var/lib/docker/volumes/langfuse_langfuse_clickhouse_data/_data
-  - /var/lib/docker/volumes/langfuse_langfuse_minio_data/_data
-  - /root/J.A.R.V.I.S./data
+shipyard_domains:
+  ops: ops.ruptur.cloud
+  api: api.ruptur.cloud
+  hermes: hermes.ruptur.cloud
+  n8n: n8n.ruptur.cloud
+  portainer: portainer.ruptur.cloud
+  traefik: traefik.ruptur.cloud
 
-kvm2_export_specs:
-  - name: kvm2_ruptur_db_data
-    path: /var/lib/docker/volumes/kvm2_ruptur_db_data/_data
-    target_host: oracle-test
-  - name: kvm2_baileys_data
-    path: /var/lib/docker/volumes/kvm2_baileys_data/_data
-    target_host: oracle-test
-  - name: kvm2_traefik_letsencrypt
-    path: /var/lib/docker/volumes/kvm2_traefik_letsencrypt/_data
-    target_host: oracle-test
-  - name: kvm2_warmup_runtime_data
-    path: /var/lib/docker/volumes/kvm2_warmup_runtime_data/_data
-    target_host: oracle-test
-  - name: kvm2_whisper_models
-    path: /var/lib/docker/volumes/kvm2_whisper_models/_data
-    target_host: oracle-test
-  - name: n8n_n8n_data
-    path: /var/lib/docker/volumes/n8n_n8n_data/_data
-    target_host: oracle-test
-  - name: langfuse_langfuse_postgres_data
-    path: /var/lib/docker/volumes/langfuse_langfuse_postgres_data/_data
-    target_host: oracle-test
-  - name: langfuse_langfuse_clickhouse_data
-    path: /var/lib/docker/volumes/langfuse_langfuse_clickhouse_data/_data
-    target_host: oracle-test
-  - name: langfuse_langfuse_minio_data
-    path: /var/lib/docker/volumes/langfuse_langfuse_minio_data/_data
-    target_host: oracle-test
-  - name: jarvis_data
-    path: /root/J.A.R.V.I.S./data
-    target_host: oracle-test
+shipyard_uazapi_events:
+  - messages
+  - connection
+shipyard_uazapi_optional_events:
+  - messages_update
+shipyard_uazapi_exclude_messages:
+  - wasSentByApi
 
-# Guardrails destrutivos
-oracle_plan_enabled: false
-oracle_destroy_enabled: false
-oracle_apply_enabled: false
-oracle_destroy_confirmation: ""
+shipyard_jarvis_repo_url: https://github.com/tiatendeai/J.A.R.V.I.S.
+shipyard_jarvis_repo_version: main
+shipyard_jarvis_state_repo_url: https://github.com/tiatendeai/state.git
+shipyard_jarvis_state_repo_version: main
+shipyard_jarvis_core_provider: gemini
+shipyard_jarvis_router_provider: "{{ shipyard_jarvis_core_provider }}"
+shipyard_jarvis_ollama_base_url: http://host.docker.internal:11434/v1
+shipyard_jarvis_ollama_model: qwen3:4b
+shipyard_jarvis_port: 3000
+shipyard_jarvis_uazapi_base_url: https://api.uazapi.com
+
+shipyard_images:
+  traefik: traefik:v3.1
+  portainer: portainer/portainer-ce:lts
+  postgres: postgres:16
+  redis: redis:7
+  n8n: docker.n8n.io/n8nio/n8n:1
+  minio: minio/minio:RELEASE.2025-02-03T21-03-04Z-cpuv1

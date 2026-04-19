@@ -1,0 +1,43 @@
+---
+- name: Garantir diretórios dedicados do Jarvis
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ jarvis_runtime_dir }}"
+    - "{{ jarvis_state_dir }}"
+    - "{{ jarvis_config_dir }}"
+    - "{{ jarvis_data_dir }}"
+
+- name: Sincronizar runtime canônico do J.A.R.V.I.S.
+  ansible.builtin.git:
+    repo: "{{ jarvis_repo_url }}"
+    dest: "{{ jarvis_runtime_dir }}"
+    version: "{{ jarvis_repo_version }}"
+    update: true
+
+- name: Sincronizar governança canônica do state
+  ansible.builtin.git:
+    repo: "{{ jarvis_state_repo_url }}"
+    dest: "{{ jarvis_state_dir }}"
+    version: "{{ jarvis_state_repo_version }}"
+    update: true
+
+- name: Renderizar env do Jarvis
+  ansible.builtin.template:
+    src: jarvis.env.j2
+    dest: "{{ jarvis_config_dir }}/jarvis.env"
+    mode: "0600"
+
+- name: Renderizar compose do Jarvis
+  ansible.builtin.template:
+    src: docker-compose.jarvis.yml.j2
+    dest: "{{ jarvis_compose_file }}"
+    mode: "0644"
+
+- name: Subir Jarvis quando autostart estiver habilitado
+  ansible.builtin.command:
+    cmd: docker compose -f {{ jarvis_compose_file }} up -d --build
+  changed_when: shipyard_compose_autostart | bool
+  when: shipyard_compose_autostart | bool

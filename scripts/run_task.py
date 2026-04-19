@@ -33,6 +33,7 @@ ALLOWED_COMMAND_ENTRYPOINTS = {
     "scripts/generate_services_registry.py",
     "scripts/build_context_packet.py",
     "scripts/linear_adapter.py",
+    "scripts/ansible_runner.py",
 }
 TYPE_TO_MODE = {
     "echo": "FAST",
