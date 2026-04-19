@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# infrastructure-state
-Infraestrutura IaC
-=======
 # Ruptur Farm Framework
 
 > Instância ativa: `infrastructure-state` — diretório operacional de infraestrutura e IaC.
@@ -291,4 +287,3 @@ Exemplos:
 ## Resultado
 
 Comandos simples, estado explícito e base limpa para qualquer máquina ou pipeline.
->>>>>>> d47f5b0 (chore: commit inicial do infrastructure-state até a tranche 2)

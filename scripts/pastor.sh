@@ -2,7 +2,7 @@
 # 🧬 JARVIS PASTORAL VISIT (VISITA PASTORAL)
 # Objetivo: Varrer repositórios subordinados, atualizar o AGENTS.md e auditar integridade de DNA.
 
-STATE_PATH="/Users/diego/dev/tiatendeai/state"
+STATE_PATH="/Users/diego/dev/tiatendeai/infrastructure-state"
 DEV_ROOT="/Users/diego/dev/tiatendeai"
 LOG_FILE="$STATE_PATH/logs/pastoral_visits.log"
 

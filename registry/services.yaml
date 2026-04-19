@@ -5,82 +5,57 @@ generated_from:
   run_ref: registry/runs/2026-04-03T21-13-40Z_LIN-001-baseline-server-inventory.json
   generated_at: 2026-04-03T22:50:42Z
 targets:
+  gcp-primary:
+    host_alias: gcp-primary
+    region: southamerica-east1
+    strategy: "GCP First"
+    services:
+      shipyard-lab:
+        service_id: shipyard-lab
+        category: intelligence_lab
+        status: "Planned/Experimental"
+        ansible_host: "34.95.234.227"
+        ansible_user: "diego"
+
   hostinger-kvm2:
     host_alias: hostinger-kvm2
     hostname: srv1503897
     os: "Ubuntu 24.04.4 LTS"
-    compose_file: /opt/ruptur/current/deploy/kvm2/docker-compose.yml
-    source: observed
+    status: active
     services:
-      warmup:
-        service_id: warmup
-        category: runtime_support
-        runtime: docker
-        status: "Up 19 hours"
-        container_name: kvm2-warmup-1
-        image: kvm2-warmup
-        ports: [4173/tcp]
-        source: observed
-      ruptur-web:
-        service_id: ruptur-web
-        category: application_frontend
-        runtime: docker
-        status: "Up 19 hours"
-        container_name: kvm2-ruptur-web-1
-        image: kvm2-ruptur-web
-        ports: [3000/tcp]
-        source: observed
-      whisper:
-        service_id: whisper
-        category: ai_runtime
-        runtime: docker
-        status: "Up 19 hours"
-        container_name: kvm2-whisper-1
-        image: kvm2-whisper
-        ports: [8001/tcp]
-        source: observed
-      baileys:
-        service_id: baileys
-        category: integration_gateway
-        runtime: docker
-        status: "Up 19 hours"
-        container_name: kvm2-baileys-1
-        image: kvm2-baileys
-        ports: [3000/tcp]
-        source: observed
       ruptur-backend:
         service_id: ruptur-backend
         category: application_backend
         runtime: docker
-        status: "Up 19 hours (healthy)"
-        container_name: kvm2-ruptur-backend-1
-        image: kvm2-ruptur-backend
-        ports: [8000/tcp]
-        source: observed
-      ruptur-db:
-        service_id: ruptur-db
-        category: database
+        status: "Active"
+      ruptur-web:
+        service_id: ruptur-web
+        category: application_frontend
         runtime: docker
-        status: "Up 20 hours (healthy)"
-        container_name: kvm2-ruptur-db-1
-        image: postgres:16
-        ports: [5432/tcp]
-        source: observed
-      traefik:
-        service_id: traefik
-        category: reverse_proxy
+        status: "Active"
+      baileys:
+        service_id: baileys
+        category: integration_gateway
         runtime: docker
-        status: "Up 20 hours"
-        container_name: kvm2-traefik-1
-        image: traefik:v3.1
-        ports: ["0.0.0.0:80->80/tcp", "[::]:80->80/tcp", "0.0.0.0:443->443/tcp", "[::]:443->443/tcp"]
-        source: observed
-      docker-socket-proxy:
-        service_id: docker-socket-proxy
-        category: docker_proxy
+      whisper:
+        service_id: whisper
+        category: ai_runtime
         runtime: docker
-        status: "Up 20 hours"
-        container_name: proxy_socket-proxy.1.tu7yxklstw2nl4k9tm5a6usla
-        image: tecnativa/docker-socket-proxy:latest
-        ports: [2375/tcp]
-        source: observed
+
+  oracle-vps:
+    host_alias: oracle-vps
+    status: "Dusty/Legacy"
+    notes: "Aguardando realocação ou desmonte."
+
+  saas-serverless:
+    providers:
+      supabase:
+        role: "Database & Auth"
+      cloudflare:
+        role: "DNS, Security & Workers"
+      vercel:
+        role: "Frontend Deployment"
+      redis:
+        role: "High Performance Cache"
+      github:
+        role: "Source Truth & CI/CD"
