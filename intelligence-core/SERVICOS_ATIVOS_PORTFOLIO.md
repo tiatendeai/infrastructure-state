@@ -48,13 +48,13 @@ Este documento é a "Torre de Comando" unificada. Ele reflete a visão estratég
     *   **Redis:** Cache de alta performance.
     *   **GitHub:** Versionamento e CI/CD.
 
-## 🗼 Torre 05: Produtos SaaS e Projetos (SaaS & Client Delivery)
-**Curador:** Gestão Comercial
+## 🗼 Torre 05: Produtos SaaS e Projetos (Ruptur Ecosystem)
+**Curador:** Gestão Comercial / Ruptur Cloud
 *   **Serviço:** Entrega de valor para o cliente final.
 *   **Ativos:**
-    *   `plataforma-bet-ai`.
-    *   `statuspersianas`.
-    *   `tiatendeai-business-boost`.
+    *   `plataforma-bet-ai` (Core Betting).
+    *   `statuspersianas` (Ativo Legado/Operação).
+    *   `ruptur-business-boost` (Antigo TiatendeAI).
 
 ## 🎭 J.A.R.V.I.S. (Maestro)
 O orquestrador que conecta todas as torres através do **Agent Loop**.

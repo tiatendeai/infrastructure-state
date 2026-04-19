@@ -1,11 +1,13 @@
-# 🛡️ Guardrails de Infraestrutura (GCP First)
+# 🛡️ Guardrails de Infraestrutura (Ruptur-Cloud Native)
 
-Diretrizes para manter o sistema imune e antifrágil.
+Diretrizes para a migração total e soberania no GCP.
 
-## ☁️ Estratégia Cloud
-1. **Prioridade GCP:** Novos serviços devem nascer no GCP para garantir integração nativa com o ecossistema de dados.
-2. **SaaS-First:** Sempre que possível, usar Cloudflare Workers ou Vercel Edge para reduzir latência e custo.
-3. **Backup CCT:** O `infrastructure-state` deve ter espelhamento cross-cloud (GCP + GitHub) para evitar o "Apagão de Verdade".
+## ☁️ Estratégia Cloud (Ruptur-Cloud)
+1. **Namespace Ruptur:** Abandonar progressivamente o termo `tiatendeai` em prol de `ruptur-cloud`. No GCP, tudo nasce 100% Ruptur.
+2. **Prioridade GCP:** Novos serviços devem nascer no GCP para garantir integração nativa.
+3. **Containerização (A Turminha no Cloud):** Jarvis, Ruptur e os Agentes devem ser preparados para rodar em Cloud Run ou GKE (Kubernetes), garantindo escala e failover.
+4. **SaaS-First:** Sempre que possível, usar Cloudflare Workers ou Vercel Edge para reduzir latência e custo.
+5. **Backup CCT:** O `infrastructure-state` deve ter espelhamento cross-cloud (GCP + GitHub) para evitar o "Apagão de Verdade".
 
 ## 🚧 Política de Caos (Chaos)
 - **Latência:** Testar periodicamente o comportamento do Ruptur sob alta latência na Hostinger.
