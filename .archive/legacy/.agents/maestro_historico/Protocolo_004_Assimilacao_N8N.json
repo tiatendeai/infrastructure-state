@@ -1,0 +1,23 @@
+{
+  "protocolo": "Protocolo_004_Assimilacao_N8N",
+  "data": "2026-03-30",
+  "status": "Concluido",
+  "tarefas": [
+    {"id": 1, "descricao": "DOE Framework absorvido no ruptur_maestro.md", "status": "Concluido"},
+    {"id": 2, "descricao": "Workflow criar_ruptur_skill.md criado no Antigravity", "status": "Concluido"},
+    {"id": 3, "descricao": "Skill ruptur-skill-forge criada no vault ruptur-skills", "status": "Concluido"},
+    {"id": 4, "descricao": "Clone do czlonkowski/n8n-skills realizado na sandbox", "status": "Concluido"},
+    {"id": 5, "descricao": "7 skills n8n portadas e traduzidas para /ruptur-skills/skills", "status": "Concluido"},
+    {"id": 6, "descricao": "Faxina da sandbox e registro historico", "status": "Concluido"}
+  ],
+  "skills_portadas": [
+    "n8n-expression-syntax", "n8n-validation-expert", "n8n-mcp-tools-expert",
+    "n8n-workflow-patterns", "n8n-code-javascript", "n8n-code-python", "n8n-node-configuration"
+  ],
+  "padrao_linguagem": {
+    "tecnico_codigo": "Ingles",
+    "descricao_frontmatter": "pt-BR",
+    "interface_usuario": "pt-BR",
+    "comunicacao_maestro": "pt-BR"
+  }
+}

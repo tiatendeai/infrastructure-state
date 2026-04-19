@@ -1,0 +1,94 @@
+{
+  "task": {
+    "task_id": "INFRA-014-create-memory-layer-interface",
+    "type": "change",
+    "mode": "FULL",
+    "status": "pending",
+    "linear_issue_id": "INFRA-014",
+    "linear_project": "Memory Layer",
+    "linear_team_key": "INF",
+    "service_target": "memory-layer",
+    "context_refs": [
+      "docs/memory-layer.md",
+      "docs/memory-policy.md",
+      "contexts/memory-layer.md"
+    ],
+    "infra_refs": [
+      "adapters/memory/interface/memory.py",
+      "adapters/memory/short_term/redis_client.py",
+      "adapters/memory/long_term/supabase_client.py"
+    ],
+    "expected_output": [
+      "adapters/memory/interface/memory.py",
+      "adapters/memory/short_term/redis_client.py",
+      "adapters/memory/long_term/supabase_client.py"
+    ],
+    "approval_required": true,
+    "execution_policy": "human_in_the_loop",
+    "input": {
+      "message": "Criar interface única de memória e stubs locais para Redis e Supabase."
+    },
+    "output": {}
+  },
+  "mode": "FULL",
+  "task_source": "tasks/INFRA-014_create_memory_layer_interface.task.json",
+  "started_at": "2026-04-06T02:12:41Z",
+  "context": {
+    "issue_identifier": "INF-14",
+    "issue_title": "INFRA-014 — Criar interface da memory layer",
+    "objective": "Criar interface única de memória e stubs locais para Redis e Supabase.",
+    "context_packet_path": "state/runtime/INFRA-014-create-memory-layer-interface/context-packet.json",
+    "memory_backend": "supabase",
+    "retrieved_memory_count": 1,
+    "mapping": {
+      "backlog_key": "INFRA-014",
+      "linear_issue_identifier": "INF-14",
+      "linear_issue_id": "c3115c18-fe35-4c54-b14c-ae5e9ba1794e",
+      "local_task": "tasks/INFRA-014_create_memory_layer_interface.task.json",
+      "project": "Memory Layer",
+      "local_status": "done",
+      "linear_issue_uuid": "c3115c18-fe35-4c54-b14c-ae5e9ba1794e"
+    }
+  },
+  "completed_at": "2026-04-06T02:12:47Z",
+  "status": "done",
+  "output": {
+    "message": "Change task verificada localmente a partir dos artefatos já materializados no repositório.",
+    "mode": "FULL",
+    "executed_at": "2026-04-06T02:12:44Z",
+    "verification_status": "verificada",
+    "verification": {
+      "expected_output": {
+        "present": [
+          "adapters/memory/interface/memory.py",
+          "adapters/memory/short_term/redis_client.py",
+          "adapters/memory/long_term/supabase_client.py"
+        ],
+        "missing": [],
+        "present_count": 3,
+        "missing_count": 0
+      },
+      "context_refs": {
+        "present": [
+          "docs/memory-layer.md",
+          "docs/memory-policy.md",
+          "contexts/memory-layer.md"
+        ],
+        "missing": [],
+        "present_count": 3,
+        "missing_count": 0
+      },
+      "infra_refs": {
+        "present": [
+          "adapters/memory/interface/memory.py",
+          "adapters/memory/short_term/redis_client.py",
+          "adapters/memory/long_term/supabase_client.py"
+        ],
+        "missing": [],
+        "present_count": 3,
+        "missing_count": 0
+      }
+    }
+  },
+  "registry_record": "registry/runs/2026-04-06T02-12-44Z_INFRA-014-create-memory-layer-interface.json"
+}

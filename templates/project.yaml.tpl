@@ -1,0 +1,7 @@
+project_name: "{{PROJECT_NAME}}"
+project_slug: "{{PROJECT_SLUG}}"
+project_type: "{{PROJECT_TYPE}}"
+owner: "{{OWNER}}"
+created_at: "{{DATE_CREATED}}"
+stack: "{{STACK}}"
+environment: "{{ENV}}"

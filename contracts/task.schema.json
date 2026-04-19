@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ruptur Task",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["task_id", "type", "input", "output", "status"],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["FAST", "STANDARD", "FULL"]
+    },
+    "input": {
+      "type": "object"
+    },
+    "output": {
+      "type": "object"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "running", "done", "error"]
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "linear_issue_id": {
+      "type": "string"
+    },
+    "linear_project": {
+      "type": "string"
+    },
+    "linear_team_key": {
+      "type": "string"
+    },
+    "service_target": {
+      "type": "string"
+    },
+    "context_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "infra_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "expected_output": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "approval_required": {
+      "type": "boolean"
+    },
+    "execution_policy": {
+      "type": "string"
+    }
+  }
+}

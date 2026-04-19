@@ -1,0 +1,41 @@
+{
+  "project": "infrastructure-state",
+  "branch": "master",
+  "generated_at": "2026-04-06T02:12:43Z",
+  "memory_backend": "supabase",
+  "linear_issue": {
+    "identifier": "INF-14",
+    "title": "INFRA-014 — Criar interface da memory layer"
+  },
+  "task": {
+    "task_id": "INFRA-014-create-memory-layer-interface",
+    "mode": "FULL",
+    "source": "tasks/INFRA-014_create_memory_layer_interface.task.json"
+  },
+  "objective": "Criar interface única de memória e stubs locais para Redis e Supabase.",
+  "latest_actions": [
+    "task validada localmente em modo FULL",
+    "binding Linear resolvido para INF-14",
+    "context packet preparado pelo runner local"
+  ],
+  "canonical_facts": [
+    "O Linear governa; o infrastructure-state registra a evidência técnica.",
+    "binding local: INFRA-014 -> INF-14",
+    "project: Memory Layer",
+    "service_target: memory-layer"
+  ],
+  "retrieved_memories": [
+    {
+      "memory_id": "canonical::INFRA-014-create-memory-layer-interface",
+      "layer": "canonical_memory",
+      "title": "Capability memory-layer",
+      "summary": "Capability validated: memory-layer. Binding issue-task: INF-14 <-> INFRA-014-create-memory-layer-interface. Registry: registry/runs/2026-04-04T22-06-08Z_INFRA-014-create-memory-layer-interface.json. Objective: Criar interface única de memória e stubs locais para Redis e Supabase..",
+      "source": "tasks/INFRA-014_create_memory_layer_interface.task.json"
+    }
+  ],
+  "policy_refs": [
+    "docs/memory-layer.md",
+    "docs/memory-policy.md",
+    "contexts/memory-layer.md"
+  ]
+}

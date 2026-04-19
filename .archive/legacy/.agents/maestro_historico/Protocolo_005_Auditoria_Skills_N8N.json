@@ -1,0 +1,13 @@
+{
+  "protocolo": "Protocolo_005_Auditoria_Skills_N8N",
+  "data": "2026-03-30",
+  "status": "Concluido",
+  "tarefas": [
+    {"id": 1, "agente": "Tech Lead N8N", "descricao": "Inventariar 12 workflows reais do n8n", "status": "Concluido"},
+    {"id": 2, "agente": "Arquiteto de Integracao", "descricao": "Cruzar cobertura das skills com padroes reais", "status": "Concluido"},
+    {"id": 3, "agente": "Guardiao do Protocolo", "descricao": "Validar gaps e corrigir n8n-workflow-patterns", "status": "Concluido"},
+    {"id": 4, "agente": "Maestro", "descricao": "Aplicar 3 novos padroes reais na skill", "status": "Concluido"}
+  ],
+  "gaps_corrigidos": ["toolWorkflow como tool do AI Agent", "DataTable + Switch multi-output", "Postgres + Code JS + routing condicional"],
+  "skills_atualizadas": ["n8n-workflow-patterns"]
+}

@@ -1,0 +1,9 @@
+profile: jarvis-foundation
+description: "Perfil base para a futura camada de estado/memória do Jarvis."
+target_class: state-node
+placement_recommendation: oracle-free-tier
+required_capabilities: [persistent_state_runtime]
+desired_services: [redis]
+prerequisites: [persistent_volume_strategy_defined]
+manual_checks: [confirm_memory_persistence_and_backup_strategy]
+registry_refs: [registry/services.yaml]

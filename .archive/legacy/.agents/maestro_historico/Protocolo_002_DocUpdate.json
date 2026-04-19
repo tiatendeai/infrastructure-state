@@ -1,0 +1,25 @@
+{
+  "protocolo": "002_DocUpdate",
+  "data_criacao": "2026-03-30T19:14:00-03:00",
+  "status": "EM_ANDAMENTO",
+  "atividades": [
+    {
+      "id": 1,
+      "responsavel": "Arquiteto Docs",
+      "tarefa": "Atualizar a seção da Trindade e Histórico do arquivo README.md",
+      "status": "PENDENTE"
+    },
+    {
+      "id": 2,
+      "responsavel": "Arquiteto Docs",
+      "tarefa": "Atualizar o AGENT_PROTOCOL.md adicionando o axioma do Histórico e Limpeza",
+      "status": "PENDENTE"
+    },
+    {
+      "id": 3,
+      "responsavel": "Tech Lead AI",
+      "tarefa": "Criar Knowledge Item (KI) na raiz para os agentes conhecerem a rotina globalmente",
+      "status": "PENDENTE"
+    }
+  ]
+}

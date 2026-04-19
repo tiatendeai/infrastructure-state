@@ -1,0 +1,27 @@
+{
+  "task_id": "INFRA-008-create-ruptur-forge-adapter",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-008",
+  "linear_project": "Core Infrastructure",
+  "linear_team_key": "INF",
+  "service_target": "ruptur-forge",
+  "context_refs": [
+    "docs/contracts.md",
+    "docs/modes.md"
+  ],
+  "infra_refs": [
+    "adapters/ruptur-forge/README.md",
+    "adapters/ruptur-forge/catalog/services.yaml"
+  ],
+  "expected_output": [
+    "adapters/ruptur-forge/*"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Estruturar o adapter ruptur-forge como camada plan-only de bootstrap."
+  },
+  "output": {}
+}

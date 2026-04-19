@@ -1,0 +1,26 @@
+{
+  "task_id": "INFRA-010-define-kvm2-core-profile",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-010",
+  "linear_project": "Core Infrastructure",
+  "linear_team_key": "INF",
+  "service_target": "kvm2-core",
+  "context_refs": [
+    "registry/services.yaml",
+    "adapters/ruptur-forge/catalog/services.yaml"
+  ],
+  "infra_refs": [
+    "adapters/ruptur-forge/profiles/kvm2-core.yaml"
+  ],
+  "expected_output": [
+    "adapters/ruptur-forge/profiles/kvm2-core.yaml"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Definir o perfil declarativo kvm2-core referenciando o estado observado atual."
+  },
+  "output": {}
+}

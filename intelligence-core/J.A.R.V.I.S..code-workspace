@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "J.A.R.V.I.S.",
+			"path": "."
+		},
+		{
+			"name": "dev",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}

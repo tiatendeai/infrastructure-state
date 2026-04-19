@@ -1,0 +1,46 @@
+version: 1
+services:
+  n8n:
+    id: n8n
+    display_name: "n8n"
+    kind: workflow_automation
+    installer: installers/install_n8n.sh
+    default_runtime: docker_compose
+    required_capabilities: [reverse_proxy, docker_compose_runtime]
+    dependencies: []
+    default_ports: [5678/tcp]
+    env_template: templates/service.env.tpl
+    notes: "Automação futura; nesta tranche existe apenas como serviço catalogado para planejamento."
+  redis:
+    id: redis
+    display_name: "Redis"
+    kind: memory_runtime
+    installer: installers/install_redis.sh
+    default_runtime: docker_compose
+    required_capabilities: [persistent_state_runtime]
+    dependencies: []
+    default_ports: [6379/tcp]
+    env_template: templates/service.env.tpl
+    notes: "Base de memória curta e estado operacional futuro."
+  langfuse:
+    id: langfuse
+    display_name: "Langfuse"
+    kind: observability
+    installer: installers/install_langfuse.sh
+    default_runtime: docker_compose
+    required_capabilities: [reverse_proxy, docker_compose_runtime]
+    dependencies: []
+    default_ports: [3000/tcp]
+    env_template: templates/service.env.tpl
+    notes: "Observabilidade de agentes e tracing; somente planejamento nesta tranche."
+  uptime-kuma:
+    id: uptime-kuma
+    display_name: "Uptime Kuma"
+    kind: monitoring
+    installer: installers/install_uptime_kuma.sh
+    default_runtime: docker_compose
+    required_capabilities: [http_exposure_capable]
+    dependencies: []
+    default_ports: [3001/tcp]
+    env_template: templates/service.env.tpl
+    notes: "Monitoramento mínimo para verificação externa de disponibilidade."

@@ -1,0 +1,99 @@
+linear:
+  strategy: hybrid
+  organization:
+    url_key: ruptur
+    id: fe8a5818-b56d-4e8a-b47c-fc3ea9eb6ebf
+  team:
+    key: INF
+    name: INFRA
+    id: f1fc8b23-ac67-4c01-96c7-057726cbd8a9
+    status: active
+    workflow_alignment: manual_ui_complete
+    notes:
+      - o plugin MCP do Linear nesta sessão não enxerga o workspace Ruptur
+      - a materialização de projects, labels e issues foi feita via browser autenticado
+      - revisar futuramente o status legado "In Review" para evitar duplicação semântica com "Review"
+  current_capabilities:
+    - issues
+    - projects
+    - labels
+    - comments
+    - updates
+  current_limitations:
+    - o plugin MCP atual só enxerga o workspace Tiatendeai nesta sessão
+    - operações no workspace Ruptur dependem do browser autenticado ou de API dedicada
+
+projects:
+  - name: Bootstrap IaC
+    id: 6c0457ee-ecea-47a5-a606-533d8a000583
+  - name: Baseline Inventory
+    id: fb0b74e4-2f4b-481b-ac86-b4bf540c0804
+  - name: Core Infrastructure
+    id: 43a1ef73-12eb-4de6-bde7-3d25c407d688
+  - name: Memory Layer
+    id: 16a307ab-40ef-4fc1-8bf5-deed4a81ecc8
+  - name: Observability
+    id: eba7156e-53e7-4636-975f-ac4515bf9ce6
+  - name: Automation & Orchestration
+    id: a7c3a535-f6eb-46a8-8a96-16c68d917617
+  - name: Jarvis Control Plane Readiness
+    id: 41a1b3ff-b26e-42b3-b341-0297032a3ca4
+
+local_contract:
+  governance_unit: linear_issue
+  execution_unit: local_task
+  logical_backlog_key_pattern: INFRA-001
+  linear_issue_identifier_pattern: INF-1
+  evidence:
+    state: kernel/state.json
+    registry: registry/runs
+    log: logs/execution.log
+  naming:
+    canonical: tasks/INFRA-123_<slug>.task.json
+    seed:
+      - tasks/LINEAR_BACKLOG_BOOTSTRAP.task.json
+      - tasks/LIN-001_baseline_server_inventory.task.json
+
+mappings:
+  - backlog_key: INFRA-001
+    linear_issue_identifier: INF-1
+    linear_issue_id: 2d7e3f0f-0445-454f-97aa-a009b1263f4f
+    local_task: tasks/LINEAR_BACKLOG_BOOTSTRAP.task.json
+    project: Bootstrap IaC
+    local_status: done
+  - backlog_key: INFRA-005
+    linear_issue_identifier: INF-5
+    linear_issue_id: dfd61b86-cbc2-445e-9052-8c6e7d57b625
+    local_task: tasks/LIN-001_baseline_server_inventory.task.json
+    project: Baseline Inventory
+    local_status: done
+  - backlog_key: INFRA-007
+    linear_issue_identifier: INF-7
+    linear_issue_id: 69d752f7-9e7e-4f32-a74e-4d98cdba4c52
+    local_task: tasks/INFRA-007_materialize_services_registry.task.json
+    project: Baseline Inventory
+    local_status: done
+  - backlog_key: INFRA-008
+    linear_issue_identifier: INF-8
+    linear_issue_id: 078fe776-1029-4ad7-be2f-38d299da6ae5
+    local_task: tasks/INFRA-008_create_ruptur_forge_adapter.task.json
+    project: Core Infrastructure
+    local_status: done
+  - backlog_key: INFRA-010
+    linear_issue_identifier: INF-10
+    linear_issue_id: 03a61e42-7351-4ddd-ba7c-5e2967083fb2
+    local_task: tasks/INFRA-010_define_kvm2_core_profile.task.json
+    project: Core Infrastructure
+    local_status: done
+  - backlog_key: INFRA-011
+    linear_issue_identifier: INF-11
+    linear_issue_id: 7e692cbc-cdc5-4b30-a65e-edd75bd8b042
+    local_task: tasks/INFRA-011_define_observability_min_profile.task.json
+    project: Observability
+    local_status: done
+  - backlog_key: INFRA-012
+    linear_issue_identifier: INF-12
+    linear_issue_id: 178bafc6-f976-44cf-9ba6-1452b2230d45
+    local_task: tasks/INFRA-012_define_jarvis_foundation_profile.task.json
+    project: Memory Layer
+    local_status: done

@@ -1,0 +1,12 @@
+profile: kvm2-core
+description: "Perfil lógico para o nó principal KVM2 sem executar bootstrap nesta tranche."
+target_class: app-node
+placement_recommendation: kvm2
+required_capabilities: [reverse_proxy, docker_compose_runtime]
+capability_bindings:
+  reverse_proxy:
+    observed_service_id: traefik
+desired_services: [n8n, langfuse]
+prerequisites: [docker_compose_runtime_available, reverse_proxy_binding_confirmed]
+manual_checks: [confirm_dns_and_tls_strategy, confirm_capacity_for_n8n_and_langfuse]
+registry_refs: [registry/services.yaml]

@@ -1,0 +1,8 @@
+{
+  "name": "colinha-excalidraw-generator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "@excalidraw/mermaid-to-excalidraw": "^2.2.2"
+  }
+}

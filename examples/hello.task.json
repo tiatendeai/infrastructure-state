@@ -1,0 +1,15 @@
+{
+  "task_id": "hello-world",
+  "type": "echo",
+  "mode": "FAST",
+  "input": {
+    "message": "Ruptur Farm Framework operacional e portátil."
+  },
+  "output": {
+    "message": "Ruptur Farm Framework operacional e portátil.",
+    "mode": "FAST",
+    "executed_at": "2026-04-03T18:50:31Z"
+  },
+  "status": "done",
+  "updated_at": "2026-04-03T18:50:31Z"
+}

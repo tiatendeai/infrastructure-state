@@ -1,0 +1,25 @@
+{
+  "nome_protocolo": "Protocolo #003 - Sanitização e Varredura de Duplicatas",
+  "data_criacao": "2026-03-30T19:55:00-03:00",
+  "status_global": "CONCLUIDO",
+  "agente_responsavel": "Ruptur Maestro",
+  "tarefas": [
+    {
+      "id": 1,
+      "descricao": "Varrer e deletar sandeco-prompts",
+      "pre_requisito": null,
+      "status": "CONCLUIDO",
+      "responsavel": "Ruptur Maestro",
+      "arquivo_trava_alvo": "sandeco_prompts.lock"
+    },
+    {
+      "id": 2,
+      "descricao": "Varrer e deletar ruptur-prompts",
+      "pre_requisito": 1,
+      "status": "CONCLUIDO",
+      "responsavel": "Ruptur Maestro",
+      "arquivo_trava_alvo": "ruptur_prompts.lock"
+    }
+  ],
+  "log_missao": "Os diretórios redundantes foram obliterados da raiz do GitHub sem erros. Limpeza do ambiente efêmero engatilhada."
+}

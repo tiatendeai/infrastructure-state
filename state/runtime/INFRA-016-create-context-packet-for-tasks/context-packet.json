@@ -1,0 +1,55 @@
+{
+  "project": "infrastructure-state",
+  "branch": "master",
+  "generated_at": "2026-04-04T03:21:51Z",
+  "memory_backend": "mock",
+  "linear_issue": {
+    "identifier": "INF-16",
+    "title": "INFRA-016-create-context-packet-for-tasks"
+  },
+  "task": {
+    "task_id": "INFRA-016-create-context-packet-for-tasks",
+    "mode": "FULL",
+    "source": "tasks/INFRA-016_create_context_packet_for_tasks.task.json"
+  },
+  "objective": "INFRA-016-create-context-packet-for-tasks",
+  "latest_actions": [
+    "task validada localmente em modo FULL",
+    "binding Linear resolvido para INF-16",
+    "context packet preparado pelo runner local"
+  ],
+  "canonical_facts": [
+    "O Linear governa; o infrastructure-state registra a evidência técnica.",
+    "binding local: INFRA-016 -> INF-16",
+    "project: Memory Layer",
+    "service_target: context-packet"
+  ],
+  "retrieved_memories": [
+    {
+      "memory_id": "mem-001",
+      "layer": "canonical_memory",
+      "title": "Papel do infrastructure-state",
+      "summary": "O infrastructure-state é a fonte canônica de execução, evidência e estado técnico.",
+      "source": "README.md"
+    },
+    {
+      "memory_id": "mem-002",
+      "layer": "canonical_memory",
+      "title": "Papel do Linear",
+      "summary": "O Linear é a fonte de backlog, governança, cadência e dependências; runtime bruto não sobe para o Linear.",
+      "source": "registry/linear-mapping.yaml"
+    },
+    {
+      "memory_id": "mem-003",
+      "layer": "summary",
+      "title": "Inventory do KVM2",
+      "summary": "O baseline do KVM2 já foi capturado e materializado localmente antes da camada de memória.",
+      "source": "registry/services.yaml"
+    }
+  ],
+  "policy_refs": [
+    "docs/memory-policy.md",
+    "docs/memory-layer.md",
+    "contexts/memory-layer.md"
+  ]
+}

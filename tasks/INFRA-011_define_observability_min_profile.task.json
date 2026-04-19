@@ -1,0 +1,26 @@
+{
+  "task_id": "INFRA-011-define-observability-min-profile",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-011",
+  "linear_project": "Observability",
+  "linear_team_key": "INF",
+  "service_target": "observability-min",
+  "context_refs": [
+    "adapters/ruptur-forge/catalog/services.yaml",
+    "registry/services.yaml"
+  ],
+  "infra_refs": [
+    "adapters/ruptur-forge/profiles/observability-min.yaml"
+  ],
+  "expected_output": [
+    "adapters/ruptur-forge/profiles/observability-min.yaml"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Definir o perfil declarativo observability-min para bootstrap futuro em nó leve."
+  },
+  "output": {}
+}

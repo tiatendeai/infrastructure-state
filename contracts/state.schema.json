@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ruptur State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["status", "current_task", "history", "version"],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["idle", "running", "error"]
+    },
+    "current_task": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["task_id", "type", "mode"],
+          "properties": {
+            "task_id": { "type": "string" },
+            "type": { "type": "string" },
+            "mode": { "type": "string", "enum": ["FAST", "STANDARD", "FULL"] },
+            "task_source": { "type": "string" },
+            "linear_issue_id": { "type": "string" },
+            "linear_project": { "type": "string" },
+            "linear_team_key": { "type": "string" },
+            "service_target": { "type": "string" },
+            "approval_required": { "type": "boolean" },
+            "execution_policy": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["task_id", "type", "mode", "status", "timestamp"],
+        "properties": {
+          "task_id": { "type": "string" },
+          "type": { "type": "string" },
+          "mode": { "type": "string", "enum": ["FAST", "STANDARD", "FULL"] },
+          "status": { "type": "string", "enum": ["done", "error"] },
+          "timestamp": { "type": "string" },
+          "registry_record": { "type": "string" },
+          "task_source": { "type": "string" },
+          "linear_issue_id": { "type": "string" },
+          "linear_project": { "type": "string" },
+          "linear_team_key": { "type": "string" },
+          "service_target": { "type": "string" },
+          "approval_required": { "type": "boolean" },
+          "execution_policy": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}

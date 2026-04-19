@@ -1,0 +1,49 @@
+{
+  "task_id": "LIN-001-baseline-server-inventory",
+  "type": "command",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-005",
+  "linear_project": "Baseline Inventory",
+  "linear_team_key": "INF",
+  "service_target": "kvm2",
+  "context_refs": [
+    "docs/linear-operating-model.md",
+    "docs/modes.md",
+    "docs/contracts.md"
+  ],
+  "infra_refs": [
+    "registry/linear-mapping.yaml",
+    "scripts/collect_server_inventory.py"
+  ],
+  "expected_output": [
+    "registry/runs/*.json",
+    "logs/execution.log",
+    "kernel/state.json"
+  ],
+  "approval_required": true,
+  "execution_policy": "read_only_remote",
+  "input": {
+    "entrypoint": "scripts/collect_server_inventory.py",
+    "args": [
+      "--host",
+      "hostinger-kvm2"
+    ],
+    "service_target": "kvm2",
+    "context_refs": [
+      "docs/linear-operating-model.md",
+      "docs/modes.md",
+      "docs/contracts.md"
+    ],
+    "infra_refs": [
+      "registry/linear-mapping.yaml",
+      "scripts/collect_server_inventory.py"
+    ],
+    "expected_output": [
+      "registry/runs/*.json",
+      "logs/execution.log",
+      "kernel/state.json"
+    ]
+  },
+  "output": {}
+}

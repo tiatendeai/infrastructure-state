@@ -1,0 +1,51 @@
+{
+  "task_id": "INFRA-007-materialize-services-registry",
+  "type": "command",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-007",
+  "linear_project": "Baseline Inventory",
+  "linear_team_key": "INF",
+  "service_target": "infrastructure-state",
+  "context_refs": [
+    "docs/contracts.md",
+    "docs/modes.md",
+    "docs/automation-flow.md"
+  ],
+  "infra_refs": [
+    "registry/runs/2026-04-03T21-13-40Z_LIN-001-baseline-server-inventory.json",
+    "scripts/generate_services_registry.py"
+  ],
+  "expected_output": [
+    "registry/services.yaml",
+    "state/snapshots/registry-services/*",
+    "registry/runs/*.json"
+  ],
+  "approval_required": true,
+  "execution_policy": "local_registry_generation",
+  "input": {
+    "entrypoint": "scripts/generate_services_registry.py",
+    "args": [
+      "--run-ref",
+      "registry/runs/2026-04-03T21-13-40Z_LIN-001-baseline-server-inventory.json",
+      "--output",
+      "registry/services.yaml"
+    ],
+    "service_target": "infrastructure-state",
+    "context_refs": [
+      "docs/contracts.md",
+      "docs/modes.md",
+      "docs/automation-flow.md"
+    ],
+    "infra_refs": [
+      "registry/runs/2026-04-03T21-13-40Z_LIN-001-baseline-server-inventory.json",
+      "scripts/generate_services_registry.py"
+    ],
+    "expected_output": [
+      "registry/services.yaml",
+      "state/snapshots/registry-services/*",
+      "registry/runs/*.json"
+    ]
+  },
+  "output": {}
+}

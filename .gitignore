@@ -1,0 +1,25 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+logs/*.log
+logs/*.jsonl
+registry/runs/*
+!registry/runs/.gitkeep
+state/snapshots/*
+!state/snapshots/.gitkeep
+.agents/runtime/*
+!.agents/runtime/.gitkeep
+node_modules/
+__pycache__/
+dist/
+build/
+coverage/
+.vscode/
+.idea/
+
+# artefatos legados sensíveis / operacionais brutos
+.archive/legacy/.antigravity/*.json
+.archive/legacy/workflows/*.json
+.archive/legacy/workflows/*.sh
+.archive/legacy/scripts/*.sh

@@ -1,0 +1,31 @@
+{
+  "task_id": "INFRA-001-bootstrap-linear-control-plane",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-001",
+  "linear_project": "Bootstrap IaC",
+  "linear_team_key": "INF",
+  "service_target": "infrastructure-state",
+  "context_refs": [
+    "docs/linear-integration.md",
+    "docs/linear-operating-model.md",
+    "docs/automation-flow.md"
+  ],
+  "infra_refs": [
+    "registry/linear-mapping.yaml",
+    "templates/linear-task.json.tpl"
+  ],
+  "expected_output": [
+    "docs/linear-integration.md",
+    "docs/linear-operating-model.md",
+    "docs/automation-flow.md",
+    "tasks/LINEAR_BACKLOG_BOOTSTRAP.task.json"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Manifesto local de transição entre backlog governado no Linear e execução auditável no infrastructure-state."
+  },
+  "output": {}
+}
