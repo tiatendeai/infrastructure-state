@@ -104,3 +104,8 @@ services_ownership:
       owner_agent: "ops (Gabriel / vOps)"
       category: "docker_proxy"
       observation: "Segurança de acesso aos daemons Docker."
+
+  infisical:
+    owner_agent: "ops (Gabriel / vOps)"
+    category: "secret_vault"
+    observation: "Chaveiro canônico do Shipyard; segredos operacionais, tokens e chaves não devem residir no Git."

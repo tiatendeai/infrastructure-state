@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "status": "active",
+  "activated_at": "2026-04-22T19:23:16-03:00",
+  "operator": "diego",
+  "maestro": {
+    "uid": "jarvis-root-001",
+    "soul_id": "SOUL-JARVIS-0001",
+    "omega_session_id": "OMEGA-20260411-015529-f8a43f87-jarvis-001"
+  },
+  "surface": {
+    "id": "shipyard",
+    "path": "/Users/diego/dev/ruptur-cloud/ruptur-main/shipyard",
+    "role": "estaleiro-operacional"
+  },
+  "gcp_memory": {
+    "enabled": true,
+    "contract": "jarvis-gcp-adk-postgres",
+    "project_id": "ruptur-jarvis-v1-68358",
+    "region": "southamerica-east1",
+    "zone": "southamerica-east1-b",
+    "instance": "ruptur-shipyard-01",
+    "service_name": "jarvis-agent",
+    "session_backend": "postgres",
+    "session_id": "OMEGA-20260411-015529-f8a43f87-jarvis-001--shipyard",
+    "access_policy": "via_ssh_tunnel_or_localhost_on_gcp",
+    "secret_policy": "segredos fora do Git; Infisical ou GCP Secret Manager"
+  },
+  "canonical_sources": {
+    "state_root": "/Users/diego/dev/ruptur-cloud/ruptur-main/state",
+    "state_agents": "../state/AGENTS.md",
+    "state_memory": "../state/memory/jarvis.memory.md",
+    "entities": "../state/registry/entities.yaml",
+    "agent_multiverse": "../state/registry/agent_multiverse.yaml",
+    "omega_sessions_root": "/Users/diego/dev/tiatendeai/omega/sessions"
+  },
+  "context_inputs": {
+    "rtk_index": "~/.claude/rtk/repo_index.md",
+    "obsidian_maps": [
+      "mapa-de-infra-e-projetos-e-debitos.md",
+      "debito-tecnico.md",
+      "debitos-tecnicos.md",
+      "../state/index.yaml",
+      "../state/knowledge/traces/trace-OMEGA-20260411-015529-f8a43f87-jarvis-001.md"
+    ],
+    "gcp_metrics_refs": [
+      "adapters/provisioning/ansible/inventories/production/group_vars/all.yml",
+      "adapters/provisioning/ansible/playbooks/jarvis_gcp.yml"
+    ]
+  },
+  "rules": [
+    "Não criar identidade nova.",
+    "Não criar sessão soberana paralela; toda sessão local aponta para o Omega ativo.",
+    "Não versionar segredos.",
+    "Usar memória GCP como runtime/session memory e State como memória canônica.",
+    "Promover fatos duráveis para o State antes de tratá-los como padrão."
+  ]
+}

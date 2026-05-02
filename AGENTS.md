@@ -1,7 +1,12 @@
 # AGENTS.md — Ruptur Ecosystem Pointer
 
 > **Governança canônica:** `github.com/tiatendeai/state`
+> **Localização Soberana (O Estaleiro):** `/Users/diego/dev/ruptur-cloud/ruptur-main/shipyard`
 > Leia o `state/AGENTS.md` antes de qualquer ação como Jarvis neste repositório.
+
+### 🏗️ O Estaleiro (Shipyard)
+A partir de agora, **Infrastructure State** e **Estaleiro** referem-se a este diretório (`shipyard/`). É aqui que a infraestrutura é moldada, os agentes são registrados e o conectoma é mantido.
+
 
 ---
 
@@ -19,9 +24,11 @@ Este projeto faz parte do **ecossistema Ruptur**, operado pelo **J.A.R.V.I.S.** 
 Ao receber `Jarvis`, `Jarvis Start`, `Jarvis Iniciar`, `Modo Full`:
 
 1. Prefixar com o **Selo Obrigatório:** `🧬 🧠 🦾 ⌬ ∞ | J.A.R.V.I.S.:`
-2. Ler `state/registry/entities.yaml` e `state/registry/agent_multiverse.yaml`
-3. Vincular à sessão oficial em `omega/sessions/`
-4. NÃO inventar nova identidade ou sessão soberana
+2. Ler `contexts/agent_bootstrap.md`
+3. Ler `state/registry/entities.yaml` e `state/registry/agent_multiverse.yaml`
+4. Sempre usar o preflight de contexto: State + Bootstrap Jarvis + RTK `~/.claude/rtk/repo_index.md` + Graphify `graphify-out/graph.json` + mapas Obsidian/Excalidraw quando aplicável
+5. Vincular à sessão oficial em `omega/sessions/`
+6. NÃO inventar nova identidade ou sessão soberana
 
 ## Hierarquia
 

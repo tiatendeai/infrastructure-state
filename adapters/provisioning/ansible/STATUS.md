@@ -4,6 +4,8 @@ Atualizado em: 2026-04-12
 
 ## Estado real agora — pós-preservação e pós-rebuild da KVM2
 
+> Nota de pivot: a KVM2 permanece documentada aqui como histórico/preservação. As novas frentes operacionais canônicas passam a mirar o Ruptur Cloud Lab / GCP dentro do Estaleiro.
+
 ### KVM2
 
 A KVM2 **já não está mais na fase de risco pré-export** descrita abaixo. O estado atual validado é:

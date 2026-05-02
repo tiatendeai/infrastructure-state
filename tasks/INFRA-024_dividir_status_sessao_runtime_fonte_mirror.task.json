@@ -1,0 +1,35 @@
+{
+  "task_id": "INFRA-024-dividir-status-sessao-runtime-fonte-mirror",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-024",
+  "linear_project": "Agent Hub",
+  "linear_team_key": "INF",
+  "service_target": "agent-hub",
+  "context_refs": [
+    "debito-tecnico.md",
+    "state/AGENTS.md",
+    "state/runtime/hitl-board.json",
+    "state/registry/hitl-sources.json",
+    "../saas/web/dashboard-dist/metrics.html",
+    "scripts/build_hitl_board.py"
+  ],
+  "infra_refs": [
+    "scripts/build_hitl_board.py",
+    "../saas/web/dashboard-dist/metrics.html",
+    "../saas/web/dashboard-dist/hitl-board.json",
+    "state/runtime/hitl-board.json"
+  ],
+  "expected_output": [
+    "status dividido em sessão, runtime, fonte e mirror",
+    "cada camada com source_ref, summary e status próprios",
+    "board do HITL refletindo a separação sem ambiguidade"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Dividir o status operacional em quatro camadas explícitas — sessão, runtime, fonte e mirror — para evitar que login, execução local e espelho visual apareçam como a mesma coisa."
+  },
+  "output": {}
+}

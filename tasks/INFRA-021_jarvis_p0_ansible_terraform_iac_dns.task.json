@@ -1,0 +1,62 @@
+{
+  "task_id": "INFRA-021-jarvis-p0-ansible-terraform-iac-dns",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_project": "Bootstrap IaC",
+  "linear_team_key": "INF",
+  "service_target": "jarvis-control-plane",
+  "context_refs": [
+    "state/AGENTS.md",
+    "docs/linear-runtime-integration.md",
+    "docs/automation-flow.md",
+    "registry/cloudflare-dns-targets.yaml",
+    "adapters/provisioning/ansible/README.md"
+  ],
+  "infra_refs": [
+    "adapters/provisioning/ansible/",
+    "registry/cloudflare-dns-targets.yaml",
+    "state/registry/p0-jarvis-control-plane.yaml",
+    "kernel/state.json"
+  ],
+  "expected_output": [
+    "Jarvis operando em modo Ansible",
+    "Jarvis operando em modo Terraform",
+    "Jarvis operando em modo IaC",
+    "DNS aiox.ruptur.cloud materializado na Cloudflare",
+    "tasks e state atualizados com a fila P0"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Fila P0 inicial do bloqueio atual: listar e salvar as tarefas; rodar Jarvis em modo Ansible; rodar Jarvis em modo Terraform; rodar Jarvis em modo IaC; resolver o DNS aiox.ruptur.cloud na Cloudflare, onde o playbook e o código já estão prontos e falta apenas permissão de escrita para criar ou ajustar o record.",
+    "task_list": [
+      {
+        "id": 1,
+        "title": "Listar e salvar as tarefas",
+        "details": "Registrar a fila P0 no state e no diretório local do shipyard."
+      },
+      {
+        "id": 2,
+        "title": "Rodar Jarvis em modo Ansible",
+        "details": "Executar a camada de automação operacional para o fluxo atual."
+      },
+      {
+        "id": 3,
+        "title": "Rodar Jarvis em modo Terraform",
+        "details": "Executar a camada de provisionamento declarativo para o fluxo atual."
+      },
+      {
+        "id": 4,
+        "title": "Rodar Jarvis em modo IaC",
+        "details": "Fechar o fluxo infra como código com o estaleiro como executor."
+      },
+      {
+        "id": 5,
+        "title": "Resolver o DNS aiox.ruptur.cloud na Cloudflare",
+        "details": "Criar ou ajustar o record com permissão de escrita; o código e o playbook já existem."
+      }
+    ]
+  },
+  "output": {}
+}

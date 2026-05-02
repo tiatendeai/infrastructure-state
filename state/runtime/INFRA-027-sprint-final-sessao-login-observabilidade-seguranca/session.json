@@ -1,0 +1,96 @@
+{
+  "task": {
+    "task_id": "INFRA-027-sprint-final-sessao-login-observabilidade-seguranca",
+    "type": "change",
+    "mode": "FULL",
+    "status": "pending",
+    "linear_issue_id": "INFRA-027",
+    "linear_project": "Sprint Final",
+    "linear_team_key": "INF",
+    "service_target": "agent-hub",
+    "context_refs": [
+      "debito-tecnico.md",
+      "debitos-tecnicos.md",
+      "mapa-de-infra-e-projetos-e-debitos.md",
+      "state/AGENTS.md",
+      "state/runtime/hitl-board.json",
+      "state/registry/hitl-sources.json",
+      "../saas/web/dashboard-dist/metrics.html",
+      "../saas/modules/warmup-core/server.mjs"
+    ],
+    "infra_refs": [
+      "adapters/memory/",
+      "adapters/provisioning/ansible/",
+      "scripts/build_hitl_board.py",
+      "state/runtime/hitl-board.json",
+      "../saas/web/dashboard-dist/hitl-board.json"
+    ],
+    "expected_output": [
+      "arquitetura de sessão e login padronizada com Redis e cookies seguros",
+      "observabilidade com logs, métricas e traces correlacionados",
+      "controles de segurança para evitar sessão indevida e logoff inconsistente",
+      "backlog confirmado como sprint final após os impedimentos e débitos técnicos",
+      "impedimento formal de pronto do projeto até haver solução ou decisão registrada"
+    ],
+    "approval_required": true,
+    "execution_policy": "human_in_the_loop",
+    "input": {
+      "message": "Guardar para a sprint final a implementação de sessão, login, logout, segurança e observabilidade do Agent Hub/HITL, somente depois de concluir as tasks que estão em débito técnico, bugs e impedimentos. A entrega deve cobrir Redis como session store, cookie seguro, revogação, auditoria, telemetria e logs correlacionados. Este item é impedimento formal para marcar o projeto como pronto; pode ser revisto e modificado, mas não pode ser esquecido nem removido sem decisão explícita registrada."
+    },
+    "output": {}
+  },
+  "mode": "FULL",
+  "task_source": "tasks/INFRA-027_sprint_final_sessao_login_observabilidade_seguranca.task.json",
+  "started_at": "2026-04-21T17:21:53Z",
+  "completed_at": "2026-04-21T17:21:53Z",
+  "status": "done",
+  "output": {
+    "message": "Change task verificada localmente a partir dos artefatos já materializados no repositório.",
+    "mode": "FULL",
+    "executed_at": "2026-04-21T17:21:53Z",
+    "verification_status": "verificada_com_ressalvas",
+    "verification": {
+      "expected_output": {
+        "present": [],
+        "missing": [
+          "arquitetura de sessão e login padronizada com Redis e cookies seguros",
+          "observabilidade com logs, métricas e traces correlacionados",
+          "controles de segurança para evitar sessão indevida e logoff inconsistente",
+          "backlog confirmado como sprint final após os impedimentos e débitos técnicos",
+          "impedimento formal de pronto do projeto até haver solução ou decisão registrada"
+        ],
+        "present_count": 0,
+        "missing_count": 5
+      },
+      "context_refs": {
+        "present": [
+          "debito-tecnico.md",
+          "debitos-tecnicos.md",
+          "mapa-de-infra-e-projetos-e-debitos.md",
+          "state/runtime/hitl-board.json",
+          "state/registry/hitl-sources.json",
+          "../saas/web/dashboard-dist/metrics.html",
+          "../saas/modules/warmup-core/server.mjs"
+        ],
+        "missing": [
+          "state/AGENTS.md"
+        ],
+        "present_count": 7,
+        "missing_count": 1
+      },
+      "infra_refs": {
+        "present": [
+          "adapters/memory/",
+          "adapters/provisioning/ansible/",
+          "scripts/build_hitl_board.py",
+          "state/runtime/hitl-board.json",
+          "../saas/web/dashboard-dist/hitl-board.json"
+        ],
+        "missing": [],
+        "present_count": 5,
+        "missing_count": 0
+      }
+    }
+  },
+  "registry_record": "registry/runs/2026-04-21T17-21-53Z_INFRA-027-sprint-final-sessao-login-observabilidade-seguranca.json"
+}

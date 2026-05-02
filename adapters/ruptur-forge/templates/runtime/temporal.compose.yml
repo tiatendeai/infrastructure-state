@@ -1,0 +1,83 @@
+services:
+  postgresql:
+    container_name: temporal-postgresql
+    image: postgres:${POSTGRESQL_VERSION:-16}
+    restart: unless-stopped
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready --username=${POSTGRES_USER} --dbname=${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - temporal_postgres_data:/var/lib/postgresql/data
+    networks:
+      - kvm2_default
+
+  temporal:
+    container_name: temporal
+    image: temporalio/auto-setup:${TEMPORAL_VERSION:-1.29.1}
+    restart: unless-stopped
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    environment:
+      DB: postgres12
+      DB_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-temporal}
+      POSTGRES_PWD: ${POSTGRES_PASSWORD}
+      POSTGRES_SEEDS: postgresql
+      DYNAMIC_CONFIG_FILE_PATH: config/dynamicconfig/development-sql.yaml
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_CLI_ADDRESS: temporal:7233
+    ports:
+      - 127.0.0.1:7233:7233
+    volumes:
+      - ./dynamicconfig:/etc/temporal/config/dynamicconfig
+    networks:
+      - kvm2_default
+
+  temporal-admin-tools:
+    container_name: temporal-admin-tools
+    image: temporalio/admin-tools:${TEMPORAL_ADMINTOOLS_VERSION:-1.29.1-tctl-1.18.4-cli-1.5.0}
+    restart: unless-stopped
+    depends_on:
+      temporal:
+        condition: service_started
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_CLI_ADDRESS: temporal:7233
+    stdin_open: true
+    tty: true
+    networks:
+      - kvm2_default
+
+  temporal-ui:
+    container_name: temporal-ui
+    image: temporalio/ui:${TEMPORAL_UI_VERSION:-2.34.0}
+    restart: unless-stopped
+    depends_on:
+      temporal:
+        condition: service_started
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+      TEMPORAL_CORS_ORIGINS: ${TEMPORAL_CORS_ORIGINS:-https://temporal.ruptur.cloud}
+    ports:
+      - 127.0.0.1:${TEMPORAL_UI_PORT:-8080}:8080
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.temporal.rule=Host(`${TEMPORAL_PUBLIC_HOST:-temporal.ruptur.cloud}`)
+      - traefik.http.routers.temporal.entrypoints=websecure
+      - traefik.http.routers.temporal.tls.certresolver=le
+      - traefik.http.services.temporal.loadbalancer.server.port=8080
+    networks:
+      - kvm2_default
+
+volumes:
+  temporal_postgres_data:
+
+networks:
+  kvm2_default:
+    external: true
+    name: kvm2_default

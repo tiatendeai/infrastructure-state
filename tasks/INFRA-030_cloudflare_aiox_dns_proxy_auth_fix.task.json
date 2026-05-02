@@ -1,0 +1,39 @@
+{
+  "task_id": "INFRA-030-cloudflare-aiox-dns-proxy-auth-fix",
+  "type": "change",
+  "mode": "FULL",
+  "status": "done",
+  "linear_issue_id": "INFRA-030",
+  "linear_project": "Sprint Final",
+  "linear_team_key": "INF",
+  "service_target": "cloudflare-edge",
+  "context_refs": [
+    "registry/cloudflare-dns-targets.yaml",
+    "state/registry/p0-jarvis-control-plane.yaml",
+    "debito-tecnico.md",
+    "debitos-tecnicos.md",
+    "adapters/provisioning/ansible/README.md"
+  ],
+  "infra_refs": [
+    "registry/cloudflare-dns-targets.yaml",
+    "state/registry/p0-jarvis-control-plane.yaml",
+    "adapters/provisioning/ansible/playbooks/aiox_gcp.yml"
+  ],
+  "expected_output": [
+    "record aiox.ruptur.cloud em proxied=true",
+    "auth do conector Cloudflare validada",
+    "estado final do DNS refletido no state",
+    "causa-raiz da falha de escrita documentada"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Fechar o bloco 3 da fila: recuperar a permissão de escrita da Cloudflare, aplicar o proxy final do aiox.ruptur.cloud, validar o estado do record e registrar a causa-raiz no State e no shipyard."
+  },
+  "output": {
+    "record_id": "35469c73ea816b8b8e85fbac5411d0ef",
+    "status": "proxied=true",
+    "completed_at": "2026-04-21T20:42:16Z",
+    "evidence": "Cloudflare API GET confirmou o record aiox.ruptur.cloud com proxied=true"
+  }
+}

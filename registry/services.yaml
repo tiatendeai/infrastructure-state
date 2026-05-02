@@ -9,6 +9,7 @@ targets:
     host_alias: gcp-primary
     region: southamerica-east1
     strategy: "GCP First"
+    notes: "Alvo canônico atual do Ruptur Cloud Lab / Estaleiro."
     services:
       shipyard-lab:
         service_id: shipyard-lab
@@ -16,12 +17,18 @@ targets:
         status: "Planned/Experimental"
         ansible_host: "34.95.234.227"
         ansible_user: "diego"
+      magicrouteer:
+        service_id: magicrouteer
+        category: ai_routing_service
+        status: "Planned/Bootstrap"
+        notes: "Scaffold inicial preparado no Shipyard para GCP + Ollama com fluxo Terraform + Ansible."
 
-  hostinger-kvm2:
-    host_alias: hostinger-kvm2
-    hostname: srv1503897
+  ruptur-cloud-lab:
+    host_alias: ruptur-cloud-lab
+    hostname: gcp-primary
     os: "Ubuntu 24.04.4 LTS"
     status: active
+    notes: "Runtime operacional atual do ecossistema; substitui KVM2 como alvo canônico."
     services:
       ruptur-backend:
         service_id: ruptur-backend
@@ -41,11 +48,17 @@ targets:
         service_id: whisper
         category: ai_runtime
         runtime: docker
+      magicrouteer:
+        service_id: magicrouteer
+        category: ai_routing_service
+        runtime: "gcp_vm + ollama"
+        status: "Planned/Bootstrap"
+        notes: "Novo serviço preparado no Estaleiro; Terraform provisiona e Ansible converge."
 
-  oracle-vps:
-    host_alias: oracle-vps
-    status: "Dusty/Legacy"
-    notes: "Aguardando realocação ou desmonte."
+  oracle-vps-legacy:
+    host_alias: oracle-vps-legacy
+    status: "legacy"
+    notes: "Legado preservado para rastreabilidade, sem papel operacional atual."
 
   saas-serverless:
     providers:
@@ -59,3 +72,5 @@ targets:
         role: "High Performance Cache"
       github:
         role: "Source Truth & CI/CD"
+      infisical:
+        role: "Canonical secrets vault for human and runtime secrets"

@@ -1,0 +1,34 @@
+{
+  "task_id": "INFRA-026-padronizar-navegacao-global-back-home-topo",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-026",
+  "linear_project": "Agent Hub",
+  "linear_team_key": "INF",
+  "service_target": "dashboard-ui",
+  "context_refs": [
+    "debito-tecnico.md",
+    "state/AGENTS.md",
+    "state/runtime/hitl-board.json",
+    "../saas/web/dashboard-dist/index.html",
+    "../saas/web/dashboard-dist/metrics.html",
+    "../saas/web/dashboard-dist/login.html"
+  ],
+  "infra_refs": [
+    "../saas/web/dashboard-dist/",
+    "scripts/build_hitl_board.py",
+    "state/runtime/hitl-board.json"
+  ],
+  "expected_output": [
+    "todas as telas com link visível para voltar à home",
+    "todas as telas com atalho xcto a home no topo",
+    "todas as telas com ação voltar ao topo no rodapé ou canto inferior"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Padronizar a navegação global das telas com um atalho claro para voltar à home, um atalho curto no topo e um botão de voltar ao topo na parte inferior, evitando que o usuário precise caçar o caminho manualmente."
+  },
+  "output": {}
+}

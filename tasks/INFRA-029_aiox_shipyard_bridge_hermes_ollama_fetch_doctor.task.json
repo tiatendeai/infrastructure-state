@@ -1,0 +1,37 @@
+{
+  "task_id": "INFRA-029-aiox-shipyard-bridge-hermes-ollama-fetch-doctor",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-029",
+  "linear_project": "Sprint Final",
+  "linear_team_key": "INF",
+  "service_target": "aiox-shipyard-bridge",
+  "context_refs": [
+    "adapters/provisioning/ansible/README.md",
+    "adapters/provisioning/ansible/STATUS.md",
+    "adapters/provisioning/ansible/roles/aiox/tasks/main.yml",
+    "adapters/provisioning/ansible/roles/aiox/templates/server.mjs.j2",
+    "debito-tecnico.md",
+    "debitos-tecnicos.md",
+    "state/runtime/hitl-board.json"
+  ],
+  "infra_refs": [
+    "adapters/provisioning/ansible/playbooks/aiox_gcp.yml",
+    "adapters/provisioning/ansible/roles/aiox/",
+    "registry/cloudflare-dns-targets.yaml",
+    "state/registry/p0-aiox-bridge-debug.yaml"
+  ],
+  "expected_output": [
+    "fetch Hermes/Ollama deixa de falhar",
+    "aiox-core doctor sem BOOTSTRAP_ERROR",
+    "bridge AIOX saudável e reportando estado",
+    "state atualizado com a causa-raiz e a correção"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Iniciar o debug do AIOX Shipyard Bridge como próxima peça da fila P0: investigar o fetch failed contra Hermes/Ollama, eliminar o BOOTSTRAP_ERROR do doctor, validar host.docker.internal e registrar a causa-raiz e a correção no State e no shipyard."
+  },
+  "output": {}
+}

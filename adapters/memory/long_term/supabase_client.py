@@ -2,12 +2,18 @@ from __future__ import annotations
 
 import json
 import os
+import ssl
 import urllib.error
 import urllib.parse
 import urllib.request
 from typing import Any
 
-from adapters.memory.interface.memory import MemoryBackendNotConfigured, MemoryError, MemoryRecord
+from adapters.memory.interface.memory import (
+    MemoryBackendActivationDisabled,
+    MemoryBackendNotConfigured,
+    MemoryError,
+    MemoryRecord,
+)
 
 
 class SupabaseMemoryBackend:
@@ -64,6 +70,12 @@ class SupabaseMemoryBackend:
             detail = exc.read().decode("utf-8", errors="replace")
             raise MemoryError(f"Erro HTTP do Supabase ({exc.code}): {detail}") from exc
         except urllib.error.URLError as exc:
+            reason = exc.reason
+            if isinstance(reason, ssl.SSLError):
+                raise MemoryBackendActivationDisabled(
+                    "Supabase TLS/SSL indisponível no ambiente local. "
+                    "Trate o trust store/CA bundle como dependência externa antes de ativar a sync real."
+                ) from exc
             raise MemoryError(f"Falha de rede ao chamar o Supabase: {exc.reason}") from exc
 
         if not raw.strip():

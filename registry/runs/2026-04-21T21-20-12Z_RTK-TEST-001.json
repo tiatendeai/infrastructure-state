@@ -1,0 +1,55 @@
+{
+  "task": {
+    "task_id": "RTK-TEST-001",
+    "type": "noop",
+    "mode": "STANDARD",
+    "status": "pending",
+    "linear_issue_identifier": "INFRA-029",
+    "linear_project": "Core Infrastructure",
+    "linear_team_key": "INF",
+    "context_refs": [
+      "debito-tecnico.md",
+      "adapters/provisioning/ansible/roles/rtk/defaults/main.yml"
+    ],
+    "infra_refs": [
+      "scripts/run_task.py"
+    ],
+    "input": {
+      "message": "Teste de preflight RTK"
+    },
+    "output": {}
+  },
+  "context": null,
+  "execution": {
+    "mode": "STANDARD",
+    "status": "done",
+    "source": "/tmp/rtk-test.task.json",
+    "recorded_at": "2026-04-21T21:20:12Z",
+    "output": {
+      "message": "No-op concluído",
+      "mode": "STANDARD",
+      "executed_at": "2026-04-21T21:20:12Z"
+    }
+  },
+  "memory_sync": {
+    "status": "skipped",
+    "saved": [
+      {
+        "backend": "redis",
+        "status": "skipped",
+        "message": "Redis não configurado. Defina REDIS_URL."
+      },
+      {
+        "backend": "supabase",
+        "status": "skipped",
+        "message": "Supabase não configurado. Defina SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY."
+      }
+    ]
+  },
+  "linear_sync": {
+    "status": "skipped",
+    "event": "done",
+    "dry_run": false,
+    "skipped_reason": "runtime_sync_disabled"
+  }
+}

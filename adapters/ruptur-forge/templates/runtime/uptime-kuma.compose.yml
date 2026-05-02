@@ -1,0 +1,24 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:2
+    restart: unless-stopped
+    volumes:
+      - uptime_kuma_data:/app/data
+    ports:
+      - 127.0.0.1:${UPTIME_KUMA_PORT:-3001}:3001
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.uptime-kuma.rule=Host(`${UPTIME_KUMA_PUBLIC_HOST:-uptime-kuma.ruptur.cloud}`)
+      - traefik.http.routers.uptime-kuma.entrypoints=websecure
+      - traefik.http.routers.uptime-kuma.tls.certresolver=le
+      - traefik.http.services.uptime-kuma.loadbalancer.server.port=3001
+    networks:
+      - kvm2_default
+
+volumes:
+  uptime_kuma_data:
+
+networks:
+  kvm2_default:
+    external: true
+    name: kvm2_default

@@ -10,7 +10,7 @@ services:
     dependencies: []
     default_ports: [5678/tcp]
     env_template: templates/service.env.tpl
-    notes: "Automação futura; nesta tranche existe apenas como serviço catalogado para planejamento."
+    notes: "Automação operacional do Ruptur Cloud Lab via docker compose e Traefik."
   redis:
     id: redis
     display_name: "Redis"
@@ -21,7 +21,7 @@ services:
     dependencies: []
     default_ports: [6379/tcp]
     env_template: templates/service.env.tpl
-    notes: "Base de memória curta e estado operacional futuro."
+    notes: "Base de memória curta e estado operacional do ecossistema."
   langfuse:
     id: langfuse
     display_name: "Langfuse"
@@ -32,7 +32,29 @@ services:
     dependencies: []
     default_ports: [3000/tcp]
     env_template: templates/service.env.tpl
-    notes: "Observabilidade de agentes e tracing; somente planejamento nesta tranche."
+    notes: "Observabilidade de agentes e tracing no shipyard e no runtime GCP."
+  infisical:
+    id: infisical
+    display_name: "Infisical"
+    kind: secrets_management
+    installer: installers/install_infisical.sh
+    default_runtime: docker_compose
+    required_capabilities: [reverse_proxy, docker_compose_runtime]
+    dependencies: []
+    default_ports: [8080/tcp]
+    env_template: templates/service.env.tpl
+    notes: "Centralização operacional de segredos e integrações do ecossistema; referência canônica para credenciais humanas e de automação."
+  temporal:
+    id: temporal
+    display_name: "Temporal"
+    kind: workflow_engine
+    installer: installers/install_temporal.sh
+    default_runtime: docker_compose
+    required_capabilities: [reverse_proxy, docker_compose_runtime]
+    dependencies: []
+    default_ports: [7233/tcp]
+    env_template: templates/service.env.tpl
+    notes: "Motor de workflows e execução resiliente para jobs e automações do Ruptur Cloud Lab."
   uptime-kuma:
     id: uptime-kuma
     display_name: "Uptime Kuma"
@@ -43,4 +65,26 @@ services:
     dependencies: []
     default_ports: [3001/tcp]
     env_template: templates/service.env.tpl
-    notes: "Monitoramento mínimo para verificação externa de disponibilidade."
+    notes: "Monitoramento externo e saúde básica dos serviços do ecossistema."
+  terraform:
+    id: terraform
+    display_name: "Terraform"
+    kind: infrastructure_as_code
+    installer: null
+    default_runtime: null
+    required_capabilities: [state_backend, declarative_provisioning]
+    dependencies: []
+    default_ports: []
+    env_template: null
+    notes: "IaC principal para GCP e para o provisionamento canônico do Ruptur Cloud Lab."
+  ansible:
+    id: ansible
+    display_name: "Ansible"
+    kind: configuration_management
+    installer: null
+    default_runtime: null
+    required_capabilities: [host_configuration, ssh_access]
+    dependencies: [terraform]
+    default_ports: []
+    env_template: null
+    notes: "Configuração, baseline e sustentação de hosts, playbooks e inventário."

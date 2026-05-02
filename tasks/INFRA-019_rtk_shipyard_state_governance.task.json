@@ -1,0 +1,39 @@
+{
+  "task_id": "INFRA-019-rtk-shipyard-state-governance",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_project": "Core Infrastructure",
+  "linear_team_key": "INF",
+  "service_target": "rtk-governance",
+  "context_refs": [
+    "debito-tecnico.md",
+    "docs/automation-flow.md",
+    "docs/linear-runtime-integration.md",
+    "state/AGENTS.md",
+    "adapters/provisioning/ansible/playbooks/rtk_curator.yml"
+  ],
+  "infra_refs": [
+    "adapters/provisioning/ansible/roles/rtk/defaults/main.yml",
+    "adapters/provisioning/ansible/roles/rtk/tasks/main.yml",
+    "adapters/provisioning/ansible/roles/rtk/templates/config.toml.j2",
+    "adapters/provisioning/ansible/roles/rtk/templates/repo_indexer.sh.j2",
+    "~/.claude/scripts/repo_indexer.sh",
+    "~/.claude/rtk/repo_index.md",
+    "state/registry/",
+    "state/knowledge/"
+  ],
+  "expected_output": [
+    "shipyard ownership formalizada para RTK",
+    "indexação contínua de repos em ~/dev e subdiretórios",
+    "mapeamento dos state maps relevantes",
+    "curadoria operacional via Ansible",
+    "registro da decisão no State"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Formalizar o RTK (Rust Token Killer) como ativo do Shipyard, com Ansible como controlador operacional, indexação contínua dos repositórios em ~/dev e subdiretórios, e varredura dos mapas/artefatos relevantes do state como camada de cognição e dados."
+  },
+  "output": {}
+}

@@ -1,6 +1,6 @@
 ---
-# Diretório local do Terraform Oracle
-terraform_project_dir: /Users/diego/dev/GitHub/vps-oracle/infra
+# Diretório local do Terraform canônico do Estaleiro (casa nova)
+terraform_project_dir: /Users/diego/dev/ruptur-cloud/ruptur-main/shipyard/adapters/ruptur-forge/terraform
 
 # Estrutura de staging bruto nas Oracle
 oracle_archive_root: /srv/jarvis-archive

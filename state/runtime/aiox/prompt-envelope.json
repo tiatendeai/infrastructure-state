@@ -1,0 +1,69 @@
+{
+  "purpose": "envelope canônico para consumidores de IA no Shipyard",
+  "mode": "STANDARD",
+  "task_id": "RTK-TEST-001",
+  "task_source": "/tmp/rtk-test.task.json",
+  "context_packet_path": "state/runtime/RTK-TEST-001/context-packet.json",
+  "strict": true,
+  "system_prompt": "Você está operando dentro do Shipyard.\nUse somente o context packet fornecido e os refs whitelistados.\nNão redescubra o repositório inteiro.\nRespeite o budget de contexto e o preflight estrito.\nSe faltar informação, pare e peça reconciliação operacional.",
+  "developer_prompt": "A resposta deve ser objetiva, canônica e alinhada ao State.\nA lógica operacional deve preferir diffs, whitelists e mapas estáticos.\nRefs whitelistados: 3.\nRefs rejeitados: 0.",
+  "task_prompt": "Teste de preflight RTK",
+  "context_budget": {
+    "path": "",
+    "max_files": 20,
+    "max_chars": 8000,
+    "prefer_diffs": true,
+    "prefer_whitelist": true,
+    "heartbeat_seconds_min": 300,
+    "allow_repo_rediscovery": false
+  },
+  "preflight": {
+    "budget": {
+      "max_files": 20,
+      "max_chars": 8000,
+      "prefer_diffs": true,
+      "prefer_whitelist": true,
+      "heartbeat_seconds_min": 300,
+      "allow_repo_rediscovery": false
+    },
+    "declared_context_refs": [
+      "debito-tecnico.md",
+      "adapters/provisioning/ansible/roles/rtk/defaults/main.yml",
+      "scripts/run_task.py"
+    ],
+    "whitelisted_context_refs": [
+      "debito-tecnico.md",
+      "adapters/provisioning/ansible/roles/rtk/defaults/main.yml",
+      "scripts/run_task.py"
+    ],
+    "rejected_context_refs": [],
+    "context_ref_count": 3,
+    "has_repo_rediscovery": false,
+    "strict_violations": 0,
+    "enforced": {
+      "max_files": 20,
+      "prefer_whitelist": true,
+      "allow_repo_rediscovery": false
+    },
+    "character_budget": {
+      "max_chars": 8000,
+      "estimated_chars": 2272,
+      "trimmed_memories": 0
+    },
+    "effective_memory_limit": 3
+  },
+  "whitelisted_context_refs": [
+    "debito-tecnico.md",
+    "adapters/provisioning/ansible/roles/rtk/defaults/main.yml",
+    "scripts/run_task.py"
+  ],
+  "rejected_context_refs": [],
+  "policy_refs": [
+    "docs/memory-policy.md",
+    "intelligence-core/alpha.md",
+    "intelligence-core/omega.md",
+    "DNA_DE_INTELIGENCIA.md",
+    "../state/AGENTS.md",
+    "../state/memory/jarvis.memory.md"
+  ]
+}

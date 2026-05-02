@@ -1,0 +1,7 @@
+project_name: "MagicRouteer"
+project_slug: "magicrouteer"
+project_type: "ai_routing_service"
+owner: "Jarvis + Diego"
+created_at: "2026-04-23"
+stack: "gcp, ollama, terraform, ansible"
+environment: "production"

@@ -1,0 +1,55 @@
+{
+  "task_id": "INFRA-028-tokens-p0-sessao-login-seguranca-observabilidade",
+  "type": "change",
+  "mode": "FULL",
+  "status": "running",
+  "linear_issue_id": "INFRA-028",
+  "linear_project": "Sprint Final",
+  "linear_team_key": "INF",
+  "service_target": "agent-hub",
+  "context_refs": [
+    "debito-tecnico.md",
+    "debitos-tecnicos.md",
+    "mapa-de-infra-e-projetos-e-debitos.md",
+    "state/AGENTS.md",
+    "state/runtime/hitl-board.json",
+    "state/registry/hitl-sources.json",
+    "../saas/web/dashboard-dist/metrics.html",
+    "../saas/modules/warmup-core/server.mjs",
+    "docs/agent-hub-auto-rotation-plan.md",
+    "tasks/INFRA-018_agent_hub_auto_account_rotation.task.json"
+  ],
+  "infra_refs": [
+    "scripts/build_hitl_board.py",
+    "state/runtime/hitl-board.json",
+    "../saas/web/dashboard-dist/hitl-board.json",
+    "../saas/modules/warmup-core/server.mjs"
+  ],
+  "expected_output": [
+    "contrato de tokens opacos e sessão server-side com Redis",
+    "login/logout e revogação imediata com auditoria",
+    "observabilidade com logs, métricas e traces correlacionados",
+    "triagem P0 para falhas, bugs e drift de sessão",
+    "status de sessão Codex sem falso negativo",
+    "logout com revogação no runtime correto",
+    "blocker de quota separado de auth"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Iniciar a execução pela frente de tokens e P0: definir contrato de sessão/token opaco, login/logout com revogação, auditoria, observabilidade e triagem das falhas e bugs que impedem o fluxo. Essa task é a primeira da ordem de ataque da sprint final."
+  },
+  "output": {
+    "updated_at": "2026-04-22T10:48:00-03:00",
+    "status": "em execução P0",
+    "applied": [
+      "triagem do fluxo Codex/Paperclip",
+      "correção de status service-ready no Agent Hub host"
+    ],
+    "remaining": [
+      "contrato Redis/session store do painel",
+      "auditoria persistente",
+      "revogação completa de sessão Google/HITL"
+    ]
+  }
+}

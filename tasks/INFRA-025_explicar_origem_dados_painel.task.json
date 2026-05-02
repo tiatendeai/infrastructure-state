@@ -1,0 +1,35 @@
+{
+  "task_id": "INFRA-025-explicar-origem-dados-painel",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-025",
+  "linear_project": "Agent Hub",
+  "linear_team_key": "INF",
+  "service_target": "agent-hub",
+  "context_refs": [
+    "debito-tecnico.md",
+    "state/AGENTS.md",
+    "state/runtime/hitl-board.json",
+    "state/registry/hitl-sources.json",
+    "../saas/web/dashboard-dist/metrics.html",
+    "../saas/web/dashboard-dist/hitl-board.json"
+  ],
+  "infra_refs": [
+    "state/registry/hitl-sources.json",
+    "scripts/build_hitl_board.py",
+    "../saas/web/dashboard-dist/metrics.html",
+    "../saas/web/dashboard-dist/hitl-board.json"
+  ],
+  "expected_output": [
+    "painel explicando a origem de cada bloco de dados",
+    "mensagens claras sobre o que vem de produção, local e mirror",
+    "separação explícita entre fonte declarada, fonte conectada e fonte espelhada"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Deixar o painel explicar claramente o que vem de onde, distinguindo produção Google ADK/A2A, MacBook local, mirror do dashboard e sessão do usuário, com textos e rótulos explícitos."
+  },
+  "output": {}
+}

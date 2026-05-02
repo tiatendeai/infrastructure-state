@@ -1,0 +1,44 @@
+version: 1
+scope: p0
+owner: diego
+managed_by: shipyard
+created_at: "2026-04-21T00:00:00-03:00"
+source_task: "tasks/INFRA-021_jarvis_p0_ansible_terraform_iac_dns.task.json"
+summary: "Fila P0 inicial do bloqueio atual: Ansible, Terraform, IaC, DNS aiox.ruptur.cloud e runtime GCP do Ruptur Cloud Lab."
+items:
+  - id: 1
+    title: "Listar e salvar as tarefas"
+    state_ref: "tasks/INFRA-021_jarvis_p0_ansible_terraform_iac_dns.task.json"
+    status: done
+    completed_at: "2026-04-21T00:00:00-03:00"
+    evidence: "tasks/INFRA-021_jarvis_p0_ansible_terraform_iac_dns.task.json"
+  - id: 2
+    title: "Rodar Jarvis em modo Ansible"
+    state_ref: "tasks/INFRA-021_jarvis_p0_ansible_terraform_iac_dns.task.json"
+    status: done
+    completed_at: "2026-04-21T00:00:00-03:00"
+    evidence: "adapters/provisioning/ansible/playbooks/aiox_gcp.yml executado com sucesso no host ruptur-shipyard-01"
+  - id: 3
+    title: "Rodar Jarvis em modo Terraform"
+    state_ref: "tasks/INFRA-021_jarvis_p0_ansible_terraform_iac_dns.task.json"
+    status: done
+    completed_at: "2026-04-21T00:00:00-03:00"
+    evidence: "adapters/provisioning/ansible/playbooks/oracle_terraform.yml executado com terraform_project_dir apontando para adapters/ruptur-forge/terraform"
+  - id: 4
+    title: "Rodar Jarvis em modo IaC"
+    state_ref: "tasks/INFRA-021_jarvis_p0_ansible_terraform_iac_dns.task.json"
+    status: done
+    completed_at: "2026-04-21T00:00:00-03:00"
+    evidence: "scripts/run_task.py tasks/INFRA-021_jarvis_p0_ansible_terraform_iac_dns.task.json FULL"
+  - id: 5
+    title: "Resolver o DNS aiox.ruptur.cloud na Cloudflare"
+    state_ref: "registry/cloudflare-dns-targets.yaml"
+    status: done
+    completed_at: "2026-04-21T20:42:16Z"
+    current_state: "record atualizado para proxied=true"
+    evidence: "Cloudflare record id 35469c73ea816b8b8e85fbac5411d0ef; Cloudflare API patch aplicado com sucesso"
+  notes:
+  - "O playbook e o código já estavam prontos; o bloqueio restante é apenas de escrita no conector DNS."
+  - "O alvo operacional é o Ruptur Cloud Lab/GCP; KVM2/Hostinger são apenas legado histórico."
+  - "Desdobramentos canônicos: INFRA-030 para Cloudflare/DNS e INFRA-031 para limpeza de legado."
+  - "Infisical é o chaveiro canônico; segredos e tokens de Cloudflare não residem em Git."

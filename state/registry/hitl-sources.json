@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "source_id": "google_adk_a2a_prod",
+      "label": "Torre Google ADK/A2A — Produção",
+      "tier": "production",
+      "authority": "google-adk-a2a",
+      "status": "unavailable",
+      "kind": "external_remote",
+      "priority": 1,
+      "evidence": [
+        "env:HITL_GOOGLE_ADK_BOARD_PATH",
+        "env:HITL_GOOGLE_ADK_API_URL",
+        "env:HITL_GOOGLE_ADK_SOURCE_URL"
+      ],
+      "notes": "Fonte soberana de produção quando conectada; não deve ser confundida com dados locais."
+    },
+    {
+      "source_id": "macbook_local",
+      "label": "MacBook Local — Estaleiro",
+      "tier": "local",
+      "authority": "shipyard",
+      "status": "available",
+      "kind": "local_state",
+      "priority": 2,
+      "evidence": [
+        "kernel/state.json",
+        "tasks/*.json",
+        "registry/runs/*.json",
+        "logs/execution.log"
+      ],
+      "notes": "Fonte operacional local do estaleiro; útil para execução, fila e histórico do trabalho."
+    },
+    {
+      "source_id": "dashboard_mirror",
+      "label": "Mirror do HITL / Dashboard",
+      "tier": "mirror",
+      "authority": "dashboard",
+      "status": "available",
+      "kind": "ui_mirror",
+      "priority": 3,
+      "evidence": [
+        "../saas/web/dashboard-dist/hitl-board.json",
+        "../saas/web/dashboard-dist/metrics.html"
+      ],
+      "notes": "Mirror visual para o painel; não é a fonte primária, apenas espelho de leitura."
+    }
+  ]
+}

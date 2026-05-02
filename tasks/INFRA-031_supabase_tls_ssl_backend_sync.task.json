@@ -1,0 +1,36 @@
+{
+  "task_id": "INFRA-031-supabase-tls-ssl-backend-sync",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-031",
+  "linear_project": "Sprint Final",
+  "linear_team_key": "INF",
+  "service_target": "memory-layer",
+  "context_refs": [
+    "debito-tecnico.md",
+    "state/AGENTS.md",
+    "state/runtime/hitl-board.json",
+    "logs/execution.log",
+    "adapters/memory/long_term/supabase_client.py",
+    "registry/runs/"
+  ],
+  "infra_refs": [
+    "adapters/memory/long_term/supabase_client.py",
+    "scripts/run_task.py",
+    "contracts/context-packet.schema.json",
+    "registry/runs/"
+  ],
+  "expected_output": [
+    "TLS/SSL do Supabase tratado ou explicitamente documentado como dependência externa",
+    "backend de memória longa sem false positive de erro por falta de CA",
+    "registro no HITL com causa, impacto e decisão",
+    "triagem separada de configuração e de falha real"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Fechar o problema do Supabase TLS/SSL no backend de memória longa: distinguir erro de configuração local de falha real, registrar no HITL e impedir que a ausência de trust store gere falso bloqueio operacional."
+  },
+  "output": {}
+}

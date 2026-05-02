@@ -1,0 +1,24 @@
+version: 1
+zone: ruptur.cloud
+intent: "Desired state for Cloudflare DNS. This file stages the intended records while the write connector is blocked by authentication."
+records:
+  - name: aiox
+    type: A
+    content: 34.39.196.137
+    proxied: true
+  - name: langfuse
+    type: A
+    content: 187.77.242.208
+    proxied: false
+  - name: infisical
+    type: A
+    content: 34.39.196.137
+    proxied: false
+  - name: temporal
+    type: A
+    content: 187.77.242.208
+    proxied: false
+  - name: uptime-kuma
+    type: A
+    content: 187.77.242.208
+    proxied: false

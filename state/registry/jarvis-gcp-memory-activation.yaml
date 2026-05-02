@@ -1,0 +1,83 @@
+version: 1
+kind: jarvis_gcp_memory_activation
+status: active
+activated_at: "2026-04-22T19:23:16-03:00"
+operator: diego
+maestro:
+  uid: jarvis-root-001
+  soul_id: SOUL-JARVIS-0001
+  omega_session_id: OMEGA-20260411-015529-f8a43f87-jarvis-001
+gcp_runtime:
+  project_id: ruptur-jarvis-v1-68358
+  region: southamerica-east1
+  zone: southamerica-east1-b
+  instance: ruptur-shipyard-01
+  service_name: jarvis-agent
+  memory_contract: jarvis-gcp-adk-postgres
+  session_backend: postgres
+  validated:
+    service_active: true
+    service_enabled: true
+    health_ok: true
+    postgres_container_healthy: true
+  last_metrics_snapshot:
+    captured_at: "2026-04-22T22:28:31Z"
+    uptime: "up 3 days, 19:09"
+    load_average: [0.08, 0.05, 0.01]
+    memory_mb:
+      total: 16008
+      used: 2097
+      free: 3722
+      available: 13478
+      swap_used: 0
+    disk_root:
+      size: "246G"
+      used: "22G"
+      available: "215G"
+      use_percent: "10%"
+    containers:
+      jarvis-postgres:
+        cpu: "0.00%"
+        memory: "24.44MiB / 15.63GiB"
+      ruptur-aiox:
+        cpu: "0.00%"
+        memory: "29.02MiB / 15.63GiB"
+      infisical-redis:
+        cpu: "0.35%"
+        memory: "10.68MiB / 15.63GiB"
+      ruptur-traefik:
+        cpu: "0.00%"
+        memory: "42.23MiB / 15.63GiB"
+surfaces:
+  - id: shipyard
+    path: /Users/diego/dev/ruptur-cloud/ruptur-main/shipyard
+    role: estaleiro-operacional
+    local_config: .jarvis/memory.config.json
+    gcp_session_id: OMEGA-20260411-015529-f8a43f87-jarvis-001--shipyard
+  - id: web-betia-studio000001
+    path: /Users/diego/dev/ruptur-cloud/web-betia--studio000001
+    role: app-betia-studio
+    local_config: .jarvis/memory.config.json
+    gcp_session_id: OMEGA-20260411-015529-f8a43f87-jarvis-001--web-betia-studio000001
+context_sources:
+  canonical:
+    - ../state/AGENTS.md
+    - ../state/memory/jarvis.memory.md
+    - ../state/registry/entities.yaml
+    - ../state/registry/agent_multiverse.yaml
+  maps:
+    - graphify-out/graph.json
+    - mapa-de-infra-e-projetos-e-debitos.md
+    - debito-tecnico.md
+    - debitos-tecnicos.md
+    - ../state/index.yaml
+    - ../state/knowledge/traces/trace-OMEGA-20260411-015529-f8a43f87-jarvis-001.md
+  rtk:
+    - ~/.claude/rtk/repo_index.md
+policy:
+  - Sempre usar State + Bootstrap Jarvis + RTK repo_index + Graphify graph.json + mapas Obsidian/Excalidraw quando aplicável antes de ativação/análise ampla.
+  - State segue como memória canônica.
+  - GCP ADK/Postgres é memória runtime/sessão, não origem de identidade.
+  - Diretórios alvo recebem vínculo local e AGENTS.md quando aplicável.
+  - Segredos permanecem fora do Git.
+  - Métricas da VPS/GCP devem ser capturadas como evidência operacional antes de conclusões sobre saúde.

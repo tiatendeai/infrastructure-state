@@ -1,0 +1,34 @@
+{
+  "task_id": "INFRA-031-legacy-cleanup-kvm2-hostinger-oracle-refs",
+  "type": "change",
+  "mode": "FULL",
+  "status": "in_progress",
+  "linear_issue_id": "INFRA-031",
+  "linear_project": "Sprint Final",
+  "linear_team_key": "INF",
+  "service_target": "shipyard-legacy-cleanup",
+  "context_refs": [
+    "debito-tecnico.md",
+    "debitos-tecnicos.md",
+    "adapters/provisioning/ansible/STATUS.md",
+    "adapters/provisioning/ansible/inventories/production/group_vars/all.yml",
+    "registry/services.yaml"
+  ],
+  "infra_refs": [
+    "adapters/provisioning/ansible/",
+    "registry/",
+    "state/registry/"
+  ],
+  "expected_output": [
+    "referências a KVM2/Hostinger/Oracle classificadas como legado ou removidas",
+    "docs e playbooks alinhados ao Ruptur Cloud Lab/GCP",
+    "ruído operacional reduzido",
+    "state atualizado com a limpeza de legado"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Fechar o bloco 4 da fila: limpar referências legadas de KVM2, Hostinger e Oracle onde não forem mais canônicas, mantendo apenas o histórico preservado e reforçando o GCP/Ruptur Cloud Lab como alvo operacional."
+  },
+  "output": {}
+}

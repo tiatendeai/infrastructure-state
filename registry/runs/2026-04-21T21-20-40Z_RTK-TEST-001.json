@@ -1,0 +1,52 @@
+{
+  "task": {
+    "task_id": "RTK-TEST-001",
+    "type": "noop",
+    "mode": "STANDARD",
+    "status": "pending",
+    "linear_issue_identifier": "INFRA-029",
+    "linear_project": "Core Infrastructure",
+    "linear_team_key": "INF",
+    "context_refs": [
+      "debito-tecnico.md",
+      "adapters/provisioning/ansible/roles/rtk/defaults/main.yml"
+    ],
+    "infra_refs": [
+      "scripts/run_task.py"
+    ],
+    "input": {
+      "message": "Teste de preflight RTK"
+    },
+    "output": {}
+  },
+  "meta": {
+    "mode": "STANDARD",
+    "source": "/tmp/rtk-test.task.json",
+    "recorded_at": "2026-04-21T21:20:40Z",
+    "status": "error",
+    "stage": "execution",
+    "error": "Falha ao montar context packet: Traceback (most recent call last):\n  File \"/Users/diego/dev/ruptur-cloud/ruptur-main/shipyard/scripts/build_context_packet.py\", line 494, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/diego/dev/ruptur-cloud/ruptur-main/shipyard/scripts/build_context_packet.py\", line 465, in main\n    \"source\": str(task_path.relative_to(ROOT)),\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/pathlib.py\", line 682, in relative_to\n    raise ValueError(f\"{str(self)!r} is not in the subpath of {str(other)!r}\")\nValueError: '/private/tmp/rtk-test.task.json' is not in the subpath of '/Users/diego/dev/ruptur-cloud/ruptur-main/shipyard'"
+  },
+  "context": null,
+  "memory_sync": {
+    "status": "skipped",
+    "saved": [
+      {
+        "backend": "redis",
+        "status": "skipped",
+        "message": "Redis não configurado. Defina REDIS_URL."
+      },
+      {
+        "backend": "supabase",
+        "status": "skipped",
+        "message": "Supabase não configurado. Defina SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY."
+      }
+    ]
+  },
+  "linear_sync": {
+    "status": "skipped",
+    "event": "error",
+    "dry_run": false,
+    "skipped_reason": "runtime_sync_disabled"
+  }
+}

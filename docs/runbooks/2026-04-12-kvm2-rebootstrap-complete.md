@@ -1,8 +1,10 @@
 # Runbook — KVM2 reerguida com Ollama local
 
+> **LEITURA ATUAL:** este runbook é **histórico**. O presente operacional do ecossistema é o **shipyard** no **Ruptur Cloud Lab / GCP**. KVM2 permanece apenas como referência de rastreabilidade.
+
 **Data:** 2026-04-12  
 **Status:** concluído  
-**Origem:** execução operacional do Jarvis + automação canonizada em `infrastructure-state`
+**Origem:** execução operacional do Jarvis + automação canonizada no `shipyard` (antigo `infrastructure-state`)
 
 ## Resumo
 
@@ -75,7 +77,16 @@ Também houve backup local do `.env` na KVM2:
 
 ## Implicação operacional
 
-A KVM2 passa a ser um nó **local-first**, limpo e mínimo, pronto para retomada seletiva de novas camadas, sem dependência do legado anterior.
+Na época deste runbook, a KVM2 passou a ser um nó **local-first**, limpo e mínimo, pronto para retomada seletiva de novas camadas, sem dependência do legado anterior.
+
+## Leitura canônica atual
+
+Esse desenho não representa mais o alvo operacional presente. Hoje:
+
+- `shipyard` é o Estaleiro ativo
+- `state` é a memória canônica
+- `Ruptur Cloud Lab / GCP` é o runtime atual
+- `KVM2` é apenas legado histórico
 
 ## Próxima fase sugerida
 

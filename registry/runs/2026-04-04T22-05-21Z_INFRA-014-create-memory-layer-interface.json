@@ -1,0 +1,62 @@
+{
+  "task": {
+    "task_id": "INFRA-014-create-memory-layer-interface",
+    "type": "change",
+    "mode": "FULL",
+    "status": "pending",
+    "linear_issue_id": "INFRA-014",
+    "linear_project": "Memory Layer",
+    "linear_team_key": "INF",
+    "service_target": "memory-layer",
+    "context_refs": [
+      "docs/memory-layer.md",
+      "docs/memory-policy.md",
+      "contexts/memory-layer.md"
+    ],
+    "infra_refs": [
+      "adapters/memory/interface/memory.py",
+      "adapters/memory/short_term/redis_client.py",
+      "adapters/memory/long_term/supabase_client.py"
+    ],
+    "expected_output": [
+      "adapters/memory/interface/memory.py",
+      "adapters/memory/short_term/redis_client.py",
+      "adapters/memory/long_term/supabase_client.py"
+    ],
+    "approval_required": true,
+    "execution_policy": "human_in_the_loop",
+    "input": {
+      "message": "Criar interface única de memória e stubs locais para Redis e Supabase."
+    },
+    "output": {}
+  },
+  "meta": {
+    "mode": "FULL",
+    "source": "tasks/INFRA-014_create_memory_layer_interface.task.json",
+    "recorded_at": "2026-04-04T22:05:21Z",
+    "status": "error",
+    "stage": "execution",
+    "error": "Falha ao montar context packet: Traceback (most recent call last):\n  File \"/Users/diego/dev/infrastructure-state/scripts/build_context_packet.py\", line 215, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/Users/diego/dev/infrastructure-state/scripts/build_context_packet.py\", line 203, in main\n    validate_instance(packet, schema)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"/Users/diego/dev/infrastructure-state/scripts/build_context_packet.py\", line 125, in validate_instance\n    validate_instance(value, child_schema, f\"{path}.{field_name}\")\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/diego/dev/infrastructure-state/scripts/build_context_packet.py\", line 130, in validate_instance\n    validate_instance(item, item_schema, f\"{path}[{index}]\")\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/diego/dev/infrastructure-state/scripts/build_context_packet.py\", line 114, in validate_instance\n    raise SchemaValidationError(f\"{path}: propriedades não permitidas: {', '.join(sorted(extra))}\")\nSchemaValidationError: $.retrieved_memories[0]: propriedades não permitidas: metadata"
+  },
+  "context": null,
+  "memory_sync": {
+    "status": "ok",
+    "saved": [
+      {
+        "backend": "redis",
+        "memory_id": "summary::INFRA-014-create-memory-layer-interface",
+        "layer": "summary"
+      },
+      {
+        "backend": "supabase",
+        "memory_id": "canonical::INFRA-014-create-memory-layer-interface",
+        "layer": "canonical_memory"
+      }
+    ]
+  },
+  "linear_sync": {
+    "status": "error",
+    "event": "error",
+    "message": "Nenhuma credencial ativa do Linear encontrada. Configure LINEAR_OAUTH_ACCESS_TOKEN, ou habilite client credentials, ou permita bootstrap com personal API key."
+  }
+}

@@ -2,7 +2,7 @@
 
 # Configurações do n8n (AtendeZaya)
 N8N_API_URL="https://n8n.atendezaya.com/api/v1"
-N8N_API_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3OWZjYzAxYi05OGRkLTQ5MjgtODY3My1kZmM1YzA1YTA1OGUiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwianRpIjoiM2IwMDI4MzQtNDNlZC00MDk0LWI4N2YtN2ZiODVhZTNjMGNlIiwiaWF0IjoxNzc0Nzk4MDQ3fQ._kVJB-46LH-vadiFKxmImtdjVDd0gemVZ8GDJqmpdNs"
+N8N_API_KEY="${N8N_API_KEY}"
 
 # Função para dar o deploy (Update) de um workflow
 deploy_workflow() {

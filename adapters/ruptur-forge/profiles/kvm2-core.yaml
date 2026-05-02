@@ -6,7 +6,7 @@ required_capabilities: [reverse_proxy, docker_compose_runtime]
 capability_bindings:
   reverse_proxy:
     observed_service_id: traefik
-desired_services: [n8n, langfuse]
+desired_services: [n8n, langfuse, infisical, temporal]
 prerequisites: [docker_compose_runtime_available, reverse_proxy_binding_confirmed]
-manual_checks: [confirm_dns_and_tls_strategy, confirm_capacity_for_n8n_and_langfuse]
+manual_checks: [confirm_dns_and_tls_strategy, confirm_capacity_for_n8n_langfuse_infisical_temporal]
 registry_refs: [registry/services.yaml]

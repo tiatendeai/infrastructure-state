@@ -9,9 +9,14 @@
     "linear_issue",
     "task",
     "objective",
+    "context_budget",
     "latest_actions",
     "canonical_facts",
     "retrieved_memories",
+    "declared_context_refs",
+    "whitelisted_context_refs",
+    "rejected_context_refs",
+    "preflight",
     "policy_refs"
   ],
   "properties": {
@@ -33,6 +38,41 @@
         "redis",
         "supabase"
       ]
+    },
+    "context_budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_files",
+        "max_chars",
+        "prefer_diffs",
+        "prefer_whitelist",
+        "heartbeat_seconds_min",
+        "allow_repo_rediscovery"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "max_files": {
+          "type": "integer"
+        },
+        "max_chars": {
+          "type": "integer"
+        },
+        "prefer_diffs": {
+          "type": "boolean"
+        },
+        "prefer_whitelist": {
+          "type": "boolean"
+        },
+        "heartbeat_seconds_min": {
+          "type": "integer"
+        },
+        "allow_repo_rediscovery": {
+          "type": "boolean"
+        }
+      }
     },
     "linear_issue": {
       "type": "object",
@@ -125,7 +165,120 @@
           },
           "source": {
             "type": "string"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": true
           }
+        }
+      }
+    },
+    "declared_context_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "whitelisted_context_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rejected_context_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "preflight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "budget",
+        "declared_context_refs",
+        "whitelisted_context_refs",
+        "rejected_context_refs",
+        "context_ref_count",
+        "has_repo_rediscovery",
+        "strict_violations",
+        "enforced",
+        "character_budget",
+        "effective_memory_limit"
+      ],
+      "properties": {
+        "budget": {
+          "type": "object"
+        },
+        "declared_context_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "whitelisted_context_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rejected_context_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "context_ref_count": {
+          "type": "integer"
+        },
+        "has_repo_rediscovery": {
+          "type": "boolean"
+        },
+        "strict_violations": {
+          "type": "integer"
+        },
+        "enforced": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "max_files",
+            "prefer_whitelist",
+            "allow_repo_rediscovery"
+          ],
+          "properties": {
+            "max_files": {
+              "type": "integer"
+            },
+            "prefer_whitelist": {
+              "type": "boolean"
+            },
+            "allow_repo_rediscovery": {
+              "type": "boolean"
+            }
+          }
+        },
+        "character_budget": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "max_chars",
+            "estimated_chars",
+            "trimmed_memories"
+          ],
+          "properties": {
+            "max_chars": {
+              "type": "integer"
+            },
+            "estimated_chars": {
+              "type": "integer"
+            },
+            "trimmed_memories": {
+              "type": "integer"
+            }
+          }
+        },
+        "effective_memory_limit": {
+          "type": "integer"
         }
       }
     },

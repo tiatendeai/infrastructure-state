@@ -3,6 +3,34 @@
   "title": "Ruptur State",
   "type": "object",
   "additionalProperties": false,
+  "$defs": {
+    "context_budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "max_files",
+        "max_chars",
+        "prefer_diffs",
+        "prefer_whitelist",
+        "heartbeat_seconds_min",
+        "allow_repo_rediscovery"
+      ],
+      "properties": {
+        "path": { "type": "string" },
+        "max_files": { "type": "integer", "minimum": 0 },
+        "max_chars": { "type": "integer", "minimum": 0 },
+        "prefer_diffs": { "type": "boolean" },
+        "prefer_whitelist": { "type": "boolean" },
+        "heartbeat_seconds_min": { "type": "integer", "minimum": 0 },
+        "allow_repo_rediscovery": { "type": "boolean" }
+      }
+    },
+    "context_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
   "required": ["status", "current_task", "history", "version"],
   "properties": {
     "status": {
@@ -37,6 +65,18 @@
             "retrieved_memory_count": {
               "type": "integer",
               "minimum": 0
+            },
+            "context_budget": {
+              "$ref": "#/$defs/context_budget"
+            },
+            "declared_context_refs": {
+              "$ref": "#/$defs/context_refs"
+            },
+            "whitelisted_context_refs": {
+              "$ref": "#/$defs/context_refs"
+            },
+            "rejected_context_refs": {
+              "$ref": "#/$defs/context_refs"
             }
           },
           "additionalProperties": false
@@ -73,6 +113,18 @@
           "retrieved_memory_count": {
             "type": "integer",
             "minimum": 0
+          },
+          "context_budget": {
+            "$ref": "#/$defs/context_budget"
+          },
+          "declared_context_refs": {
+            "$ref": "#/$defs/context_refs"
+          },
+          "whitelisted_context_refs": {
+            "$ref": "#/$defs/context_refs"
+          },
+          "rejected_context_refs": {
+            "$ref": "#/$defs/context_refs"
           }
         },
         "additionalProperties": false

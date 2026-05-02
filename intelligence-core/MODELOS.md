@@ -1,8 +1,9 @@
-# 🤖 Guia de Modelos — Claude Code via OpenRouter
+# 🤖 Guia de Modelos — Claude Code Pro via CLI
 
 ## Estrutura das Variáveis
 
-O Claude Code usa estas variáveis para escolher modelos em diferentes contextos:
+Quando o Claude Code está no modo Pro via CLI, normalmente não é preciso forçar provider via `settings.local.json`.
+Este guia fica como referência para estratégias de modelo quando houver override explícito.
 
 | Variável | Contexto de uso |
 |---|---|
@@ -15,14 +16,10 @@ O Claude Code usa estas variáveis para escolher modelos em diferentes contextos
 
 ---
 
-## ✅ Configuração Ativa Agora (`settings.local.json`)
+## ✅ Situação atual
 
-```json
-"ANTHROPIC_DEFAULT_OPUS_MODEL":   "z-ai/glm-5",
-"ANTHROPIC_DEFAULT_SONNET_MODEL": "minimax/minimax-m2.7",
-"ANTHROPIC_DEFAULT_HAIKU_MODEL":  "google/gemini-3.1-flash-lite-preview",
-"CLAUDE_CODE_SUBAGENT_MODEL":     "google/gemini-3-flash-preview"
-```
+Sem override local de provider/modelo no `settings.local.json`.
+O CLI deve usar o Claude Code Pro diretamente, sem Vertex e sem OpenRouter por enquanto.
 
 ---
 
@@ -113,6 +110,5 @@ Coloque no `settings.local.json`:
 "PERPLEXITY_BASE_URL": "https://api.perplexity.ai"
 ```
 
-> **Nota:** Para o Claude Code usar um modelo específico do OpenAI ou Perplexity via OpenRouter, 
-> basta colocar o ID no ANTHROPIC_DEFAULT_* correspondente. A `ANTHROPIC_BASE_URL` do OpenRouter
-> já dá acesso a todos os providers sem precisar de chave separada.
+> **Nota:** esta seção é só para quando você quiser reintroduzir providers externos.
+> No uso atual do Claude Code Pro via CLI, o caminho padrão é não forçar override nenhum.

@@ -2,7 +2,7 @@
 
 ## Princípio central
 
-O Linear governa. O agente executa. O state audita.
+O Linear governa. O agente executa. O State audita.
 
 ## Responsabilidades
 
@@ -23,7 +23,7 @@ O Linear governa. O agente executa. O state audita.
 - registrar evidência
 - preparar retorno estruturado
 
-### `infrastructure-state`
+### `shipyard`
 
 - armazenar tasks locais
 - manter `kernel/state.json`
@@ -57,3 +57,10 @@ Antes da operação plena:
 3. criar os statuses do team
 
 Até isso acontecer, o repo usa o contrato-alvo localmente sem presumir que o Linear já esteja materializado.
+
+## Nomenclatura atual
+
+- `shipyard` é o nome operacional do estaleiro
+- `State` é a memória canônica
+- `Ruptur Cloud Lab / GCP` é o runtime atual
+- `KVM2` ficou como legado histórico

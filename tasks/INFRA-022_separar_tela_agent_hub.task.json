@@ -1,0 +1,37 @@
+{
+  "task_id": "INFRA-022-separar-tela-agent-hub",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-022",
+  "linear_project": "Agent Hub",
+  "linear_team_key": "INF",
+  "service_target": "agent-hub",
+  "context_refs": [
+    "debito-tecnico.md",
+    "state/AGENTS.md",
+    "state/runtime/hitl-board.json",
+    "state/registry/hitl-sources.json",
+    "../saas/web/dashboard-dist/metrics.html",
+    "../saas/web/dashboard-dist/hitl-board.json",
+    "../saas/modules/warmup-core/server.mjs"
+  ],
+  "infra_refs": [
+    "../saas/web/dashboard-dist/metrics.html",
+    "../saas/web/dashboard-dist/hitl-board.json",
+    "../saas/modules/warmup-core/server.mjs",
+    "scripts/build_hitl_board.py",
+    "kernel/state.json"
+  ],
+  "expected_output": [
+    "tela do Agent Hub separada em blocos claros por função",
+    "sessão, runtime, fonte e mirror com leitura visual distinta",
+    "navegação e rotas do painel sem mistura de estados"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Separar a tela do Agent Hub em blocos visuais distintos para sessão, runtime, fonte e mirror, evitando mistura entre estado de login, runtime local e espelho do painel."
+  },
+  "output": {}
+}

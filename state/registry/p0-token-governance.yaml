@@ -1,0 +1,40 @@
+version: 1
+scope: p0
+owner: diego
+managed_by: shipyard
+created_at: "2026-04-21T00:00:00-03:00"
+source_task: "tasks/INFRA-029_token_consumption_context_budget_rtk_ansible.task.json"
+summary: "Fila P0 da frente de tokens e contexto: RTK, Ansible, budget, perfil operacional, catálogo e redução de custo."
+items:
+  - id: 1
+    title: "Reduzir consumo de tokens e padronizar contexto"
+    state_ref: "tasks/INFRA-029_token_consumption_context_budget_rtk_ansible.task.json"
+    status: running
+    evidence: "debito-tecnico.md + debitos-tecnicos.md atualizados com a frente tokens/contexto"
+  - id: 2
+    title: "Sessão e login P0"
+    state_ref: "tasks/INFRA-028_tokens_p0_sessao_login_seguranca_observabilidade.task.json"
+    status: running
+    evidence: "bloco P0 já registrado na sprint final; Agent Hub começou correção de auth/quota/service-ready"
+  - id: 3
+    title: "Agent Hub Codex service-ready"
+    state_ref: "tasks/INFRA-018_agent_hub_auto_account_rotation.task.json"
+    status: running
+    evidence: "docs/agent-hub-auto-rotation-plan.md + patch aplicado no host HITL em 2026-04-22"
+notes:
+  - "A ordem canônica desta frente começa por tokens/contexto porque ela reduz custo, ruído e loops antes da expansão de rotas e agentes."
+  - "RTK é tratado como ativo do Shipyard; Ansible mantém a configuração única entre Mac, GCP e runtime do Ruptur Cloud Lab."
+  - "INFRA-029 entrou em execução para consolidar contexto, budget e preflight antes de seguir para sessão/login P0."
+  - "Preflight agora carrega budget canônico, whitelist declarada e corte por budget de caracteres no context packet."
+  - "AIOX passou a preferir o prompt envelope canônico via PROMPT_ENVELOPE_PATH quando o arquivo estiver disponível no host."
+  - "Adicionada biblioteca canônica de composição de prompt envelope em adapters/llm para consumidores futuros e integrações em linha de comando."
+  - "Adicionado cliente OpenAI-compatible em scripts/llm_chat_from_envelope.py para executar a chamada real com o envelope canônico."
+  - "Criado atalho canônico em scripts/ruptur.sh llm para compor e enviar prompts a partir do envelope do Shipyard."
+  - "O runner agora publica o prompt envelope também em state/runtime/aiox/prompt-envelope.json para consumidores remotos como o AIOX bridge."
+  - "O contrato canônico de segredos passou a ser documentado em docs/INFISICAL_SECRET_MAP.md com Infisical como cofre e Git apenas como contrato."
+  - "O inventário de segredos passou a ser cruzável por scripts/collect_secret_inventory.py com contrato machine-readable em state/registry/infisical-secret-contract.json."
+  - "Inventário atual validado: 30 segredos contratados, 30 referenciados no repo, 0 contratos sem uso aparente."
+  - "Catálogos e objetivos precisam refletir a nomenclatura nova: shipyard como infra state, GCP como runtime e Infisical como cofre."
+  - "Em 2026-04-22 foi corrigido o drift semântico do Codex no Agent Hub: autenticação do Paperclip, quota e service-ready agora são estados separados."
+  - "O falso Not logged in vinha da consulta fora do usuário paperclip; o runtime real usa CODEX_HOME=/var/lib/paperclip/.codex."
+  - "Agentes codex_local receberam --skip-git-repo-check para reduzir falhas/reexecuções por cwd não confiável."

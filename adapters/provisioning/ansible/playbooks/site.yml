@@ -64,6 +64,12 @@
           - shipyard_jarvis_allowed_user_ids | default('') | trim | length > 0
           - >-
             (
+              shipyard_jarvis_session_backend | default('postgres')
+            ) != 'postgres' or (
+              shipyard_jarvis_session_postgres_password | default('PENDING_') is not search('CHANGE_ME|PENDING_')
+            )
+          - >-
+            (
               shipyard_jarvis_core_provider == 'ollama'
             ) or (
               shipyard_jarvis_core_provider == 'gemini' and
@@ -97,3 +103,5 @@
     - role: minio
     - role: jarvis
       when: shipyard_jarvis_enabled | bool
+    - role: aiox
+      when: shipyard_aiox_enabled | bool

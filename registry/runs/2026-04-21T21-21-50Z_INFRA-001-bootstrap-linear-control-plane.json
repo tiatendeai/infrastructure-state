@@ -1,0 +1,177 @@
+{
+  "task": {
+    "task_id": "INFRA-001-bootstrap-linear-control-plane",
+    "type": "change",
+    "mode": "FULL",
+    "status": "pending",
+    "linear_issue_id": "INFRA-001",
+    "linear_project": "Bootstrap IaC",
+    "linear_team_key": "INF",
+    "service_target": "infrastructure-state",
+    "context_refs": [
+      "docs/linear-integration.md",
+      "docs/linear-operating-model.md",
+      "docs/automation-flow.md"
+    ],
+    "infra_refs": [
+      "registry/linear-mapping.yaml",
+      "templates/linear-task.json.tpl"
+    ],
+    "expected_output": [
+      "docs/linear-integration.md",
+      "docs/linear-operating-model.md",
+      "docs/automation-flow.md",
+      "tasks/LINEAR_BACKLOG_BOOTSTRAP.task.json"
+    ],
+    "approval_required": true,
+    "execution_policy": "human_in_the_loop",
+    "input": {
+      "message": "Manifesto local de transição entre backlog governado no Linear e execução auditável no infrastructure-state."
+    },
+    "output": {}
+  },
+  "context": {
+    "issue_identifier": "INF-1",
+    "issue_title": "Manifesto local de transição entre backlog governado no Linear e execução auditável no infrastructure-state.",
+    "objective": "Manifesto local de transição entre backlog governado no Linear e execução auditável no infrastructure-state.",
+    "context_packet_path": "state/runtime/INFRA-001-bootstrap-linear-control-plane/context-packet.json",
+    "memory_backend": "mock",
+    "retrieved_memory_count": 3,
+    "mapping": {
+      "backlog_key": "INFRA-001",
+      "linear_issue_identifier": "INF-1",
+      "linear_issue_id": "2d7e3f0f-0445-454f-97aa-a009b1263f4f",
+      "local_task": "tasks/LINEAR_BACKLOG_BOOTSTRAP.task.json",
+      "project": "Bootstrap IaC",
+      "local_status": "done",
+      "linear_issue_uuid": "2d7e3f0f-0445-454f-97aa-a009b1263f4f"
+    },
+    "context_budget": {
+      "path": "",
+      "max_files": 20,
+      "max_chars": 8000,
+      "prefer_diffs": true,
+      "prefer_whitelist": true,
+      "heartbeat_seconds_min": 300,
+      "allow_repo_rediscovery": false
+    },
+    "declared_context_refs": [
+      "docs/linear-integration.md",
+      "docs/linear-operating-model.md",
+      "docs/automation-flow.md",
+      "registry/linear-mapping.yaml",
+      "templates/linear-task.json.tpl"
+    ],
+    "whitelisted_context_refs": [
+      "docs/linear-integration.md",
+      "docs/linear-operating-model.md",
+      "docs/automation-flow.md",
+      "registry/linear-mapping.yaml",
+      "templates/linear-task.json.tpl"
+    ],
+    "rejected_context_refs": [],
+    "preflight": {
+      "budget": {
+        "max_files": 20,
+        "max_chars": 8000,
+        "prefer_diffs": true,
+        "prefer_whitelist": true,
+        "heartbeat_seconds_min": 300,
+        "allow_repo_rediscovery": false
+      },
+      "declared_context_refs": [
+        "docs/linear-integration.md",
+        "docs/linear-operating-model.md",
+        "docs/automation-flow.md",
+        "registry/linear-mapping.yaml",
+        "templates/linear-task.json.tpl"
+      ],
+      "whitelisted_context_refs": [
+        "docs/linear-integration.md",
+        "docs/linear-operating-model.md",
+        "docs/automation-flow.md",
+        "registry/linear-mapping.yaml",
+        "templates/linear-task.json.tpl"
+      ],
+      "rejected_context_refs": [],
+      "context_ref_count": 5,
+      "has_repo_rediscovery": false,
+      "enforced": {
+        "max_files": 20,
+        "prefer_whitelist": true,
+        "allow_repo_rediscovery": false
+      },
+      "character_budget": {
+        "max_chars": 8000,
+        "estimated_chars": 2340,
+        "trimmed_memories": 0
+      },
+      "effective_memory_limit": 3
+    }
+  },
+  "execution": {
+    "mode": "FULL",
+    "status": "done",
+    "source": "tasks/LINEAR_BACKLOG_BOOTSTRAP.task.json",
+    "recorded_at": "2026-04-21T21:21:50Z",
+    "output": {
+      "message": "Change task verificada localmente a partir dos artefatos já materializados no repositório.",
+      "mode": "FULL",
+      "executed_at": "2026-04-21T21:21:50Z",
+      "verification_status": "verificada",
+      "verification": {
+        "expected_output": {
+          "present": [
+            "docs/linear-integration.md",
+            "docs/linear-operating-model.md",
+            "docs/automation-flow.md",
+            "tasks/LINEAR_BACKLOG_BOOTSTRAP.task.json"
+          ],
+          "missing": [],
+          "present_count": 4,
+          "missing_count": 0
+        },
+        "context_refs": {
+          "present": [
+            "docs/linear-integration.md",
+            "docs/linear-operating-model.md",
+            "docs/automation-flow.md"
+          ],
+          "missing": [],
+          "present_count": 3,
+          "missing_count": 0
+        },
+        "infra_refs": {
+          "present": [
+            "registry/linear-mapping.yaml",
+            "templates/linear-task.json.tpl"
+          ],
+          "missing": [],
+          "present_count": 2,
+          "missing_count": 0
+        }
+      }
+    }
+  },
+  "memory_sync": {
+    "status": "skipped",
+    "saved": [
+      {
+        "backend": "redis",
+        "status": "skipped",
+        "message": "Redis não configurado. Defina REDIS_URL."
+      },
+      {
+        "backend": "supabase",
+        "status": "skipped",
+        "message": "Supabase não configurado. Defina SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY."
+      }
+    ]
+  },
+  "linear_sync": {
+    "status": "skipped",
+    "event": "done",
+    "dry_run": false,
+    "skipped_reason": "runtime_sync_disabled"
+  }
+}

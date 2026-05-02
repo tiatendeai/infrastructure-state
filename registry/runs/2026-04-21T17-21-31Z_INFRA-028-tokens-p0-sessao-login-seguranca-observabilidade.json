@@ -1,0 +1,114 @@
+{
+  "task": {
+    "task_id": "INFRA-028-tokens-p0-sessao-login-seguranca-observabilidade",
+    "type": "change",
+    "mode": "FULL",
+    "status": "pending",
+    "linear_issue_id": "INFRA-028",
+    "linear_project": "Sprint Final",
+    "linear_team_key": "INF",
+    "service_target": "agent-hub",
+    "context_refs": [
+      "debito-tecnico.md",
+      "debitos-tecnicos.md",
+      "mapa-de-infra-e-projetos-e-debitos.md",
+      "state/AGENTS.md",
+      "state/runtime/hitl-board.json",
+      "state/registry/hitl-sources.json",
+      "../saas/web/dashboard-dist/metrics.html",
+      "../saas/modules/warmup-core/server.mjs"
+    ],
+    "infra_refs": [
+      "scripts/build_hitl_board.py",
+      "state/runtime/hitl-board.json",
+      "../saas/web/dashboard-dist/hitl-board.json",
+      "../saas/modules/warmup-core/server.mjs"
+    ],
+    "expected_output": [
+      "contrato de tokens opacos e sessão server-side com Redis",
+      "login/logout e revogação imediata com auditoria",
+      "observabilidade com logs, métricas e traces correlacionados",
+      "triagem P0 para falhas, bugs e drift de sessão"
+    ],
+    "approval_required": true,
+    "execution_policy": "human_in_the_loop",
+    "input": {
+      "message": "Iniciar a execução pela frente de tokens e P0: definir contrato de sessão/token opaco, login/logout com revogação, auditoria, observabilidade e triagem das falhas e bugs que impedem o fluxo. Essa task é a primeira da ordem de ataque da sprint final."
+    },
+    "output": {}
+  },
+  "context": null,
+  "execution": {
+    "mode": "FULL",
+    "status": "done",
+    "source": "tasks/INFRA-028_tokens_p0_sessao_login_seguranca_observabilidade.task.json",
+    "recorded_at": "2026-04-21T17:21:31Z",
+    "output": {
+      "message": "Change task verificada localmente a partir dos artefatos já materializados no repositório.",
+      "mode": "FULL",
+      "executed_at": "2026-04-21T17:21:31Z",
+      "verification_status": "verificada_com_ressalvas",
+      "verification": {
+        "expected_output": {
+          "present": [],
+          "missing": [
+            "contrato de tokens opacos e sessão server-side com Redis",
+            "login/logout e revogação imediata com auditoria",
+            "observabilidade com logs, métricas e traces correlacionados",
+            "triagem P0 para falhas, bugs e drift de sessão"
+          ],
+          "present_count": 0,
+          "missing_count": 4
+        },
+        "context_refs": {
+          "present": [
+            "debito-tecnico.md",
+            "debitos-tecnicos.md",
+            "mapa-de-infra-e-projetos-e-debitos.md",
+            "state/runtime/hitl-board.json",
+            "state/registry/hitl-sources.json",
+            "../saas/web/dashboard-dist/metrics.html",
+            "../saas/modules/warmup-core/server.mjs"
+          ],
+          "missing": [
+            "state/AGENTS.md"
+          ],
+          "present_count": 7,
+          "missing_count": 1
+        },
+        "infra_refs": {
+          "present": [
+            "scripts/build_hitl_board.py",
+            "state/runtime/hitl-board.json",
+            "../saas/web/dashboard-dist/hitl-board.json",
+            "../saas/modules/warmup-core/server.mjs"
+          ],
+          "missing": [],
+          "present_count": 4,
+          "missing_count": 0
+        }
+      }
+    }
+  },
+  "memory_sync": {
+    "status": "error",
+    "saved": [
+      {
+        "backend": "redis",
+        "status": "error",
+        "message": "Redis não configurado. Defina REDIS_URL."
+      },
+      {
+        "backend": "supabase",
+        "status": "error",
+        "message": "Supabase não configurado. Defina SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY."
+      }
+    ]
+  },
+  "linear_sync": {
+    "status": "skipped",
+    "event": "done",
+    "dry_run": false,
+    "skipped_reason": "runtime_sync_disabled"
+  }
+}

@@ -9,7 +9,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV "/Users/diego/dev/J.A.R.V.I.S./.venv-ansible"
+setenv VIRTUAL_ENV "/Users/diego/dev/ruptur-cloud/ruptur-main/shipyard/.venv-ansible"
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/bin:$PATH"

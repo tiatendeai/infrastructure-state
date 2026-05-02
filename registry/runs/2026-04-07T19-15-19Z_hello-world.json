@@ -1,0 +1,50 @@
+{
+  "task": {
+    "task_id": "hello-world",
+    "type": "echo",
+    "mode": "FAST",
+    "input": {
+      "message": "Ruptur Farm Framework operacional e portátil."
+    },
+    "output": {
+      "message": "Ruptur Farm Framework operacional e portátil.",
+      "mode": "FAST",
+      "executed_at": "2026-04-03T18:50:31Z"
+    },
+    "status": "done",
+    "updated_at": "2026-04-03T18:50:31Z"
+  },
+  "context": null,
+  "execution": {
+    "mode": "FAST",
+    "status": "done",
+    "source": "examples/hello.task.json",
+    "recorded_at": "2026-04-07T19:15:19Z",
+    "output": {
+      "message": "Ruptur Farm Framework operacional e portátil.",
+      "mode": "FAST",
+      "executed_at": "2026-04-07T19:15:19Z"
+    }
+  },
+  "memory_sync": {
+    "status": "ok",
+    "saved": [
+      {
+        "backend": "redis",
+        "memory_id": "summary::hello-world",
+        "layer": "summary"
+      },
+      {
+        "backend": "supabase",
+        "status": "error",
+        "message": "Falha de rede ao chamar o Supabase: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)"
+      }
+    ]
+  },
+  "linear_sync": {
+    "status": "skipped",
+    "event": "done",
+    "dry_run": false,
+    "skipped_reason": "runtime_sync_disabled"
+  }
+}

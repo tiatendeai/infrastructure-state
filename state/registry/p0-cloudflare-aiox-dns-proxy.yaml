@@ -1,0 +1,33 @@
+version: 1
+scope: p0
+owner: diego
+managed_by: shipyard
+created_at: "2026-04-21T00:00:00-03:00"
+source_task: "tasks/INFRA-030_cloudflare_aiox_dns_proxy_auth_fix.task.json"
+summary: "Fechamento da borda Cloudflare para aiox.ruptur.cloud com auth de escrita e proxied=true."
+credential_owner: "Infisical"
+credential_scope: "Cloudflare edge credentials and DNS write access"
+items:
+  - id: 1
+    title: "Recuperar auth de escrita no conector Cloudflare"
+    state_ref: "tasks/INFRA-030_cloudflare_aiox_dns_proxy_auth_fix.task.json"
+    status: done
+    completed_at: "2026-04-21T20:42:16Z"
+    current_state: "Auth validada no conector Cloudflare"
+    evidence: "Cloudflare API GET/PATCH executado com sucesso no zone 227b5a55cb0351ee3c1ca6b533d3cbfb"
+  - id: 2
+    title: "Aplicar proxied=true no record aiox.ruptur.cloud"
+    state_ref: "tasks/INFRA-030_cloudflare_aiox_dns_proxy_auth_fix.task.json"
+    status: done
+    completed_at: "2026-04-21T20:42:16Z"
+    evidence: "Cloudflare API patch aplicado com sucesso; proxied=true"
+  - id: 3
+    title: "Registrar a causa-raiz e o estado final no State"
+    state_ref: "tasks/INFRA-030_cloudflare_aiox_dns_proxy_auth_fix.task.json"
+    status: pending
+notes:
+  - "O record existe, aponta para o origin e agora está em proxied=true."
+  - "A reauth do conector Cloudflare deixou de ser bloqueio para este record; a borda pública já está fechada."
+  - "A tentativa anterior que bloqueava o conector retornava Auth required; a autenticação foi validada nesta execução."
+  - "Os segredos de Cloudflare agora têm dono operacional no Infisical; nada sensível deve ficar em Git."
+  - "A borda atual serve ao Ruptur Cloud Lab / GCP; referências a KVM2 foram descontinuadas no fluxo operacional."

@@ -6,7 +6,7 @@ Definir o modelo nativo de eventos do Linear para sincronização entre:
 
 - Linear
 - n8n
-- `infrastructure-state`
+- `shipyard`
 - futura orquestração do Jarvis
 
 ## Decisão principal
@@ -112,7 +112,7 @@ Isso é suficiente para alimentar:
 - faz roteamento e enriquecimento
 - desacopla recepção de execução
 
-### `infrastructure-state`
+### `shipyard`
 
 - resolve vínculo issue ↔ task
 - executa trabalho local/auditável

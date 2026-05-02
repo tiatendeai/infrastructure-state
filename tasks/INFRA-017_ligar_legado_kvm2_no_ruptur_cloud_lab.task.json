@@ -1,0 +1,54 @@
+{
+  "task_id": "INFRA-017-ligar-legado-kvm2-no-ruptur-cloud-lab",
+  "type": "change",
+  "mode": "FULL",
+  "status": "in_progress",
+  "linear_issue_id": "INFRA-017",
+  "linear_project": "Ruptur Cloud Lab",
+  "linear_team_key": "INF",
+  "service_target": "ruptur-cloud-lab",
+  "context_refs": [
+    "docs/runbooks/2026-04-13-religacao-ruptur-core-kvm2.md",
+    "../state/knowledge/2026-04-13-jarvis-ruptur-religacao-kvm2.md",
+    "../ruptur/knowledge/2026-04-13-jarvis-ruptur-religacao-kvm2.md",
+    "state/knowledge/",
+    "state/registry/"
+  ],
+  "infra_refs": [
+    "../ruptur/deploy/kvm2/docker-compose.yml",
+    "../ruptur/ops/kvm2/preflight.sh",
+    "../ruptur/ops/kvm2/smoke.sh",
+    "../ruptur-cloud-lab/",
+    "../state/infrastructure/"
+  ],
+  "expected_output": [
+    "legado da KVM2 reconciliado com o Ruptur Cloud Lab",
+    "o que ainda tem valor foi ligado ao novo lab",
+    "o que é legado foi documentado como dívida técnica",
+    "rotas e mapas atualizados no State"
+  ],
+  "approval_required": false,
+  "execution_policy": "remote_materialization_with_local_record",
+  "input": {
+    "message": "Ligar o legado da KVM2 ao Ruptur Cloud Lab, preservando o que ainda é útil, reconciliando rotas e mapas no State, e registrando o que virou débito técnico para não tratar o KVM2 como core ativo.",
+    "today_priorities": [
+      "mapear o que ainda existe na KVM2",
+      "separar legado aproveitável de legado morto",
+      "conectar o que sobrar ao Ruptur Cloud Lab",
+      "atualizar State com a nova topologia",
+      "registrar o débito técnico da KVM2"
+    ]
+  },
+  "output": {
+    "progress_notes": [
+      "2026-04-13: kvm2-ruptur-db-1 materializado e saudável no KVM2.",
+      "2026-04-13: kvm2-ruptur-backend-1 materializado no KVM2.",
+      "2026-04-13: health validado dentro do container com GET /health retornando ok.",
+      "2026-04-13: webhook /webhook/uazapi respondeu com ok em smoke mínimo.",
+      "2026-04-13: admin token UAZAPI respondeu e listou instâncias.",
+      "2026-04-13: token direto configurado no backend retornou 401 em /instance/status, indicando drift de credencial/instância.",
+      "2026-04-13: próximo passo é reconciliar a instância/canal e concluir a ligação operacional do Jarvis ao Ruptur.",
+      "2026-04-21: task reinterpretada como ligação do legado da KVM2 ao Ruptur Cloud Lab, sem tratá-la como core ativo."
+    ]
+  }
+}

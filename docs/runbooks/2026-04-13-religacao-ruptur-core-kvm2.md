@@ -1,12 +1,14 @@
 # Runbook — 2026-04-13 — Religacao do core do Ruptur no KVM2
 
+> **LEITURA ATUAL:** este runbook é **histórico**. O presente operacional do ecossistema é o **shipyard** no **Ruptur Cloud Lab / GCP**. KVM2 é legado.
+
 ## Objetivo
 
-Materializar o menor stack funcional do Ruptur no KVM2 para recolocar o Jarvis sobre o Ruptur.
+Materializar, na época, o menor stack funcional do Ruptur no KVM2 para recolocar o Jarvis sobre o Ruptur.
 
 ## Premissas
 
-- KVM2 continua sendo o core critico por economia e controle.
+- KVM2 continuava sendo o core crítico por economia e controle, **naquele momento histórico**.
 - Plataformas externas entram como alivio tatico, nao como ownership do core.
 - O caminho critico do dia e `ruptur-db` + `ruptur-backend` + canal minimo.
 
@@ -23,7 +25,7 @@ Materializar o menor stack funcional do Ruptur no KVM2 para recolocar o Jarvis s
 
 - nao criar stack paralela antes de religar a stack existente;
 - nao trocar ownership do core por conveniencia de provider;
-- registrar evidencias em `state` e docs relevantes;
+- registrar evidências em `state` e docs relevantes;
 - so promover edge publico quando o core estiver funcional.
 
 ## Tarefas de hoje
@@ -33,3 +35,12 @@ Materializar o menor stack funcional do Ruptur no KVM2 para recolocar o Jarvis s
 - [ ] health local aprovado
 - [ ] webhook/canal minimo aprovado
 - [ ] integracao com Jarvis comprovada
+
+## Leitura canônica atual
+
+Hoje o mesmo tipo de operação deve ser lido assim:
+
+- `shipyard` como Estaleiro
+- `state` como memória canônica
+- `Ruptur Cloud Lab / GCP` como runtime atual
+- `KVM2` apenas como histórico de uma fase anterior

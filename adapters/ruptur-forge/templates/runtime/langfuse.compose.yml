@@ -15,6 +15,8 @@ services:
       - 127.0.0.1:3030:3030
     env_file:
       - .env
+    networks:
+      - kvm2_default
 
   langfuse-web:
     image: docker.io/langfuse/langfuse:3
@@ -29,9 +31,17 @@ services:
       clickhouse:
         condition: service_healthy
     ports:
-      - "${LANGFUSE_WEB_PORT:-3000}:3000"
+      - 127.0.0.1:${LANGFUSE_WEB_PORT:-3000}:3000
     env_file:
       - .env
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.langfuse.rule=Host(`${LANGFUSE_PUBLIC_HOST:-langfuse.ruptur.cloud}`)
+      - traefik.http.routers.langfuse.entrypoints=websecure
+      - traefik.http.routers.langfuse.tls.certresolver=le
+      - traefik.http.services.langfuse.loadbalancer.server.port=3000
+    networks:
+      - kvm2_default
 
   clickhouse:
     image: docker.io/clickhouse/clickhouse-server
@@ -51,6 +61,8 @@ services:
       timeout: 5s
       retries: 10
       start_period: 1s
+    networks:
+      - kvm2_default
 
   minio:
     image: cgr.dev/chainguard/minio
@@ -70,6 +82,8 @@ services:
       timeout: 5s
       retries: 5
       start_period: 1s
+    networks:
+      - kvm2_default
 
   redis:
     image: docker.io/redis:7
@@ -86,6 +100,8 @@ services:
       interval: 3s
       timeout: 10s
       retries: 10
+    networks:
+      - kvm2_default
 
   postgres:
     image: docker.io/postgres:17
@@ -101,6 +117,8 @@ services:
       - 127.0.0.1:5432:5432
     volumes:
       - langfuse_postgres_data:/var/lib/postgresql/data
+    networks:
+      - kvm2_default
 
 volumes:
   langfuse_postgres_data:
@@ -108,3 +126,8 @@ volumes:
   langfuse_clickhouse_logs:
   langfuse_minio_data:
   langfuse_redis_data:
+
+networks:
+  kvm2_default:
+    external: true
+    name: kvm2_default

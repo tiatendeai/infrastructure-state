@@ -1,0 +1,55 @@
+{
+  "task_id": "INFRA-018-agent-hub-auto-account-rotation",
+  "type": "change",
+  "mode": "FULL",
+  "status": "running",
+  "linear_issue_id": "INFRA-018",
+  "linear_project": "Agent Hub",
+  "linear_team_key": "INF",
+  "service_target": "agent-hub",
+  "context_refs": [
+    "debito-tecnico.md",
+    "state/AGENTS.md",
+    "docs/linear-native-integration.md",
+    "docs/agent-hub-auto-rotation-plan.md",
+    "state/registry/p0-token-governance.yaml",
+    "tasks/INFRA-028_tokens_p0_sessao_login_seguranca_observabilidade.task.json"
+  ],
+  "infra_refs": [
+    "../saas/modules/warmup-core/server.mjs",
+    "../saas/web/dashboard-dist/login.html",
+    "../saas/web/dashboard-dist/app.html",
+    "/opt/ruptur/jarvis-v1/apps/jarvis/hitl-panel/app/api/services/route.ts",
+    "/opt/ruptur/jarvis-v1/apps/jarvis/hitl-panel/app/services/page.tsx",
+    "/var/lib/paperclip/.codex/auth.json",
+    "/var/lib/paperclip/service-account-state.json"
+  ],
+  "expected_output": [
+    "docs/agent-hub-auto-rotation-plan.md",
+    "../saas/modules/warmup-core/server.mjs",
+    "../saas/web/dashboard-dist/login.html",
+    "Agent Hub separa authState, quotaState e serviceReady",
+    "logout/login/status rodam como usuário paperclip no host",
+    "rotação acusa segredo ausente quando conta reserva não está provisionada"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Implementar rotação automática de contas no Agent Hub como P0 da fase seguinte: usar State como verdade, Infisical como cofre, host/Paperclip como runtime, com logout/login automático, cooldown, fallback e pausa quando o pool acabar."
+  },
+  "output": {
+    "updated_at": "2026-04-22T10:48:00-03:00",
+    "status": "parcial aplicado no host",
+    "diagnosis": "UI antiga consultava Codex fora do runtime paperclip e confundia quota_exceeded com not logged in.",
+    "applied": [
+      "/api/services agora usa sudo -n -u paperclip com CODEX_HOME=/var/lib/paperclip/.codex",
+      "/services exibe Auth, Quota e Service-ready separadamente",
+      "agentes codex_local receberam --skip-git-repo-check"
+    ],
+    "remaining": [
+      "provisionar OPENAI_API_KEY_2/3 no cofre/host para rotação real",
+      "registrar auditoria durável de login/logout/rotação"
+    ],
+    "persisted_source": "Persistido também em /Users/diego/dev/ruptur-cloud/ruptur-lab-main/apps/jarvis/hitl-panel em 2026-04-22; build local validado."
+  }
+}

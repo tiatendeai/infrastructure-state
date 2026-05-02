@@ -2,9 +2,9 @@
 
 ## Papel do Linear nesta arquitetura
 
-O Linear é a camada de **governança operacional** do `infrastructure-state`.
+O Linear é a camada de **governança operacional** do `shipyard`.
 
-O `infrastructure-state` continua sendo a camada de:
+O `shipyard` continua sendo a camada de:
 
 - execução local
 - estado canônico

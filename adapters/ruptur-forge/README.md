@@ -14,6 +14,9 @@ Serviços com instalador operacional:
 - Redis
 - n8n
 - Langfuse
+- Infisical
+- Temporal
+- Uptime Kuma
 
 ## Comandos
 
@@ -26,4 +29,7 @@ bash adapters/ruptur-forge/bin/ruptur-forge profile plan kvm2-core --format json
 bash adapters/ruptur-forge/installers/install_redis.sh
 bash adapters/ruptur-forge/installers/install_n8n.sh
 bash adapters/ruptur-forge/installers/install_langfuse.sh
+bash adapters/ruptur-forge/installers/install_infisical.sh
+bash adapters/ruptur-forge/installers/install_temporal.sh
+bash adapters/ruptur-forge/installers/install_uptime_kuma.sh
 ```

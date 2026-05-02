@@ -6,7 +6,13 @@ from typing import Any
 import json
 import os
 
-from adapters.linear.client import LinearClient, LinearConfig, LinearConfigError, parse_bool
+from adapters.linear.client import (
+    LinearAuthenticationError,
+    LinearClient,
+    LinearConfig,
+    LinearConfigError,
+    parse_bool,
+)
 from adapters.linear.issues import add_comment, update_issue_status
 from adapters.linear.registry import (
     DEFAULT_MAPPING_PATH,
@@ -76,6 +82,8 @@ class LinearRuntimePublishResult:
     comment: dict[str, Any] | None = None
     comment_preview: str | None = None
     skipped_reason: str | None = None
+    message: str | None = None
+    auth_state: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         payload = {
@@ -90,8 +98,28 @@ class LinearRuntimePublishResult:
             "comment": self.comment,
             "comment_preview": self.comment_preview,
             "skipped_reason": self.skipped_reason,
+            "message": self.message,
+            "auth_state": self.auth_state,
         }
         return {key: value for key, value in payload.items() if value not in (None, {}, [])}
+
+
+def probe_auth_state(config: LinearConfig) -> dict[str, Any]:
+    """Descobre se existe uma credencial ativa sem disparar a sync remota."""
+    client = LinearClient(config)
+    try:
+        mode, _ = client._resolve_authentication()  # noqa: SLF001 - uso interno intencional para triagem
+    except LinearAuthenticationError as exc:
+        return {
+            "available": False,
+            "reason": str(exc),
+            "config": config.auth_summary(),
+        }
+    return {
+        "available": True,
+        "active_mode": mode,
+        "config": config.auth_summary(),
+    }
 
 
 def publish_task_runtime_update(
@@ -116,6 +144,22 @@ def publish_task_runtime_update(
     if not issue_identifier:
         raise LinearConfigError("Mapping encontrado, mas sem linear_issue_identifier")
 
+    config = LinearConfig.from_env(ROOT)
+    auth_state = probe_auth_state(config)
+    if not dry_run and not auth_state.get("available", False):
+        message = auth_state.get("reason") or "Nenhuma credencial ativa do Linear encontrada."
+        return LinearRuntimePublishResult(
+            status="skipped",
+            event=event,
+            issue_identifier=issue_identifier,
+            issue_uuid=mapping.linear_issue_uuid or None,
+            dry_run=False,
+            mapping=mapping.to_dict(),
+            skipped_reason="linear_auth_unavailable",
+            message=str(message),
+            auth_state=auth_state,
+        ).to_dict()
+
     comment_preview = build_runtime_comment(
         task=task,
         task_source=task_source,
@@ -138,13 +182,14 @@ def publish_task_runtime_update(
         mapping=mapping.to_dict(),
         target_status_name=resolve_status_name(runtime_config, event),
         comment_preview=comment_preview,
+        auth_state=auth_state,
     )
 
     if dry_run:
         result.status = "ok"
         return result.to_dict()
 
-    client = LinearClient(LinearConfig.from_env(ROOT))
+    client = LinearClient(config)
 
     if should_update_status(runtime_config, event):
         target_status = find_status_by_name(client, registry.meta.team_id or registry.meta.team_key, result.target_status_name or "")

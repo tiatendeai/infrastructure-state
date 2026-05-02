@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/diego/dev/J.A.R.V.I.S./.venv-ansible"
+set -gx VIRTUAL_ENV "/Users/diego/dev/ruptur-cloud/ruptur-main/shipyard/.venv-ansible"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

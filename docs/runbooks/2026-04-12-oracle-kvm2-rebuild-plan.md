@@ -1,5 +1,7 @@
 # Runbook — Oracle + KVM2 Rebuild Plan
 
+> **LEITURA ATUAL:** este runbook é **histórico**. O alvo operacional atual é o **Ruptur Cloud Lab / GCP** sob o **shipyard**. KVM2 e Oracle aqui são contexto legado.
+
 Data: 2026-04-12
 
 ## Objetivo
@@ -15,7 +17,7 @@ Concluir a preservação do estado atual, consolidar o bruto na `oracle-test` e 
 - nada destrutivo antes de preservação validada
 - Git guarda trilha e automação
 - Oracle guarda bruto temporário
-- `infrastructure-state` é a casa canônica da automação
+- `shipyard` é a casa canônica da automação
 - `J.A.R.V.I.S.` é o maestro
 
 ## Estado já preservado
@@ -69,7 +71,7 @@ Em consolidação:
 
 ### Implicação operacional
 
-A KVM2 pode ser abatida mais cedo se aceitarmos uma das opções abaixo para `n8n.ruptur.cloud`:
+Na época deste plano, a KVM2 podia ser abatida mais cedo se aceitássemos uma das opções abaixo para `n8n.ruptur.cloud`:
 
 1. janela curta de indisponibilidade
 2. migração do n8n para outro host antes do corte
@@ -88,7 +90,17 @@ Para o restante do tráfego Ruptur, a oracle-prod já consegue atuar como retagu
   - `kvm2_baileys_data_final`
   - `jarvis_data_final`
 
-Resultado: a KVM2 está operacionalmente abatida e pronta para a fase de limpeza/rebuild, sem dependência de manter os serviços atuais ligados.
+Resultado histórico: a KVM2 ficou operacionalmente abatida e pronta para a fase de limpeza/rebuild, sem dependência de manter os serviços atuais ligados.
+
+## Leitura canônica atual
+
+Hoje esse plano serve apenas como referência histórica. O centro atual é:
+
+- `shipyard` como Estaleiro
+- `state` como memória canônica
+- `Ruptur Cloud Lab / GCP` como runtime atual
+- `Infisical` como cofre
+- `Terraform` e `Ansible` como ferramentas-base
 
 ## Gate de destruição
 

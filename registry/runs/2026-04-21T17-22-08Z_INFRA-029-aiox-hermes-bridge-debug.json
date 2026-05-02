@@ -1,0 +1,114 @@
+{
+  "task": {
+    "task_id": "INFRA-029-aiox-hermes-bridge-debug",
+    "type": "change",
+    "mode": "FULL",
+    "status": "pending",
+    "linear_issue_id": "INFRA-029",
+    "linear_project": "Bootstrap IaC",
+    "linear_team_key": "INF",
+    "service_target": "aiox-bridge",
+    "context_refs": [
+      "debito-tecnico.md",
+      "state/AGENTS.md",
+      "state/runtime/hitl-board.json",
+      "registry/cloudflare-dns-targets.yaml",
+      "adapters/provisioning/ansible/playbooks/aiox_gcp.yml",
+      "adapters/provisioning/ansible/roles/aiox/templates/server.mjs.j2",
+      "adapters/provisioning/ansible/roles/aiox/templates/docker-compose.aiox.yml.j2"
+    ],
+    "infra_refs": [
+      "adapters/provisioning/ansible/playbooks/aiox_gcp.yml",
+      "adapters/provisioning/ansible/roles/aiox/templates/server.mjs.j2",
+      "adapters/provisioning/ansible/roles/aiox/templates/docker-compose.aiox.yml.j2",
+      "registry/cloudflare-dns-targets.yaml",
+      "kernel/state.json"
+    ],
+    "expected_output": [
+      "aiox.ruptur.cloud responde sem erro de borda",
+      "Hermes/Ollama responde ao teste do bridge",
+      "doctor do AIOX fecha sem falha ou deixa causa-raiz explícita",
+      "configuração de host-gateway, TLS ou endpoint fica consolidada"
+    ],
+    "approval_required": true,
+    "execution_policy": "human_in_the_loop",
+    "input": {
+      "message": "Debugar a ponte do AIOX com o Hermes/Ollama na mesma VM: validar se host.docker.internal precisa virar host-gateway, confirmar o endpoint OpenAI-compatible correto, estabilizar o aiox-core doctor e fechar a borda HTTPS do aiox.ruptur.cloud com causa-raiz ou correção aplicada."
+    },
+    "output": {}
+  },
+  "context": null,
+  "execution": {
+    "mode": "FULL",
+    "status": "done",
+    "source": "tasks/INFRA-029_aiox_hermes_bridge_debug.task.json",
+    "recorded_at": "2026-04-21T17:22:08Z",
+    "output": {
+      "message": "Change task verificada localmente a partir dos artefatos já materializados no repositório.",
+      "mode": "FULL",
+      "executed_at": "2026-04-21T17:22:08Z",
+      "verification_status": "verificada_com_ressalvas",
+      "verification": {
+        "expected_output": {
+          "present": [],
+          "missing": [
+            "aiox.ruptur.cloud responde sem erro de borda",
+            "Hermes/Ollama responde ao teste do bridge",
+            "doctor do AIOX fecha sem falha ou deixa causa-raiz explícita",
+            "configuração de host-gateway, TLS ou endpoint fica consolidada"
+          ],
+          "present_count": 0,
+          "missing_count": 4
+        },
+        "context_refs": {
+          "present": [
+            "debito-tecnico.md",
+            "state/runtime/hitl-board.json",
+            "registry/cloudflare-dns-targets.yaml",
+            "adapters/provisioning/ansible/playbooks/aiox_gcp.yml",
+            "adapters/provisioning/ansible/roles/aiox/templates/server.mjs.j2",
+            "adapters/provisioning/ansible/roles/aiox/templates/docker-compose.aiox.yml.j2"
+          ],
+          "missing": [
+            "state/AGENTS.md"
+          ],
+          "present_count": 6,
+          "missing_count": 1
+        },
+        "infra_refs": {
+          "present": [
+            "adapters/provisioning/ansible/playbooks/aiox_gcp.yml",
+            "adapters/provisioning/ansible/roles/aiox/templates/server.mjs.j2",
+            "adapters/provisioning/ansible/roles/aiox/templates/docker-compose.aiox.yml.j2",
+            "registry/cloudflare-dns-targets.yaml",
+            "kernel/state.json"
+          ],
+          "missing": [],
+          "present_count": 5,
+          "missing_count": 0
+        }
+      }
+    }
+  },
+  "memory_sync": {
+    "status": "error",
+    "saved": [
+      {
+        "backend": "redis",
+        "status": "error",
+        "message": "Redis não configurado. Defina REDIS_URL."
+      },
+      {
+        "backend": "supabase",
+        "status": "error",
+        "message": "Supabase não configurado. Defina SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY."
+      }
+    ]
+  },
+  "linear_sync": {
+    "status": "skipped",
+    "event": "done",
+    "dry_run": false,
+    "skipped_reason": "runtime_sync_disabled"
+  }
+}

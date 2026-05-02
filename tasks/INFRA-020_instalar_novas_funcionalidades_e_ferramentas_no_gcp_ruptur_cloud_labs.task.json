@@ -1,0 +1,43 @@
+{
+  "task_id": "INFRA-020-instalar-novas-funcionalidades-e-ferramentas-no-gcp-ruptur-cloud-labs",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_project": "Ruptur Cloud Lab",
+  "linear_team_key": "INF",
+  "service_target": "gcp-ruptur-cloud-labs",
+  "context_refs": [
+    "state/AGENTS.md",
+    "debito-tecnico.md",
+    "docs/automation-flow.md",
+    "docs/linear-runtime-integration.md",
+    "adapters/provisioning/ansible/playbooks/",
+    "adapters/provisioning/ansible/roles/"
+  ],
+  "infra_refs": [
+    "../state/infrastructure/",
+    "../state/registry/",
+    "../state/knowledge/",
+    "adapters/provisioning/ansible/",
+    "scripts/ruptur.sh"
+  ],
+  "expected_output": [
+    "novas funcionalidades e ferramentas instaladas no GCP Ruptur Cloud Labs",
+    "infra e operacionalização registradas no State",
+    "playbooks/roles Ansible alinhados ao novo escopo",
+    "dívida técnica separada do que é entrega ativa"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Instalar novas funcionalidades e ferramentas no GCP Ruptur Cloud Labs, mantendo o State como camada de cognição e registro, e o Shipyard como executor operacional via Ansible/Terraform quando aplicável.",
+    "today_priorities": [
+      "mapear o que precisa ser instalado no GCP Ruptur Cloud Labs",
+      "separar o que é nova funcionalidade do que é manutenção",
+      "definir se a entrega é via Terraform, Ansible ou ambos",
+      "registrar impactos e dependências no State",
+      "deixar claro o que é débito técnico"
+    ]
+  },
+  "output": {}
+}

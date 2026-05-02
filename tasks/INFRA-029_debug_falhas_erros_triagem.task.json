@@ -1,0 +1,37 @@
+{
+  "task_id": "INFRA-029-debug-falhas-erros-triagem",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-029",
+  "linear_project": "Sprint Final",
+  "linear_team_key": "INF",
+  "service_target": "shipyard-runtime",
+  "context_refs": [
+    "debito-tecnico.md",
+    "state/AGENTS.md",
+    "state/runtime/hitl-board.json",
+    "logs/execution.log",
+    "registry/runs/",
+    "kernel/state.json"
+  ],
+  "infra_refs": [
+    "scripts/build_hitl_board.py",
+    "scripts/run_task.py",
+    "scripts/build_context_packet.py",
+    "adapters/linear/",
+    "adapters/memory/"
+  ],
+  "expected_output": [
+    "triagem dos erros P0/P1 com causa raiz e impacto",
+    "correção do schema do context packet e campos incompatíveis",
+    "tratamento da falta de credenciais Linear e outros drifts de sync",
+    "registro explícito no HITL com causa, resolução e follow-up"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Executar a triagem de debug dos erros e falhas já evidentes no estaleiro: schema do context packet com propriedade não permitida, falha de credencial Linear, falha de TLS/SSL em Supabase e qualquer drift de memory sync ou runtime. Esta task deve gerar análise de causa raiz, correção e rastreio no HITL."
+  },
+  "output": {}
+}

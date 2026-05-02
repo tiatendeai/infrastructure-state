@@ -1,6 +1,6 @@
 # Ruptur Farm Framework
 
-> Instância ativa: `infrastructure-state` — diretório operacional de infraestrutura e IaC.
+> Instância ativa: `shipyard` — o Estaleiro canônico de infraestrutura, IaC, agentes e execução operacional.
 
 Framework operacional para execução de tarefas por agentes e automações com foco em simplicidade, portabilidade e estado determinístico.
 
@@ -8,7 +8,7 @@ Este README também funciona como **bússola operacional** para qualquer diretó
 
 ## Missão do Diretório
 
-Este diretório existe para concentrar o estado operacional de infraestrutura e IaC.
+Este diretório existe para concentrar o estado operacional de infraestrutura, IaC, automação e governança viva do ecossistema Ruptur.
 
 Ele deve servir como base para:
 
@@ -16,6 +16,7 @@ Ele deve servir como base para:
 - validação e auditoria de ambientes
 - registro de execuções, decisões e trilhas operacionais
 - operação previsível por humanos e agentes
+- sincronização da fila atual com o momento operacional
 
 ## Escopo de IaC
 
@@ -41,6 +42,25 @@ O Ruptur Farm Framework foi desenhado para inteligência modular e efêmera:
 - **portátil**: roda sem dependência de ferramentas proprietárias
 - **determinístico**: estado, histórico e logs ficam em arquivos previsíveis
 - **automatizável**: shell + arquivos + contratos simples para uso por devs e agentes
+
+## Mapa canônico de repositórios
+
+- `state`: memória canônica, governança, identidade, mapas e fonte viva de verdade
+- `shipyard`: execução operacional, tasks, runners, adapters e runtime do estaleiro
+- `ruptur-cloud`: guarda o ecossistema maior e os trabalhos satélites
+- `vps-oracle` / `infrastructure-state`: nomes legados, úteis apenas para rastreabilidade histórica
+
+## Vocabulário atual
+
+- `Infra State` = `shipyard`
+- `Estaleiro` = `shipyard`
+- `State` = memória canônica ativa e fonte de governança
+- `GCP` / `Ruptur Cloud Lab` = alvo operacional atual de runtime e provisionamento
+- `Infisical` = cofre canônico de segredos e credenciais
+- `Terraform` = IaC declarativa principal
+- `Ansible` = configuração e sustentação de hosts
+- `Obsidian` + `Excalidraw` = mapas e navegação visual
+- `Rusty RDK` = camada Rust de integração/SDK mencionada como base de evolução de runtime
 
 ## Estrutura
 
@@ -116,6 +136,25 @@ A escolha do modo pode ser:
 ```bash
 bash scripts/ruptur.sh init
 ```
+
+## Bootstrap canônico
+
+Antes de qualquer ação que envolva agentes, contexto ou execução, leia:
+
+- `contexts/agent_bootstrap.md`
+- `intelligence-core/alpha.md`
+- `intelligence-core/omega.md`
+- `DNA_DE_INTELIGENCIA.md`
+- `../state/AGENTS.md`
+
+Esses arquivos são a base mínima para evitar agente cego, conflito de escopo e retrabalho.
+
+## Situação operacional atual
+
+- o `State` está ativo
+- o `shipyard` é o Estaleiro em uso
+- a fila P0 atual cobre tokens/contexto, sessão/login, triagem de erros, Linear auth e Supabase TLS/SSL
+- os catálogos e objetivos devem ser lidos sempre pelo nome novo, sem assumir KVM2 como alvo operacional
 
 ## Como executar a primeira task
 

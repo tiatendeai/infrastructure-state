@@ -17,8 +17,8 @@
 
 ## Uso neste repositório
 
-Este repositório (infrastructure-state) deve considerar o Linear novamente como camada operacional disponível.
+Este repositório (shipyard) deve considerar o Linear novamente como camada operacional disponível.
 
 ## Referência canônica
 
-- `/Users/diego/dev/infrastructure-state/docs/LINEAR-CODEX-AUTH-RECOVERY-2026-04-08.md`
+- `/Users/diego/dev/infrastructure-state/docs/LINEAR-CODEX-AUTH-RECOVERY-2026-04-08.md` (legado histórico)

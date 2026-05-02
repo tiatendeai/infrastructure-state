@@ -1,0 +1,25 @@
+version: 1
+scope: maintenance
+owner: diego
+managed_by: shipyard
+created_at: "2026-04-21T00:00:00-03:00"
+source_task: "tasks/INFRA-031_legacy_cleanup_kvm2_hostinger_oracle_refs.task.json"
+summary: "Limpeza de legado e normalização de referências antigas para o alvo GCP atual do Ruptur Cloud Lab."
+items:
+  - id: 1
+    title: "Classificar referências antigas como legado ou canônicas"
+    state_ref: "tasks/INFRA-031_legacy_cleanup_kvm2_hostinger_oracle_refs.task.json"
+    status: in_progress
+  - id: 2
+    title: "Reescrever docs e playbooks para o alvo GCP/Ruptur Cloud Lab"
+    state_ref: "tasks/INFRA-031_legacy_cleanup_kvm2_hostinger_oracle_refs.task.json"
+    status: pending
+  - id: 3
+    title: "Reduzir ruído operacional e registrar a limpeza no State"
+    state_ref: "tasks/INFRA-031_legacy_cleanup_kvm2_hostinger_oracle_refs.task.json"
+    status: pending
+notes:
+  - "Manter histórico preservado, mas remover ambiguidade operacional do presente."
+  - "O legado continua documentado apenas onde for necessário para rastreabilidade."
+  - "Primeira limpeza aplicada em registry/services.yaml e group_vars/all.yml."
+  - "KVM2 e Hostinger não são mais o alvo operacional; a referência viva agora é GCP / Ruptur Cloud Lab."

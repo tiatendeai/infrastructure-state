@@ -1,0 +1,49 @@
+{
+  "task_id": "INFRA-029-token-consumption-context-budget-rtk-ansible",
+  "type": "change",
+  "mode": "FULL",
+  "status": "running",
+  "linear_issue_id": "INFRA-029",
+  "linear_project": "Core Infrastructure",
+  "linear_team_key": "INF",
+  "service_target": "shipyard-token-governance",
+  "context_refs": [
+    "debito-tecnico.md",
+    "debitos-tecnicos.md",
+    "DNA_DE_INTELIGENCIA.md",
+    "state/AGENTS.md",
+    "tasks/INFRA-019_rtk_shipyard_state_governance.task.json",
+    "tasks/INFRA-021_jarvis_p0_ansible_terraform_iac_dns.task.json",
+    "tasks/INFRA-028_tokens_p0_sessao_login_seguranca_observabilidade.task.json"
+  ],
+  "infra_refs": [
+    "adapters/provisioning/ansible/",
+    "adapters/provisioning/ansible/roles/rtk/",
+    "adapters/provisioning/ansible/inventories/production/",
+    "scripts/ruptur.sh",
+    "state/registry/",
+    "state/runtime/"
+  ],
+  "expected_output": [
+    "budget de contexto e consumo de tokens por tarefa/agente",
+    "config RTK centralizada entre Mac local e VPS via Ansible",
+    "preflight mínimo antes de invocar o Paperclip/Codex",
+    "perfil operacional da IA explícito (residência, atuação, modelo, autonomia)",
+    "observabilidade de custo e loops de contexto registrada",
+    "backlog e dívida técnica atualizados no State/shipyard"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Iniciar a frente P0 de consumo de tokens e contexto: reduzir re-leitura de repositório, padronizar preflight com RTK, sincronizar config única com Ansible entre Mac local e VPS, declarar o perfil operacional da IA (local de residência, atuação, modelo e autonomia) e registrar tudo no State e na dívida técnica."
+  },
+  "output": {
+    "updated_at": "2026-04-22T10:48:00-03:00",
+    "status": "continua running; P0 de login/status destravado como frente adjacente",
+    "evidence": [
+      "docs/agent-hub-auto-rotation-plan.md",
+      "state/registry/p0-token-governance.yaml"
+    ],
+    "note": "A correção do Codex evita reexecuções inúteis causadas por falso not_logged_in e por cwd não confiável."
+  }
+}

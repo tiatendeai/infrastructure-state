@@ -1,0 +1,129 @@
+{
+  "project": "infrastructure-state",
+  "branch": "master",
+  "generated_at": "2026-04-21T21:19:47Z",
+  "memory_backend": "mock",
+  "context_budget": {
+    "path": "",
+    "max_files": 20,
+    "max_chars": 8000,
+    "prefer_diffs": true,
+    "prefer_whitelist": true,
+    "heartbeat_seconds_min": 300,
+    "allow_repo_rediscovery": false
+  },
+  "linear_issue": {
+    "identifier": "INFRA-029",
+    "title": "Consumo de tokens e contexto"
+  },
+  "task": {
+    "task_id": "INFRA-029-token-consumption-context-budget-rtk-ansible",
+    "mode": "FULL",
+    "source": "tasks/INFRA-029_token_consumption_context_budget_rtk_ansible.task.json"
+  },
+  "objective": "Reduzir re-leitura de repositório e padronizar preflight",
+  "latest_actions": [
+    "contexto canônico inicializado a partir de Alpha, Omega, State e Shipyard",
+    "base canônica carregada: shipyard/contexts/agent_bootstrap.md",
+    "base canônica carregada: shipyard/intelligence-core/alpha.md",
+    "base canônica carregada: shipyard/intelligence-core/omega.md",
+    "base canônica carregada: state/AGENTS.md",
+    "base canônica carregada: state/memory/jarvis.memory.md",
+    "base canônica carregada: state/registry/entities.yaml",
+    "base canônica carregada: state/registry/agent_multiverse.yaml",
+    "base canônica carregada: shipyard/DNA_DE_INTELIGENCIA.md",
+    "base canônica carregada: shipyard/AGENTS.md"
+  ],
+  "canonical_facts": [
+    "Bootstrap canônico curto: ordem obrigatória de leitura, alertas vermelhos e frentes críticas.",
+    "Alpha: gênese e identidade raiz; state-first; aprendizados duráveis sobem ao state_outbox.",
+    "Omega: lifecycle de sessões, replay/recovery e fechamento obrigatório.",
+    "State AGENTS: selo obrigatório, hierarquia Alpha→State→Omega e consulta obrigatória a entities/agent_multiverse.",
+    "Memória curada: invariantes estáveis, continuidade, sessões pertencem ao Omega e dívidas abertas.",
+    "Entities: Jarvis/ops/vcfo/vcvo/vceo/iazinha; manifestação canônica e governança do control plane.",
+    "Multiverse: sessão ativa, engaged/hot_standby, linhagem e source refs.",
+    "DNA de inteligência: STATE como cérebro de contexto; auditoria proativa; RTK; graphify; anotações viram protocolos ativos.",
+    "Shipyard AGENTS: o estaleiro é a execução viva e lê o State antes de agir."
+  ],
+  "retrieved_memories": [
+    {
+      "memory_id": "mem-001",
+      "layer": "canonical_memory",
+      "title": "Papel do infrastructure-state",
+      "summary": "O infrastructure-state é a fonte canônica de execução, evidência e estado técnico.",
+      "source": "README.md",
+      "metadata": {
+        "scope": "governance"
+      }
+    },
+    {
+      "memory_id": "mem-002",
+      "layer": "canonical_memory",
+      "title": "Papel do Linear",
+      "summary": "O Linear é a fonte de backlog, governança, cadência e dependências; runtime bruto não sobe para o Linear.",
+      "source": "registry/linear-mapping.yaml",
+      "metadata": {
+        "scope": "governance"
+      }
+    },
+    {
+      "memory_id": "mem-003",
+      "layer": "summary",
+      "title": "Inventory do KVM2",
+      "summary": "O baseline do KVM2 já foi capturado e materializado localmente antes da camada de memória.",
+      "source": "registry/services.yaml",
+      "metadata": {
+        "scope": "inventory"
+      }
+    }
+  ],
+  "declared_context_refs": [
+    "debito-tecnico.md",
+    "adapters/provisioning/ansible/roles/rtk/defaults/main.yml"
+  ],
+  "whitelisted_context_refs": [
+    "debito-tecnico.md",
+    "adapters/provisioning/ansible/roles/rtk/defaults/main.yml"
+  ],
+  "rejected_context_refs": [],
+  "preflight": {
+    "budget": {
+      "max_files": 20,
+      "max_chars": 8000,
+      "prefer_diffs": true,
+      "prefer_whitelist": true,
+      "heartbeat_seconds_min": 300,
+      "allow_repo_rediscovery": false
+    },
+    "declared_context_refs": [
+      "debito-tecnico.md",
+      "adapters/provisioning/ansible/roles/rtk/defaults/main.yml"
+    ],
+    "whitelisted_context_refs": [
+      "debito-tecnico.md",
+      "adapters/provisioning/ansible/roles/rtk/defaults/main.yml"
+    ],
+    "rejected_context_refs": [],
+    "context_ref_count": 2,
+    "has_repo_rediscovery": false,
+    "enforced": {
+      "max_files": 20,
+      "prefer_whitelist": true,
+      "allow_repo_rediscovery": false
+    },
+    "character_budget": {
+      "max_chars": 8000,
+      "estimated_chars": 2002,
+      "trimmed_memories": 0
+    },
+    "effective_memory_limit": 3
+  },
+  "policy_refs": [
+    "docs/memory-policy.md",
+    "intelligence-core/alpha.md",
+    "intelligence-core/omega.md",
+    "DNA_DE_INTELIGENCIA.md",
+    "../state/AGENTS.md",
+    "../state/memory/jarvis.memory.md"
+  ]
+}

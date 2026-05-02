@@ -18,6 +18,9 @@ SNAPSHOT_DIR = ROOT / "state" / "snapshots"
 AGENTS_RUNTIME_DIR = ROOT / "state" / "runtime"
 CONTEXT_PACKET_SCHEMA = "contracts/context-packet.schema.json"
 DEFAULT_CONTEXT_PACKET = "context-packet.json"
+DEFAULT_PROMPT_ENVELOPE = "prompt-envelope.json"
+HITL_BOARD_SCRIPT = "scripts/build_hitl_board.py"
+HITL_BOARD_PATH = AGENTS_RUNTIME_DIR / "hitl-board.json"
 
 DEFAULT_STATE = {
     "status": "idle",
@@ -231,6 +234,38 @@ def record_runtime(task_id: str, payload: dict) -> str:
     return str(runtime_file.relative_to(ROOT))
 
 
+def publish_hitl_board() -> dict:
+    command = [
+        sys.executable,
+        str((ROOT / HITL_BOARD_SCRIPT).resolve()),
+        "--output",
+        str(HITL_BOARD_PATH.relative_to(ROOT)),
+    ]
+    result = subprocess.run(command, capture_output=True, text=True, cwd=ROOT)
+    if result.returncode != 0:
+        detail = result.stderr.strip() or result.stdout.strip() or f"exit_code={result.returncode}"
+        return {"status": "error", "message": detail}
+    try:
+        board = json.loads(result.stdout.strip() or "{}")
+    except json.JSONDecodeError:
+        board = {}
+
+    mirror_path = ROOT.parent / "saas" / "web" / "dashboard-dist" / "hitl-board.json"
+    mirror_status = None
+    try:
+        if mirror_path.parent.exists():
+            mirror_path.write_text(json.dumps(board, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            mirror_status = str(mirror_path)
+    except Exception as exc:
+        mirror_status = f"error: {exc}"
+    return {
+        "status": "ok",
+        "board_path": str(HITL_BOARD_PATH.relative_to(ROOT)),
+        "mirror_path": mirror_status,
+        "board": board,
+    }
+
+
 def write_registry_record(record: dict, task_id: str) -> str:
     safe_task_id = task_id.replace("/", "-").replace(" ", "-")
     filename = f"{now_iso().replace(':', '-')}_{safe_task_id}.json"
@@ -311,10 +346,26 @@ def build_history_entry(task: dict, mode: str, status: str, registry_file: str, 
             payload["resolved_linear_issue_identifier"] = context_info["issue_identifier"]
         if context_info.get("context_packet_path"):
             payload["context_packet"] = context_info["context_packet_path"]
+        if context_info.get("prompt_envelope_path"):
+            payload["prompt_envelope"] = context_info["prompt_envelope_path"]
+        if context_info.get("published_prompt_envelope_path"):
+            payload["published_prompt_envelope"] = context_info["published_prompt_envelope_path"]
         if context_info.get("memory_backend"):
             payload["memory_backend"] = context_info["memory_backend"]
         if context_info.get("retrieved_memory_count") is not None:
             payload["retrieved_memory_count"] = context_info["retrieved_memory_count"]
+        if context_info.get("prompt_envelope_path"):
+            payload["prompt_envelope"] = context_info["prompt_envelope_path"]
+        if context_info.get("published_prompt_envelope_path"):
+            payload["published_prompt_envelope"] = context_info["published_prompt_envelope_path"]
+        if context_info.get("context_budget"):
+            payload["context_budget"] = context_info["context_budget"]
+        if context_info.get("declared_context_refs") is not None:
+            payload["declared_context_refs"] = context_info["declared_context_refs"]
+        if context_info.get("whitelisted_context_refs") is not None:
+            payload["whitelisted_context_refs"] = context_info["whitelisted_context_refs"]
+        if context_info.get("rejected_context_refs") is not None:
+            payload["rejected_context_refs"] = context_info["rejected_context_refs"]
     return payload
 
 
@@ -371,23 +422,43 @@ def task_objective(task: dict) -> str:
     return str(task.get("task_id", "Executar task local")).strip()
 
 
+def task_context_refs(task: dict) -> list[str]:
+    refs: list[str] = []
+    for field_name in ("context_refs", "infra_refs"):
+        value = task.get(field_name, [])
+        if isinstance(value, list):
+            refs.extend(item for item in value if isinstance(item, str))
+
+    normalized: list[str] = []
+    seen: set[str] = set()
+    for ref in refs:
+        cleaned = ref.strip()
+        if not cleaned or cleaned in seen:
+            continue
+        seen.add(cleaned)
+        normalized.append(cleaned)
+    return normalized
+
+
 def try_resolve_linear_issue(task: dict, task_source: str) -> dict:
+    explicit_issue_identifier = (
+        str(task.get("linear_issue_identifier", "")).strip()
+        or str(task.get("linear_issue_id", "")).strip()
+        or str(task.get("linear_issue_uuid", "")).strip()
+    )
     try:
         from adapters.linear.registry import load_linear_mapping_registry, resolve_issue_mapping
     except Exception:
-        return {}
-
-    try:
-        registry = load_linear_mapping_registry()
-        mapping = resolve_issue_mapping(registry=registry, task=task, task_source=task_source)
-    except Exception:
-        return {}
-
-    issue_identifier = (
-        mapping.linear_issue_identifier
-        or str(task.get("linear_issue_identifier", "")).strip()
-        or str(task.get("linear_issue_id", "")).strip()
-    )
+        mapping = None
+    else:
+        try:
+            registry = load_linear_mapping_registry()
+            mapping = resolve_issue_mapping(registry=registry, task=task, task_source=task_source)
+        except Exception:
+            mapping = None
+    issue_identifier = explicit_issue_identifier
+    if mapping is not None:
+        issue_identifier = mapping.linear_issue_identifier or issue_identifier
     issue_title = ""
     if issue_identifier:
         try:
@@ -404,7 +475,7 @@ def try_resolve_linear_issue(task: dict, task_source: str) -> dict:
         issue_title = task_objective(task)
 
     return {
-        "mapping": mapping.to_dict(),
+        "mapping": mapping.to_dict() if mapping is not None else {},
         "issue_identifier": issue_identifier,
         "issue_title": issue_title,
     }
@@ -441,6 +512,7 @@ def prepare_context_packet(task: dict, task_id: str, task_source: str, mode: str
         "--schema",
         CONTEXT_PACKET_SCHEMA,
         "--validate-schema",
+        "--strict",
         "--output",
         output_rel,
         "--latest-action",
@@ -452,6 +524,9 @@ def prepare_context_packet(task: dict, task_id: str, task_source: str, mode: str
         "--canonical-fact",
         "O Linear governa; o infrastructure-state registra a evidência técnica.",
     ]
+
+    for ref in task_context_refs(task):
+        command.extend(["--context-ref", ref])
 
     mapping = linear_context.get("mapping")
     if isinstance(mapping, dict):
@@ -495,7 +570,76 @@ def prepare_context_packet(task: dict, task_id: str, task_source: str, mode: str
         "mapping": mapping,
         "memory_backend": packet.get("memory_backend"),
         "retrieved_memory_count": len(packet.get("retrieved_memories", [])) if isinstance(packet.get("retrieved_memories"), list) else 0,
+        "context_budget": packet.get("context_budget"),
+        "declared_context_refs": packet.get("declared_context_refs", []),
+        "whitelisted_context_refs": packet.get("whitelisted_context_refs", []),
+        "rejected_context_refs": packet.get("rejected_context_refs", []),
+        "preflight": packet.get("preflight"),
+        "policy_refs": packet.get("policy_refs", []),
     }
+
+
+def build_prompt_envelope(task: dict, mode: str, task_source: str, context_info: dict) -> dict:
+    context_budget = context_info.get("context_budget") or {}
+    preflight = context_info.get("preflight") or {}
+    whitelisted_refs = context_info.get("whitelisted_context_refs", [])
+    rejected_refs = context_info.get("rejected_context_refs", [])
+    prompt = {
+        "purpose": "envelope canônico para consumidores de IA no Shipyard",
+        "mode": mode,
+        "task_id": task.get("task_id"),
+        "task_source": task_source,
+        "context_packet_path": context_info.get("context_packet_path"),
+        "strict": True,
+        "system_prompt": "\n".join(
+            [
+                "Você está operando dentro do Shipyard.",
+                "Use somente o context packet fornecido e os refs whitelistados.",
+                "Não redescubra o repositório inteiro.",
+                "Respeite o budget de contexto e o preflight estrito.",
+                "Se faltar informação, pare e peça reconciliação operacional.",
+            ]
+        ),
+        "developer_prompt": "\n".join(
+            [
+                "A resposta deve ser objetiva, canônica e alinhada ao State.",
+                "A lógica operacional deve preferir diffs, whitelists e mapas estáticos.",
+                f"Refs whitelistados: {len(whitelisted_refs)}.",
+                f"Refs rejeitados: {len(rejected_refs)}.",
+            ]
+        ),
+        "task_prompt": str(task.get("input", {}).get("message", "")).strip() or task_objective(task),
+        "context_budget": context_budget,
+        "preflight": preflight,
+        "whitelisted_context_refs": whitelisted_refs,
+        "rejected_context_refs": rejected_refs,
+        "policy_refs": context_info.get("policy_refs", []),
+    }
+    return prompt
+
+
+def publish_prompt_envelope(task_id: str, prompt_envelope: dict) -> str | None:
+    candidate_paths: list[Path] = []
+    explicit_publish_path = os.getenv("SHIPYARD_PROMPT_ENVELOPE_PUBLISH_PATH", "").strip()
+    if explicit_publish_path:
+        candidate_paths.append(Path(explicit_publish_path))
+
+    candidate_paths.extend(
+        [
+            AGENTS_RUNTIME_DIR / "aiox" / DEFAULT_PROMPT_ENVELOPE,
+            AGENTS_RUNTIME_DIR / task_id / DEFAULT_PROMPT_ENVELOPE,
+        ]
+    )
+
+    rendered = json.dumps(prompt_envelope, ensure_ascii=False, indent=2) + "\n"
+    for candidate in candidate_paths:
+        try:
+            candidate.parent.mkdir(parents=True, exist_ok=True)
+            candidate.write_text(rendered, encoding="utf-8")
+            return str(candidate.relative_to(ROOT)) if candidate.is_relative_to(ROOT) else str(candidate)
+        except Exception:
+            continue
+    return None
 
 
 def execute_command_task(task: dict) -> dict:
@@ -551,7 +695,11 @@ def update_registry_record(registry_file: str, patch: dict) -> None:
 
 def try_persist_runtime_memory(*, task: dict, task_source: str, mode: str, registry_file: str, output: dict | None = None, context_info: dict | None = None, status: str = "done", error_message: str | None = None) -> dict:
     try:
-        from adapters.memory.interface.memory import MemoryRecord
+        from adapters.memory.interface.memory import (
+            MemoryBackendActivationDisabled,
+            MemoryBackendNotConfigured,
+            MemoryRecord,
+        )
         from adapters.memory.long_term.supabase_client import SupabaseMemoryBackend
         from adapters.memory.short_term.redis_client import RedisMemoryBackend
     except Exception as exc:
@@ -585,81 +733,107 @@ def try_persist_runtime_memory(*, task: dict, task_source: str, mode: str, regis
 
     try:
         redis = RedisMemoryBackend()
-        summary_record = MemoryRecord(
-            memory_id=f"summary::{task_id}",
-            layer="summary",
-            title=f"Resumo operacional {task_id}",
-            summary=clean_summary,
-            source=task_source,
-            metadata={
-                "registry_record": registry_file,
-                "issue_identifier": issue_identifier,
-                "service_target": service_target,
-                "mode": mode,
-                "status": status,
-            },
-        )
-        redis.save(summary_record)
-        saved.append({"backend": "redis", "memory_id": summary_record.memory_id, "layer": summary_record.layer})
-
-        if packet_path:
-            context_record = MemoryRecord(
-                memory_id=f"context::{task_id}",
-                layer="context_packet",
-                title=f"Context packet {task_id}",
-                summary=f"Context packet real gerado para {task_id} em {packet_path}",
+    except MemoryBackendNotConfigured as exc:
+        saved.append({"backend": "redis", "status": "skipped", "message": str(exc)})
+    except MemoryBackendActivationDisabled as exc:
+        saved.append({"backend": "redis", "status": "skipped", "message": str(exc)})
+    except Exception as exc:
+        saved.append({"backend": "redis", "status": "error", "message": str(exc)})
+    else:
+        try:
+            summary_record = MemoryRecord(
+                memory_id=f"summary::{task_id}",
+                layer="summary",
+                title=f"Resumo operacional {task_id}",
+                summary=clean_summary,
                 source=task_source,
                 metadata={
                     "registry_record": registry_file,
-                    "context_packet_path": packet_path,
                     "issue_identifier": issue_identifier,
+                    "service_target": service_target,
+                    "mode": mode,
+                    "status": status,
                 },
             )
-            redis.save(context_record)
-            saved.append({"backend": "redis", "memory_id": context_record.memory_id, "layer": context_record.layer})
-    except Exception as exc:
-        saved.append({"backend": "redis", "status": "error", "message": str(exc)})
+            redis.save(summary_record)
+            saved.append({"backend": "redis", "memory_id": summary_record.memory_id, "layer": summary_record.layer})
+
+            if packet_path:
+                context_record = MemoryRecord(
+                    memory_id=f"context::{task_id}",
+                    layer="context_packet",
+                    title=f"Context packet {task_id}",
+                    summary=f"Context packet real gerado para {task_id} em {packet_path}",
+                    source=task_source,
+                    metadata={
+                        "registry_record": registry_file,
+                        "context_packet_path": packet_path,
+                        "issue_identifier": issue_identifier,
+                    },
+                )
+                redis.save(context_record)
+                saved.append({"backend": "redis", "memory_id": context_record.memory_id, "layer": context_record.layer})
+        except MemoryBackendNotConfigured as exc:
+            saved.append({"backend": "redis", "status": "skipped", "message": str(exc)})
+        except MemoryBackendActivationDisabled as exc:
+            saved.append({"backend": "redis", "status": "skipped", "message": str(exc)})
+        except Exception as exc:
+            saved.append({"backend": "redis", "status": "error", "message": str(exc)})
 
     try:
         supabase = SupabaseMemoryBackend()
-        canonical_summary = (
-            f"Capability validated: {service_target or task_id}. "
-            f"Binding issue-task: {issue_identifier or 'sem-issue'} <-> {task_id}. "
-            f"Registry: {registry_file}. "
-            f"Objective: {objective}."
-        )
-        if status == "error" and error_message:
-            canonical_summary = (
-                f"Execution error recorded for {task_id}. "
-                f"Registry: {registry_file}. "
-                f"Objective: {objective}. "
-                f"Error: {error_message}."
-            )
-        canonical_record = MemoryRecord(
-            memory_id=f"canonical::{task_id}",
-            layer="canonical_memory",
-            title=f"Capability {service_target or task_id}",
-            summary=canonical_summary,
-            source=task_source,
-            metadata={
-                "registry_record": registry_file,
-                "issue_identifier": issue_identifier,
-                "issue_title": issue_title,
-                "service_target": service_target,
-                "mode": mode,
-                "status": status,
-                "context_packet_path": packet_path,
-                "output_keys": sorted((output or {}).keys()) if isinstance(output, dict) else [],
-            },
-        )
-        supabase.save(canonical_record)
-        saved.append({"backend": "supabase", "memory_id": canonical_record.memory_id, "layer": canonical_record.layer})
+    except MemoryBackendNotConfigured as exc:
+        saved.append({"backend": "supabase", "status": "skipped", "message": str(exc)})
+    except MemoryBackendActivationDisabled as exc:
+        saved.append({"backend": "supabase", "status": "skipped", "message": str(exc)})
     except Exception as exc:
         saved.append({"backend": "supabase", "status": "error", "message": str(exc)})
+    else:
+        try:
+            canonical_summary = (
+                f"Capability validated: {service_target or task_id}. "
+                f"Binding issue-task: {issue_identifier or 'sem-issue'} <-> {task_id}. "
+                f"Registry: {registry_file}. "
+                f"Objective: {objective}."
+            )
+            if status == "error" and error_message:
+                canonical_summary = (
+                    f"Execution error recorded for {task_id}. "
+                    f"Registry: {registry_file}. "
+                    f"Objective: {objective}. "
+                    f"Error: {error_message}."
+                )
+            canonical_record = MemoryRecord(
+                memory_id=f"canonical::{task_id}",
+                layer="canonical_memory",
+                title=f"Capability {service_target or task_id}",
+                summary=canonical_summary,
+                source=task_source,
+                metadata={
+                    "registry_record": registry_file,
+                    "issue_identifier": issue_identifier,
+                    "issue_title": issue_title,
+                    "service_target": service_target,
+                    "mode": mode,
+                    "status": status,
+                    "context_packet_path": packet_path,
+                    "output_keys": sorted((output or {}).keys()) if isinstance(output, dict) else [],
+                },
+            )
+            supabase.save(canonical_record)
+            saved.append({"backend": "supabase", "memory_id": canonical_record.memory_id, "layer": canonical_record.layer})
+        except MemoryBackendNotConfigured as exc:
+            saved.append({"backend": "supabase", "status": "skipped", "message": str(exc)})
+        except MemoryBackendActivationDisabled as exc:
+            saved.append({"backend": "supabase", "status": "skipped", "message": str(exc)})
+        except Exception as exc:
+            saved.append({"backend": "supabase", "status": "error", "message": str(exc)})
 
     has_success = any(item.get("memory_id") for item in saved)
+    has_error = any(item.get("status") == "error" for item in saved)
+    has_skip = any(item.get("status") == "skipped" for item in saved)
     return {
-        "status": "ok" if has_success else "error",
+        "status": "ok" if has_success else ("skipped" if has_skip and not has_error else "error"),
         "saved": saved,
     }
 
@@ -692,6 +866,10 @@ def log_linear_sync(task_id: str, payload: dict) -> None:
     status = str(payload.get("status", "unknown"))
     event = str(payload.get("event", ""))
     if status == "skipped" and payload.get("skipped_reason") == "runtime_sync_disabled":
+        return
+    if status == "skipped":
+        reason = payload.get("message") or payload.get("skipped_reason") or "motivo não informado"
+        append_log(task_id, "linear_sync_skipped", f"Linear sync {event} ignorado: {reason}")
         return
     if status == "ok":
         issue_identifier = str(payload.get("issue_identifier", "")).strip()
@@ -803,6 +981,7 @@ def main() -> int:
     state["status"] = "running"
     state["current_task"] = build_current_task(task, mode, task_source)
     write_state(state)
+    publish_hitl_board()
 
     runtime_payload = {
         "task": task,
@@ -814,28 +993,49 @@ def main() -> int:
     try:
         context_info = prepare_context_packet(task, task_id, task_source, mode)
         if context_info:
+            prompt_envelope = build_prompt_envelope(task, mode, task_source, context_info)
+            prompt_envelope_dir = AGENTS_RUNTIME_DIR / task_id
+            prompt_envelope_dir.mkdir(parents=True, exist_ok=True)
+            prompt_envelope_path = prompt_envelope_dir / DEFAULT_PROMPT_ENVELOPE
+            save_json(prompt_envelope_path, prompt_envelope)
+            prompt_envelope_rel = str(prompt_envelope_path.relative_to(ROOT))
+            published_prompt_envelope_rel = publish_prompt_envelope(task_id, prompt_envelope)
             runtime_payload["context"] = {
                 "issue_identifier": context_info.get("issue_identifier"),
                 "issue_title": context_info.get("issue_title"),
                 "objective": context_info.get("objective"),
                 "context_packet_path": context_info.get("context_packet_path"),
+                "prompt_envelope_path": prompt_envelope_rel,
+                "published_prompt_envelope_path": published_prompt_envelope_rel,
                 "memory_backend": context_info.get("memory_backend"),
                 "retrieved_memory_count": context_info.get("retrieved_memory_count"),
                 "mapping": context_info.get("mapping"),
+                "context_budget": context_info.get("context_budget"),
+                "declared_context_refs": context_info.get("declared_context_refs", []),
+                "whitelisted_context_refs": context_info.get("whitelisted_context_refs", []),
+                "rejected_context_refs": context_info.get("rejected_context_refs", []),
+                "preflight": context_info.get("preflight"),
             }
             state = read_state()
             state["current_task"] = {
                 **build_current_task(task, mode, task_source),
                 "resolved_linear_issue_identifier": context_info.get("issue_identifier"),
                 "context_packet": context_info.get("context_packet_path"),
+                "prompt_envelope": prompt_envelope_rel,
+                "published_prompt_envelope": published_prompt_envelope_rel,
                 "memory_backend": context_info.get("memory_backend"),
                 "retrieved_memory_count": context_info.get("retrieved_memory_count"),
+                "context_budget": context_info.get("context_budget"),
+                "declared_context_refs": context_info.get("declared_context_refs", []),
+                "whitelisted_context_refs": context_info.get("whitelisted_context_refs", []),
+                "rejected_context_refs": context_info.get("rejected_context_refs", []),
             }
             write_state(state)
+            publish_hitl_board()
             append_log(
                 task_id,
                 "context_packet",
-                f"Context packet pronto em {context_info.get('context_packet_path')} (memory_backend: {context_info.get('memory_backend')}, retrieved_memories: {context_info.get('retrieved_memory_count')})",
+                f"Context packet pronto em {context_info.get('context_packet_path')} e envelope pronto em {prompt_envelope_rel} (published: {published_prompt_envelope_rel or 'falhou'}) (memory_backend: {context_info.get('memory_backend')}, retrieved_memories: {context_info.get('retrieved_memory_count')}, whitelisted_refs: {len(context_info.get('whitelisted_context_refs', []))}, rejected_refs: {len(context_info.get('rejected_context_refs', []))})",
             )
 
         running_sync = try_publish_linear_runtime(
@@ -896,6 +1096,7 @@ def main() -> int:
         state["current_task"] = None
         state.setdefault("history", []).append(build_history_entry(task, mode, "done", registry_file, task_source, context_info))
         write_state(state)
+        publish_hitl_board()
 
         if mode == "FULL":
             snapshot_state(task_id, "after", state)
@@ -966,6 +1167,7 @@ def main() -> int:
         state["current_task"] = None
         state.setdefault("history", []).append(build_history_entry(task, mode, "error", registry_file, task_source, context_info))
         write_state(state)
+        publish_hitl_board()
 
         if mode == "FULL":
             snapshot_state(task_id, "error", state)

@@ -6,11 +6,11 @@ Data: 2026-04-03
 
 ## Objetivo
 
-Documentar o caminho **canônico, nativo e suportado pelo Linear** para integrar o `infrastructure-state` ao workspace Ruptur sem depender de browser automation, MCP de sessão ou hacks operacionais.
+Documentar o caminho **canônico, nativo e suportado pelo Linear** para integrar o `shipyard` ao workspace Ruptur sem depender de browser automation, MCP de sessão ou hacks operacionais.
 
 ## Premissas
 
-- `infrastructure-state` é o plano de execução e auditoria.
+- `shipyard` é o plano de execução e auditoria.
 - Linear é a camada de governança operacional.
 - O backbone da integração deve ser **API oficial + autenticação oficial + webhooks oficiais**.
 - MCP e browser podem existir no máximo como ferramentas auxiliares de operação humana, nunca como fundação.
@@ -36,7 +36,7 @@ Documentar o caminho **canônico, nativo e suportado pelo Linear** para integrar
 
 > Esta última conclusão é uma **inferência arquitetural para o nosso repo**, não uma afirmação universal do Linear.
 
-### 3) Webhooks oficiais cobrem o fluxo com Linear, n8n e `infrastructure-state`?
+### 3) Webhooks oficiais cobrem o fluxo com Linear, n8n e `shipyard`?
 
 **Sim.** O modelo oficial de webhooks do Linear cobre bem o fluxo desejado:
 
@@ -111,14 +111,14 @@ Modelo recomendado:
 | Ator de automação | **`actor=app`** para agentes/serviços |
 | Server-to-server | **`client_credentials`** quando não houver fluxo interativo |
 | Superfície da API | **GraphQL oficial** |
-| SDK vs GraphQL | **GraphQL direto no `infrastructure-state`**; SDK só se o adapter nascer em TypeScript |
+| SDK vs GraphQL | **GraphQL direto no `shipyard`**; SDK só se o adapter nascer em TypeScript |
 | Eventos | **Webhooks oficiais** |
 | Polling | Apenas reconciliação e backfill restritos |
 | MCP | **Opcional/contingência**, não backbone |
 
 ## Modelo nativo recomendado para o ecossistema Ruptur
 
-## 1. `infrastructure-state`
+## 1. `shipyard`
 
 Responsável por:
 

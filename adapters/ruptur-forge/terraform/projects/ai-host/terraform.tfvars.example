@@ -1,0 +1,5 @@
+# Copie este arquivo para terraform.tfvars local antes do apply.
+# Ajuste o /32 para o IP público do operador ou do bastion.
+gcp_zone = "southamerica-east1-c"
+gpu_enabled = true
+ssh_source_ranges = ["SEU.IP.PUBLICO/32"]

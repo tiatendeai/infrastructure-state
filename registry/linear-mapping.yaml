@@ -121,3 +121,28 @@ mappings:
     local_task: tasks/INFRA-016_create_context_packet_for_tasks.task.json
     project: Memory Layer
     local_status: done
+  - backlog_key: INFRA-027
+    linear_issue_identifier: INF-27
+    local_task: tasks/INFRA-027_sprint_final_sessao_login_observabilidade_seguranca.task.json
+    project: Sprint Final
+    local_status: pending
+  - backlog_key: INFRA-028
+    linear_issue_identifier: INF-28
+    local_task: tasks/INFRA-028_tokens_p0_sessao_login_seguranca_observabilidade.task.json
+    project: Sprint Final
+    local_status: pending
+  - backlog_key: INFRA-029
+    linear_issue_identifier: INF-29
+    local_task: tasks/INFRA-029_debug_falhas_erros_triagem.task.json
+    project: Sprint Final
+    local_status: pending
+  - backlog_key: INFRA-030
+    linear_issue_identifier: INF-30
+    local_task: tasks/INFRA-030_linear_credential_gap_and_runtime_sync.task.json
+    project: Sprint Final
+    local_status: pending
+  - backlog_key: INFRA-031
+    linear_issue_identifier: INF-31
+    local_task: tasks/INFRA-031_supabase_tls_ssl_backend_sync.task.json
+    project: Sprint Final
+    local_status: pending

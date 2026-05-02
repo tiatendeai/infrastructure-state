@@ -1,0 +1,34 @@
+{
+  "task_id": "INFRA-023-criar-badges-origem-proveniencia",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-023",
+  "linear_project": "Agent Hub",
+  "linear_team_key": "INF",
+  "service_target": "agent-hub",
+  "context_refs": [
+    "debito-tecnico.md",
+    "state/AGENTS.md",
+    "state/runtime/hitl-board.json",
+    "state/registry/hitl-sources.json",
+    "../saas/web/dashboard-dist/metrics.html"
+  ],
+  "infra_refs": [
+    "state/registry/hitl-sources.json",
+    "scripts/build_hitl_board.py",
+    "../saas/web/dashboard-dist/metrics.html",
+    "../saas/web/dashboard-dist/hitl-board.json"
+  ],
+  "expected_output": [
+    "badges visuais para origem e proveniência dos dados",
+    "identificação explícita de produção, local e mirror",
+    "status de conectividade e autoridade exibidos por fonte"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Criar badges de origem e proveniência no painel para distinguir produção Google ADK/A2A, MacBook local e mirror do dashboard, com status e autoridade claramente identificados."
+  },
+  "output": {}
+}

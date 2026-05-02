@@ -1,9 +1,9 @@
 profile: observability-min
-description: "Perfil mínimo de observabilidade para nó leve sem aplicar mudanças reais."
+description: "Perfil mínimo de observabilidade para o VPS do estaleiro sem aplicar mudanças reais."
 target_class: light-monitoring-node
-placement_recommendation: oracle-free-tier
+placement_recommendation: kvm2
 required_capabilities: [http_exposure_capable]
 desired_services: [uptime-kuma]
 prerequisites: [http_exposure_path_defined]
-manual_checks: [confirm_public_endpoint_and_retention_policy]
+manual_checks: [confirm_public_endpoint_and_reverse_proxy_route]
 registry_refs: [registry/services.yaml]

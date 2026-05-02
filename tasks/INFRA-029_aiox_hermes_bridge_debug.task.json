@@ -1,0 +1,38 @@
+{
+  "task_id": "INFRA-029-aiox-hermes-bridge-debug",
+  "type": "change",
+  "mode": "FULL",
+  "status": "pending",
+  "linear_issue_id": "INFRA-029",
+  "linear_project": "Bootstrap IaC",
+  "linear_team_key": "INF",
+  "service_target": "aiox-bridge",
+  "context_refs": [
+    "debito-tecnico.md",
+    "state/AGENTS.md",
+    "state/runtime/hitl-board.json",
+    "registry/cloudflare-dns-targets.yaml",
+    "adapters/provisioning/ansible/playbooks/aiox_gcp.yml",
+    "adapters/provisioning/ansible/roles/aiox/templates/server.mjs.j2",
+    "adapters/provisioning/ansible/roles/aiox/templates/docker-compose.aiox.yml.j2"
+  ],
+  "infra_refs": [
+    "adapters/provisioning/ansible/playbooks/aiox_gcp.yml",
+    "adapters/provisioning/ansible/roles/aiox/templates/server.mjs.j2",
+    "adapters/provisioning/ansible/roles/aiox/templates/docker-compose.aiox.yml.j2",
+    "registry/cloudflare-dns-targets.yaml",
+    "kernel/state.json"
+  ],
+  "expected_output": [
+    "aiox.ruptur.cloud responde sem erro de borda",
+    "Hermes/Ollama responde ao teste do bridge",
+    "doctor do AIOX fecha sem falha ou deixa causa-raiz explícita",
+    "configuração de host-gateway, TLS ou endpoint fica consolidada"
+  ],
+  "approval_required": true,
+  "execution_policy": "human_in_the_loop",
+  "input": {
+    "message": "Debugar a ponte do AIOX com o Hermes/Ollama na mesma VM: validar se host.docker.internal precisa virar host-gateway, confirmar o endpoint OpenAI-compatible correto, estabilizar o aiox-core doctor e fechar a borda HTTPS do aiox.ruptur.cloud com causa-raiz ou correção aplicada."
+  },
+  "output": {}
+}

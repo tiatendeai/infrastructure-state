@@ -117,7 +117,7 @@ LINEAR_RUNTIME_COMMENT_ON_RUNNING=false
 LINEAR_RUNTIME_COMMENT_ON_DONE=true
 LINEAR_RUNTIME_COMMENT_ON_ERROR=true
 LINEAR_RUNTIME_APPEND_EXPECTED_OUTPUT=true
-LINEAR_RUNTIME_COMMENT_HEADER=Execução local sincronizada pelo infrastructure-state.
+LINEAR_RUNTIME_COMMENT_HEADER=Execução local sincronizada pelo shipyard.
 ```
 
 ## Exemplos operacionais

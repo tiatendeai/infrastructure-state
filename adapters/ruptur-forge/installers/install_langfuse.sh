@@ -7,7 +7,8 @@ REMOTE_DIR="${RUPTUR_LANGFUSE_REMOTE_DIR:-/opt/ruptur/runtime/langfuse}"
 REMOTE_ENV="$REMOTE_DIR/.env"
 REMOTE_COMPOSE="$REMOTE_DIR/docker-compose.yml"
 LOCAL_TEMPLATE="$ROOT_DIR/adapters/ruptur-forge/templates/runtime/langfuse.compose.yml"
-PUBLIC_BASE_URL="${LANGFUSE_PUBLIC_BASE_URL:-http://187.77.242.208:3000}"
+PUBLIC_HOST="${LANGFUSE_PUBLIC_HOST:-langfuse.ruptur.cloud}"
+PUBLIC_BASE_URL="${LANGFUSE_PUBLIC_BASE_URL:-https://${PUBLIC_HOST}}"
 MINIO_BASE_URL="${LANGFUSE_MINIO_BASE_URL:-http://187.77.242.208:9090}"
 
 ssh "$REMOTE_HOST" "mkdir -p '$REMOTE_DIR'"
@@ -23,6 +24,7 @@ SALT_VALUE=\$(openssl rand -hex 16)
 ENCRYPTION_KEY_VALUE=\$(openssl rand -hex 32)
 INIT_PASSWORD=\$(openssl rand -base64 24 | tr -d '\n')
 cat > '$REMOTE_ENV' <<EOF
+LANGFUSE_PUBLIC_HOST=$PUBLIC_HOST
 NEXTAUTH_URL=$PUBLIC_BASE_URL
 NEXTAUTH_SECRET=\${NEXTAUTH_SECRET_VALUE}
 DATABASE_URL=postgresql://postgres:\${POSTGRES_PASSWORD}@postgres:5432/postgres
@@ -77,6 +79,7 @@ LANGFUSE_INIT_USER_NAME=Ruptur Admin
 LANGFUSE_INIT_USER_PASSWORD=\${INIT_PASSWORD}
 EOF
 fi
+docker network inspect kvm2_default >/dev/null 2>&1 || docker network create kvm2_default
 sudo ufw allow 3000/tcp >/dev/null 2>&1 || true
 sudo ufw allow 9090/tcp >/dev/null 2>&1 || true
 cd '$REMOTE_DIR'

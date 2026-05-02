@@ -1,0 +1,30 @@
+version: 1
+scope: p0
+owner: diego
+managed_by: shipyard
+created_at: "2026-04-21T00:00:00-03:00"
+source_task: "tasks/INFRA-029_aiox_shipyard_bridge_hermes_ollama_fetch_doctor.task.json"
+summary: "Debug do AIOX Shipyard Bridge: fetch failed, BOOTSTRAP_ERROR e saúde Hermes/Ollama."
+items:
+  - id: 1
+    title: "Diagnosticar fetch failed do Hermes/Ollama"
+    state_ref: "tasks/INFRA-029_aiox_shipyard_bridge_hermes_ollama_fetch_doctor.task.json"
+    status: pending
+  - id: 2
+    title: "Eliminar o BOOTSTRAP_ERROR do doctor"
+    state_ref: "tasks/INFRA-029_aiox_shipyard_bridge_hermes_ollama_fetch_doctor.task.json"
+    status: pending
+  - id: 3
+    title: "Validar host.docker.internal e o endpoint OpenAI-compatible"
+    state_ref: "tasks/INFRA-029_aiox_shipyard_bridge_hermes_ollama_fetch_doctor.task.json"
+    status: pending
+  - id: 4
+    title: "Atualizar o State com causa-raiz e correção"
+    state_ref: "tasks/INFRA-029_aiox_shipyard_bridge_hermes_ollama_fetch_doctor.task.json"
+    status: pending
+notes:
+  - "A ponte AIOX existe, mas ainda não está saudável porque o motor Hermes/Ollama falha no fetch."
+  - "O alvo canônico deste bloco é o bridge do Shipyard, não o cockpit HITL."
+  - "A referência operacional atual é GCP / Ruptur Cloud Lab; o legado KVM2 não entra no caminho atual."
+  - "O bootstrap do bridge passou a degradar falhas de install/doctor em warnings e o fetch do Hermes passou a tentar múltiplos endpoints OpenAI-compatible com timeout explícito."
+  - "O envelope de prompt canônico passa a ter caminho publicado para o AIOX em state/runtime/aiox/prompt-envelope.json e o compose do AIOX monta o diretório de home runtime correspondente."

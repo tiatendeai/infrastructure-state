@@ -11,6 +11,8 @@ Uso:
   bash scripts/ruptur.sh init
   bash scripts/ruptur.sh run <task-file> [mode]
   bash scripts/ruptur.sh validate <task-file> [mode]
+  bash scripts/ruptur.sh llm compose --envelope <path> --prompt <texto> [--model <modelo>] [--output <path>]
+  bash scripts/ruptur.sh llm chat --envelope <path> --prompt <texto> [--model <modelo>] [--base-url <url>] [--api-key <chave>] [--dry-run] [--output <path>]
   bash scripts/ruptur.sh status
   bash scripts/ruptur.sh doctor
   bash scripts/ruptur.sh clean
@@ -21,6 +23,7 @@ Comandos:
   init      Inicializa o projeto e garante a estrutura base.
   run       Executa uma task.
   validate  Valida uma task sem executá-la.
+  llm       Compõe ou envia um prompt canônico a partir do envelope do Shipyard.
   status    Exibe o estado canônico atual.
   doctor    Verifica pré-requisitos e estrutura essencial.
   clean     Limpa somente runtime efêmero.
@@ -118,6 +121,28 @@ validate_task_command() {
   fi
 }
 
+llm_command() {
+  local llm_mode="${1:-}"
+  shift || true
+
+  case "$llm_mode" in
+    compose)
+      python3 scripts/compose_prompt_request.py "$@"
+      ;;
+    chat)
+      python3 scripts/llm_chat_from_envelope.py "$@"
+      ;;
+    ""|-h|--help|help)
+      usage
+      ;;
+    *)
+      error "modo inválido para llm: $llm_mode"
+      usage >&2
+      return 1
+      ;;
+  esac
+}
+
 doctor_command() {
   local has_error=0
 
@@ -206,6 +231,9 @@ case "$COMMAND" in
     ;;
   validate)
     validate_task_command "${2:-examples/hello.task.json}" "${3:-${RUPTUR_MODE:-}}"
+    ;;
+  llm)
+    llm_command "${2:-}" "${@:3}"
     ;;
   status)
     status_command
